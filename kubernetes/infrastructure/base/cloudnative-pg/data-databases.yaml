@@ -1,0 +1,47 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: source
+  namespace: cloudnative-pg
+spec:
+  name: source
+  owner: data
+  cluster:
+    name: data-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: staging
+  namespace: cloudnative-pg
+spec:
+  name: staging
+  owner: data
+  cluster:
+    name: data-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: marts
+  namespace: cloudnative-pg
+spec:
+  name: marts
+  owner: data
+  cluster:
+    name: data-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: scratch
+  namespace: cloudnative-pg
+spec:
+  name: scratch
+  owner: data
+  cluster:
+    name: data-cluster
+  databaseReclaimPolicy: retain

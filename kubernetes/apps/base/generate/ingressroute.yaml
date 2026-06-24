@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: generate
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`generate.austinsmith.org`)
+      kind: Rule
+      services:
+        - name: generate-web
+          port: 80

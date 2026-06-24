@@ -1,0 +1,10 @@
+resources:
+  - cloudnative-pg-crds.yaml
+  - atlas-crds.yaml
+  #- clickstack-operators.yaml
+  - infrastructure.yaml
+  - apps.yaml
+  - data-lakehouse.yaml
+  #- monitoring.yaml
+  - teleport-config.yaml
+  - metallb-config.yaml

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kasm-brave
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: kasm-brave
+  template:
+    metadata:
+      labels:
+        app: kasm-brave
+    spec:
+      containers:
+        - name: brave
+          image: kasmweb/brave:1.17.0-rolling-weekly
+          ports:
+            - name: https-vnc
+              containerPort: 6901
+          env:
+            - name: VNC_PW
+              valueFrom:
+                secretKeyRef:
+                  name: kasm-brave
+                  key: vnc_password
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          readinessProbe:
+            tcpSocket:
+              port: 6901
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi

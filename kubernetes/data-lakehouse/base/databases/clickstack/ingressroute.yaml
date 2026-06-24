@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: clickstack
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`clickstack.theblacklodge.dev`)
+      services:
+        - kind: Service
+          name: clickstack-hyperdx
+          port: 3000

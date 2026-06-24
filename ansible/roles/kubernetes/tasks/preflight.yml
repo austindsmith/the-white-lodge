@@ -1,0 +1,31 @@
+- name: refresh service facts
+  ansible.builtin.service_facts:
+
+- name: disable and stop ufw
+  ansible.builtin.systemd:
+    name: ufw
+    state: stopped
+    enabled: false
+  when: ansible_facts.services['ufw.service'] is defined
+
+- name: disable and stop firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+    enabled: false
+  when: ansible_facts.services['firewalld.service'] is defined
+
+- name: install growpart
+  ansible.builtin.package:
+    name: cloud-utils-growpart
+    state: present
+
+- name: grow root partition to fill disk
+  ansible.builtin.command: growpart /dev/vda 4
+  register: growpart_result
+  changed_when: "'CHANGED' in growpart_result.stdout"
+  failed_when: growpart_result.rc != 0 and 'NOCHANGE' not in growpart_result.stdout
+
+- name: resize root xfs filesystem
+  ansible.builtin.command: xfs_growfs /
+  changed_when: false

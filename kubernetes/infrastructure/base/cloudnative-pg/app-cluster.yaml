@@ -1,0 +1,116 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: app-cluster
+spec:
+  instances: 3
+  enableSuperuserAccess: true
+  certificates:
+    clientCASecret: pg-client-ca-bundle
+    replicationTLSSecret: pg-replication-cert
+  postgresql:
+    pg_hba:
+      - hostssl all all all cert
+      - host all all all scram-sha-256
+  bootstrap:
+    initdb:
+      owner: postgres
+  superuserSecret:
+    name: cloudnative-pg-admin
+  storage:
+    size: 15Gi
+  monitoring:
+    enablePodMonitor: true
+    customQueriesConfigMap:
+      - name: cnpg-default-monitoring
+        key: queries
+  managed:
+    roles:
+      - name: authentik
+        login: true
+        passwordSecret:
+          name: authentik-db-secret
+      - name: immich
+        login: true
+        passwordSecret:
+          name: immich-db-secret
+      - name: n8n
+        login: true
+        passwordSecret:
+          name: n8n-db-secret
+      - name: nextcloud
+        login: true
+        passwordSecret:
+          name: nextcloud-db-secret
+      - name: mealie
+        login: true
+        passwordSecret:
+          name: mealie-db-secret
+      - name: paperless-ngx
+        login: true
+        passwordSecret:
+          name: paperless-ngx-db-secret
+      - name: semaphore
+        login: true
+        passwordSecret:
+          name: semaphore-db-secret
+      - name: bytebase
+        login: true
+        passwordSecret:
+          name: bytebase-db-secret
+      - name: dbgate
+        login: true
+        passwordSecret:
+          name: dbgate-db-secret
+      - name: radarr
+        login: true
+        passwordSecret:
+          name: radarr-db-secret
+      - name: sonarr
+        login: true
+        passwordSecret:
+          name: sonarr-db-secret
+      - name: bazarr
+        login: true
+        passwordSecret:
+          name: bazarr-db-secret
+      - name: prowlarr
+        login: true
+        passwordSecret:
+          name: prowlarr-db-secret
+      - name: autobrr
+        login: true
+        passwordSecret:
+          name: autobrr-db-secret
+      - name: deduparr
+        login: true
+        passwordSecret:
+          name: deduparr-db-secret
+      - name: qui
+        login: true
+        passwordSecret:
+          name: qui-db-secret
+      - name: romm
+        login: true
+        passwordSecret:
+          name: romm-db-secret
+      - name: wikijs
+        login: true
+        passwordSecret:
+          name: wikijs-db-secret
+      - name: zammad
+        login: true
+        passwordSecret:
+          name: zammad-db-secret
+      - name: sabnzbd
+        login: true
+        passwordSecret:
+          name: sabnzbd-db-secret
+      - name: wizarr
+        login: true
+        passwordSecret:
+          name: wizarr-db-secret
+      - name: test
+        login: true
+        passwordSecret:
+          name: test-db-secret

@@ -1,0 +1,27 @@
+{{- if .Values.frontend.config.enabled }}
+{{- $host := .Values.frontend.config.redirectUri }}
+{{- if not $host }}
+{{- $host = printf "https://%s/" (index .Values.ingress.hosts 0) }}
+{{- end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "generate.fullname" . }}-frontend
+  labels:
+    {{- include "generate.labels" . | nindent 4 }}
+data:
+  config.prod.json: |
+    {
+      "env": {
+        "name": "Production",
+        "version": "0.0.0"
+      },
+      "pageSize": {{ .Values.frontend.config.pageSize }},
+      "timeoutInSeconds": {{ .Values.frontend.config.timeoutInSeconds }},
+      "callService": {{ .Values.frontend.config.callService }},
+      "authType": {{ .Values.frontend.config.authType | quote }},
+      "clientId": {{ .Values.frontend.config.clientId | quote }},
+      "authority": "https://login.microsoftonline.com/{{ .Values.frontend.config.tenantId }}",
+      "redirectUri": {{ $host | quote }}
+    }
+{{- end }}

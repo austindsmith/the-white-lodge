@@ -1,0 +1,19 @@
+proxmox:
+    url: https://192.168.1.80:8006
+    token: root@pam!homepage
+    secret: 5955cbc5-9c2b-4559-b133-c6d418965697
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwelJJNHBDbEw0QVBORjJa
+            cEx0OHpyMnp3NVMrTmcycFZVYXZzVVMzZ3hRCm03K3pHT2hzOEZwWlNtSjVCY0RJ
+            MW1XV1BkM0ovMW80TWxGVEh6aDVTc00KLS0tIDVEWGl1TEJuZWFFcW4xdmVaUU9Q
+            ejB4SjNVSFUxcnp5UnJFUE1ybDZxOW8K1M4yjLV/rS+8e1zzyrXa0VWWtKZPCRr2
+            eG2Ymjju4mmPr6ZeimA6JyTvxAjnD6liEMfYsLLll8oDMZg20aXNUw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n
+    encrypted_regex: ^(data|stringData|spec)$
+    lastmodified: "2026-06-19T06:21:43Z"
+    mac: ENC[AES256_GCM,data:eB7uKGhH0XrhJpBC3bJiR3qWVfPgScbuC/RMAZWJmw+oureifP7PbFz3Wd9xTaiJx197slR42z84+a4lf/SGvtYiB6W591bnw22oHrrgXGwn4XYu7VUBAro7KYs1rpREkZGG3Q7RYwosOA+7xJXhVs0QEq/qUJ6ZIZQ64+p+JZk=,iv:8+X2i0nyEvYjDZP7Gsrqkfm5rk+e9IVax2brwq7czEc=,tag:ZytdkV8E/mTQ8EM4pptAGA==,type:str]
+    version: 3.13.1

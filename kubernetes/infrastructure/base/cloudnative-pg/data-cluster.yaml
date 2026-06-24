@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: data-cluster
+spec:
+  instances: 3
+  enableSuperuserAccess: true
+  certificates:
+    clientCASecret: pg-client-ca-bundle
+    replicationTLSSecret: pg-replication-cert
+  postgresql:
+    pg_hba:
+      - hostssl all all all cert
+      - host all all all scram-sha-256
+  bootstrap:
+    initdb:
+      owner: postgres
+  superuserSecret:
+    name: cloudnative-pg-admin
+  storage:
+    size: 15Gi
+  managed:
+    roles:
+      - name: data
+        login: true
+        passwordSecret:
+          name: data-db-secret

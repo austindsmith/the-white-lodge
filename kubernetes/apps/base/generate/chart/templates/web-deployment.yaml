@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "generate.fullname" . }}-web
+  labels:
+    {{- include "generate.labels" . | nindent 4 }}
+    app.kubernetes.io/component: web
+
+spec:
+  replicas: {{ .Values.web.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: web
+
+  template:
+    metadata:
+      labels:
+        {{- include "generate.labels" . | nindent 8 }}
+        app.kubernetes.io/component: web
+
+    spec:
+      containers:
+        - name: web
+          image: "{{ .Values.image.web.repository }}:{{ .Values.image.web.tag }}"
+          imagePullPolicy: {{ .Values.image.web.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: 80
+
+          env:
+            {{- include "generate.appEnv" . | nindent 12 }}
+
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 20
+
+          resources:
+            {{- toYaml .Values.web.resources | nindent 12 }}
+
+          {{- if .Values.frontend.config.enabled }}
+          volumeMounts:
+            - name: frontend-config
+              mountPath: {{ .Values.frontend.config.mountPath }}
+              subPath: {{ .Values.frontend.config.subPath }}
+          {{- end }}
+
+      {{- if .Values.frontend.config.enabled }}
+      volumes:
+        - name: frontend-config
+          configMap:
+            name: {{ include "generate.fullname" . }}-frontend
+      {{- end }}

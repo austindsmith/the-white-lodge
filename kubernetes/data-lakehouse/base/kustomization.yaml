@@ -1,0 +1,6 @@
+resources:
+  - namespace.yaml
+  - management
+  - storage
+  - orchestration
+  - databases

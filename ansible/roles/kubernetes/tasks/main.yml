@@ -1,0 +1,17 @@
+- name: Preflight checks
+  ansible.builtin.import_tasks:
+    file: preflight.yml
+
+- name: Install packages
+  ansible.builtin.import_tasks:
+    file: packages.yml
+
+#- name: Install scripts
+#  ansible.builtin.include_tasks: install_scripts.yml
+#  loop: "{{ install_scripts }}"
+#  loop_control:
+#    loop_var: install_script
+
+- name: Prepare longhorn
+  ansible.builtin.import_tasks:
+    file: longhorn.yml

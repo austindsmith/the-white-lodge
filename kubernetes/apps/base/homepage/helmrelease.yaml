@@ -1,0 +1,41 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: homepage
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: homepage
+  values:
+    config:
+      useExistingConfigMap: homepage-config
+      allowedHosts:
+        - homepage.theblacklodge.dev
+    enableRbac: true
+    env:
+      - name: HOMEPAGE_ALLOWED_HOSTS
+        value: homepage.theblacklodge.dev
+    envFrom:
+      - secretRef:
+          name: homepage-credentials
+    volumes:
+      - name: homepage-config
+        configMap:
+          name: homepage-config
+    volumeMounts:
+      - name: homepage-config
+        mountPath: /app/config/bookmarks.yaml
+        subPath: bookmarks.yaml
+      - name: homepage-config
+        mountPath: /app/config/proxmox.yaml
+        subPath: proxmox.yaml
+      - name: homepage-config
+        mountPath: /app/config/services.yaml
+        subPath: services.yaml
+      - name: homepage-config
+        mountPath: /app/config/settings.yaml
+        subPath: settings.yaml
+      - name: homepage-config
+        mountPath: /app/config/widgets.yaml
+        subPath: widgets.yaml

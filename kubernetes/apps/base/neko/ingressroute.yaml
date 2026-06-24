@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: neko
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`research.theblacklodge.dev`)
+      kind: Rule
+      services:
+        - name: neko
+          port: 8080

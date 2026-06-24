@@ -1,0 +1,39 @@
+local action:
+    @echo "Deploying local cluster"
+    kubectl config use-context k3d-local-machine-cluster
+    kustomize build clusters/staging \
+      --enable-helm \
+      --enable-alpha-plugins \
+      --enable-exec \
+    | kubectl {{ action }} -f -
+
+server action:
+    @echo "Deploying server cluster"
+    kubectl config use-context k3s-ansible
+    kustomize build clusters/staging \
+      --enable-helm \
+      --enable-alpha-plugins \
+      --enable-exec \
+    | kubectl {{ action }} \
+    --server-side \
+    --force-conflicts \
+    -f -
+
+# Delete Kubernetes resources defined in the current directory
+delete:
+    kustomize build {{ invocation_directory() }} \
+      --enable-helm \
+      --enable-alpha-plugins \
+      --enable-exec \
+    | kubectl delete -f -
+
+apply:
+    kustomize build {{ invocation_directory() }} \
+      --enable-helm \
+      --enable-alpha-plugins \
+      --enable-exec \
+    | kubectl apply -f -
+
+flux:
+    /home/austin/.local/share/scripts/flux_secret.sh && \
+    /home/austin/.local/share/scripts/flux_bootstrap.sh

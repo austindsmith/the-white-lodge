@@ -1,0 +1,10 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflare-tunnel
+  namespace: cloudflare-tunnel
+spec:
+  values:
+    cloudflare:
+      secretRef:
+        name: cloudflare-tunnel-production

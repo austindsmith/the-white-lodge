@@ -1,0 +1,66 @@
+apiVersion: resources.teleport.dev/v5
+kind: TeleportRole
+metadata:
+  name: db-access
+spec:
+  allow:
+    impersonate:
+      users: ["Db"]
+      roles: ["Db"]
+    db_labels:
+      "*": "*"
+    db_names:
+      - postgres
+      - app
+      - source
+      - staging
+      - marts
+      - scratch
+      - authentik
+      - immich
+      - n8n
+      - nextcloud
+      - mealie
+      - paperless-ngx
+      - semaphore
+      - bytebase
+      - dbgate
+      - radarr
+      - sonarr-main
+      - sonarr-log
+      - bazarr
+      - prowlarr
+      - autobrr
+      - deduparr
+      - qui
+      - romm
+      - wikijs
+      - zammad
+      - sabnzbd
+      - wizarr
+      - test
+    db_users:
+      - postgres
+      - data
+      - authentik
+      - immich
+      - n8n
+      - nextcloud
+      - mealie
+      - paperless-ngx
+      - semaphore
+      - bytebase
+      - dbgate
+      - radarr
+      - sonarr
+      - bazarr
+      - prowlarr
+      - autobrr
+      - deduparr
+      - qui
+      - romm
+      - wikijs
+      - zammad
+      - sabnzbd
+      - wizarr
+      - test

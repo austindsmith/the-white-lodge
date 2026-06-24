@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: generate-schema-build
+  labels:
+    app.kubernetes.io/name: generate
+    app.kubernetes.io/component: schema-build
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: generate
+        app.kubernetes.io/component: schema-build
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: build
+          image: debian:12-slim
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -e
+              apt-get update -qq
+              apt-get install -y -qq curl gnupg ca-certificates apt-transport-https >/dev/null
+              curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+              curl -fsSL https://packages.microsoft.com/config/debian/12/prod.list -o /etc/apt/sources.list.d/mssql-release.list
+              apt-get update -qq
+              ACCEPT_EULA=Y apt-get install -y -qq mssql-tools18 unixodbc-dev >/dev/null
+              bash /scripts/build-generate-db.sh
+          env:
+            - name: DB_HOST
+              value: generate-mssql
+            - name: DB_PORT
+              value: "1433"
+            - name: DB_USER
+              value: sa
+            - name: DB_NAME
+              value: Generate
+            - name: CEDS_IDS_TAG
+              value: v13.0.0.0
+            - name: CEDS_DW_TAG
+              value: v13.0.0.0
+            - name: GENERATE_TAG
+              value: V13.2
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: generate-secrets
+                  key: db_password
+          volumeMounts:
+            - name: build-script
+              mountPath: /scripts
+              readOnly: true
+      volumes:
+        - name: build-script
+          configMap:
+            name: generate-schema-build-script

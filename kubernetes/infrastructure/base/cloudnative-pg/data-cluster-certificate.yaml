@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: data-cluster-server
+  namespace: cloudnative-pg
+spec:
+  secretName: data-cluster-server-tls
+  issuerRef:
+    name: cluster-ca
+    kind: ClusterIssuer
+  usages:
+    - server auth
+    - digital signature
+    - key encipherment
+  dnsNames:
+    - data-cluster-rw
+    - data-cluster-ro
+    - data-cluster-r
+    - data-cluster-rw.cloudnative-pg.svc
+    - data-cluster-ro.cloudnative-pg.svc
+    - data-cluster-r.cloudnative-pg.svc
+    - data-cluster-rw.cloudnative-pg.svc.cluster.local
+    - data-cluster-ro.cloudnative-pg.svc.cluster.local
+    - data-cluster-r.cloudnative-pg.svc.cluster.local
+    - data-cluster-1.data-cluster.cloudnative-pg.svc.cluster.local
+    - data-cluster-2.data-cluster.cloudnative-pg.svc.cluster.local
+    - data-cluster-3.data-cluster.cloudnative-pg.svc.cluster.local
+  duration: 8760h
+  renewBefore: 720h

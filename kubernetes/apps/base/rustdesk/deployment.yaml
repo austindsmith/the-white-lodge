@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustdesk-api
+  namespace: rustdesk
+  labels:
+    app: rustdesk-api
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rustdesk-api
+  template:
+    metadata:
+      labels:
+        app: rustdesk-api
+    spec:
+      containers:
+        - name: rustdesk-api
+          image: ghcr.io/lantongxue/rustdesk-api-server-pro:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TZ
+              value: America/Denver
+            - name: ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rustdesk-api-admin
+                  key: username
+            - name: ADMIN_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rustdesk-api-admin
+                  key: password
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+            - name: config
+              mountPath: /app/data/server.yaml
+              subPath: server.yaml
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: rustdesk-api-data
+        - name: config
+          secret:
+            secretName: rustdesk-api-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustdesk-server
+  namespace: rustdesk
+  labels:
+    app: rustdesk-server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rustdesk-server
+  template:
+    metadata:
+      labels:
+        app: rustdesk-server
+    spec:
+      containers:
+        - name: hbbs
+          image: rustdesk/rustdesk-server:latest
+          command: ["hbbs", "-r", "rd-relay.theblacklodge.dev"]
+          ports:
+            - containerPort: 21118
+          volumeMounts:
+            - name: keys
+              mountPath: /root
+        - name: hbbr
+          image: rustdesk/rustdesk-server:latest
+          command: ["hbbr"]
+          ports:
+            - containerPort: 21119
+          volumeMounts:
+            - name: keys
+              mountPath: /root
+      volumes:
+        - name: keys
+          persistentVolumeClaim:
+            claimName: hbbs-keys

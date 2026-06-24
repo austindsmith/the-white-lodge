@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflare-tunnel
+spec:
+  install:
+    createNamespace: true
+  interval: 1h
+  chart:
+    spec:
+      chart: cloudflare-tunnel-ingress-controller
+      version: 0.0.23
+      sourceRef:
+        kind: HelmRepository
+        name: cloudflare-tunnel
+  values:
+    cloudflare:
+      secretRef:
+        name: cloudflare-tunnel
+        apiTokenKey: cloudflare-api-token
+        accountIDKey: cloudflare-account-id
+        tunnelNameKey: cloudflare-tunnel-name
+    cloudflared:
+      protocol: http2

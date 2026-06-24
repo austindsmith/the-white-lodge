@@ -1,0 +1,14 @@
+resources:
+  #- agregarr
+  #- autobrr
+  #- bazarr
+  #- deduparr
+  - plex
+  #- prowlarr
+  #- qbittorrent-vpn
+  #- qui
+  #- radarr
+  #- sabnzbd
+  #- seerr
+  #- sonarr
+  #- tautulli

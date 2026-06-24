@@ -1,0 +1,20 @@
+collections:
+  - name: ansible.posix
+    version: "2.1.0"
+
+  - name: community.sops
+    version: "2.4.0"
+
+  - name: https://github.com/k3s-io/k3s-ansible.git
+    type: git
+    version: "1.2.0"
+
+  - name: kubernetes.core
+    version: "6.3.0"
+
+roles:
+  - name: linux-system-roles.cockpit
+    version: "1.7.4"
+
+  - name: mdsketch.teleport
+    version: "v2.0.0"

@@ -1,0 +1,35 @@
+scheduling:
+  userScheduler:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+
+  userPlaceholder:
+    enabled: false
+
+  corePods:
+    tolerations: []
+
+cull:
+  enabled: true
+  timeout: 3600
+  every: 300
+
+hub:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+proxy:
+  chp:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+  traefik:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi

@@ -1,0 +1,267 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Media:
+        - Plex:
+                href: https://plex.thewhitelodge.org
+                icon: plex
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: plex # The name of the container you'd like to connect
+        - Sonarr:
+                href: https://sonarr.thewhitelodge.org
+                icon: sonarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: sonarr # The name of the container you'd like to connect
+        - Radarr:
+                href: https://radarr.thewhitelodge.org
+                icon: radarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: radarr # The name of the container you'd like to connect
+        - Overseerr:
+                href: https://overseerr.thewhitelodge.org
+                icon: overseerr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: overseerr # The name of the container you'd like to connect
+        - Bazarr:
+                href: https://bazarr.thewhitelodge.org
+                icon: bazarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: bazarr # The name of the container you'd like to connect
+        - Cleanuparr:
+                href: https://cleanuparr.thewhitelodge.org
+                icon: cleanuperr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: cleanuparr # The name of the container you'd like to connect
+        - Huntarr:
+                href: https://huntarr.thewhitelodge.org
+                icon: huntarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: huntarr # The name of the container you'd like to connect
+        - Lidarr:
+                href: https://lidarr.thewhitelodge.org
+                icon: lidarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: lidarr # The name of the container you'd like to connect
+        - Maintainerr:
+                href: https://maintainerr.thewhitelodge.org
+                icon: maintainerr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: maintainerr # The name of the container you'd like to connect
+        - Prowlarr:
+                href: https://prowlarr.thewhitelodge.org
+                icon: prowlarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: prowlarr # The name of the container you'd like to connect
+        - qBittorrent:
+                href: https://torrent.thewhitelodge.org
+                icon: qbittorrent
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: qbittorrent # The name of the container you'd like to connect
+        - Tdarr:
+                href: https://tdarr.thewhitelodge.org
+                icon: tdarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: tdarr # The name of the container you'd like to connect
+        - Wizarr:
+                href: https://wizarr.thewhitelodge.org
+                icon: wizarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: wizarr # The name of the container you'd like to connect
+        - Audiobookshelf:
+                href: https://audiobookshelf.thewhitelodge.org
+                icon: audiobookshelf
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: audiobookshelf # The name of the container you'd like to connect
+        - Autobrr:
+                href: https://autobrr.thewhitelodge.org
+                icon: autobrr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: autobrr # The name of the container you'd like to connect
+        - Readarr:
+                href: https://readarr.thewhitelodge.org
+                icon: readarr
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: readarr # The name of the container you'd like to connect
+- Requests:
+        - Sonarr:
+                href: https://sonarr.thewhitelodge.org
+                widget:
+                      type: sonarr
+                      url: http://sonarr:8989
+                      key: "3691aeb2af194dc49c5c0bdf3f3c2b6f"
+        - Radarr:
+                href: https://radarr.thewhitelodge.org
+                widget:
+                      type: radarr
+                      url: http://radarr:7878
+                      key: "54b95e46541b48958655464cb04f6c1a"
+        - SABnzbd:
+                href: https://sabnzbd.thewhitelodge.org
+                widget:
+                      type: sabnzbd
+                      url: http://sabnzbd:8080
+                      key: "2ed6202e6fc04cc7a0afd1307834bf61"
+        - qBittorrent:
+                href: https://torrent.thewhitelodge.org
+                widget:
+                      type: qbittorrent
+                      url: http://192.168.1.26:8080
+                      username: qbittorrent
+                      password: Perm3-Esteemed5-Gigabyte8-Bauble6-Unfocused0
+                      enableLeechProgress: true # optional, defaults to false
+                      enableLeechSize: true # optional, defaults to false
+        - Zammad:
+                href: https://zammad.thewhitelodge.org
+                icon: zammad
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: zammad-railserver # The name of the container you'd like to connect
+
+- Data Lakehouse:
+        - Jupyterlab:
+                href: https://jupyter.data.thewhitelodge.org
+                icon: jupyter
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: data-jupyterlab # The name of the container you'd like to connect
+        - pgAdmin4:
+                href: https://pgadmin.data.thewhitelodge.org
+                icon: pgadmin
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: data-pgadmin4 # The name of the container you'd like to connect
+        - RustFS:
+                href: https://jupyterlab.thewhitelodge.org
+                icon: rustfs
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: rustfs-server # The name of the container you'd like to connect
+
+- My Calendar Group:
+        - Family:
+        - Calendar:
+                widget:
+                      type: calendar
+                      view: monthly
+                      integrations:
+                            - type: sonarr
+                              service_group: Requests
+                              service_name: Sonarr
+                            - type: radarr
+                              service_group: Requests
+                              service_name: Radarr
+                            - type: ical
+                              name: Google Calendar
+                              url: "https://calendar.google.com/calendar/ical/6j2kv9b45jg5afaapdcd5deenc%40group.calendar.google.com/private-c8c466b1dfe46f7fdd1ae2fb6c31286d/basic.ics"
+                              color: zinc
+                              params:
+                                    showName: true
+
+- Services:
+        - Mealie:
+                href: https://mealie.thewhitelodge.org
+                icon: mealie
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: mealie # The name of the container you'd like to connect
+        - Immich:
+                href: https://immich.thewhitelodge.org
+                icon: immich
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: immich_server # The name of the container you'd like to connect
+        - Nextcloud:
+                href: https://nextcloud.thewhitelodge.org
+                icon: nextcloud
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: nextcloud # The name of the container you'd like to connect
+        - HomeAssistant:
+                icon: home-assistant.png
+                href: https://homeassistant.thewhitelodge.org/
+                description: Home automation
+                proxmoxNode: proxmox
+                proxmoxVMID: 101
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Pihole:
+                icon: pi-hole.png
+                href: https://pihole.thewhitelodge.org/admin
+                proxmoxNode: proxmox
+                proxmoxVMID: 103
+                proxmoxType: lxc
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Infisical:
+                icon: infisical.png
+                href: https://infisical.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 104
+                proxmoxType: lxc
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Semaphore:
+                icon: semaphore.png
+                href: https://semaphore.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 105
+                proxmoxType: lxc
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - RustDesk:
+                icon: rustdesk.png
+                href: https://rustdesk.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 110
+                proxmoxType: lxc
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Netbox:
+                icon: netbox.png
+                href: https://netbox.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 113
+                proxmoxType: lxc
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Proxmox Backup Server:
+                icon: proxmox.png
+                href: https://pbs.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 106
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - FreeIPA:
+                icon: freeipa.png
+                href: https://ipa.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 109
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - OPNsense:
+                icon: opnsense.png
+                href: https://opnsense.thewhitelodge.org/
+                proxmoxNode: proxmox
+                proxmoxVMID: 112
+                # proxmoxType: qemu # This is the default, so it can be omitted
+        - Jupyterlab:
+                href: https://jupyterlab.thewhitelodge.org
+                icon: jupyter
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: jupyterlab # The name of the container you'd like to connect
+        - pgAdmin4:
+                href: https://pgadmin.thewhitelodge.org
+                icon: pgadmin
+                target: _blank
+                server: my-docker # The docker server that was configured
+                container: pgadmin4 # The name of the container you'd like to connect

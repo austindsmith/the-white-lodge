@@ -1,0 +1,6 @@
+all:
+  children:
+    cloud:
+      hosts:
+        kubernetes-server-01:
+          ansible_host: 152.53.52.163

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: generate
+description: CIID Generate EDFacts reporting application
+type: application
+version: 0.1.0
+appVersion: v13.2
+home: https://github.com/CEDS-Collaborative-Exchange/Generate
+sources:
+  - https://github.com/CEDS-Collaborative-Exchange/Generate
+maintainers:
+  - name: austin

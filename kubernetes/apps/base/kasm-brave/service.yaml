@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kasm-brave
+spec:
+  selector:
+    app: kasm-brave
+  ports:
+    - name: https-vnc
+      port: 6901
+      targetPort: 6901

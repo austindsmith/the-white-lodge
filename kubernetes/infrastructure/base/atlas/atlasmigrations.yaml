@@ -1,0 +1,13 @@
+apiVersion: db.atlasgo.io/v1alpha1
+kind: AtlasMigration
+metadata:
+  name: app-cluster-migrations
+  namespace: cloudnative-pg
+spec:
+  urlFrom:
+    secretKeyRef:
+      name: app-cluster-uri
+      key: url
+  dir:
+    configMapRef:
+      name: app-cluster-migrations

@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: qbittorrent-vpn
+spec:
+  interval: 24h
+  url: https://bdclark.github.io/helm-charts

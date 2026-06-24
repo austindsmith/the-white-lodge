@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qbittorrent-vpn
+spec:
+  timeout: 15m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  interval: 1h
+  chart:
+    spec:
+      chart: qbittorrent-vpn
+      version: 0.7.4
+      sourceRef:
+        kind: HelmRepository
+        name: qbittorrent-vpn
+  values:
+    strategy:
+      type: Recreate
+    qbittorrent:
+      envFrom:
+        - secretRef:
+            name: qbittorrent-env
+      config:
+        bootstrap:
+          enabled: true
+          existingConfig:
+            type: secret
+            name: qbittorrent-config
+            key: qBittorrent.conf
+      persistence:
+        data:
+          enabled: true
+          existingClaim: media
+          mountPath: /media
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+
+    gluetun:
+      startupProbe:
+        httpGet:
+          path: /v1/openvpn/status
+          port: 8000
+        periodSeconds: 5
+        failureThreshold: 60
+      envFrom:
+        - secretRef:
+            name: gluetun-env
+
+    volumes:
+      - name: tmp
+        emptyDir: {}

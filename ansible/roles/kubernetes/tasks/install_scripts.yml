@@ -1,0 +1,38 @@
+- name: Install flux
+  ansible.builtin.shell:
+    cmd: curl -s https://fluxcd.io/install.sh | bash
+  become: true
+  args:
+    creates: /usr/local/bin/flux
+
+- name: Get latest kustomize version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest
+    return_content: true
+  register: kustomize_release
+
+- name: Install kustomize
+  ansible.builtin.unarchive:
+    src: "https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_release.json.tag_name }}/kustomize_{{ kustomize_release.json.tag_name | regex_replace('kustomize/', '') }}_linux_amd64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: true
+  become: true
+  args:
+    creates: /usr/local/bin/kustomize
+
+- name: Get latest ksops version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/viaduct-ai/kustomize-sops/releases/latest
+    return_content: true
+  register: ksops_release
+
+- name: Install ksops
+  ansible.builtin.unarchive:
+    src: "https://github.com/viaduct-ai/kustomize-sops/releases/download/{{ ksops_release.json.tag_name }}/ksops_{{ ksops_release.json.tag_name | replace('v', '') }}_Linux_x86_64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: true
+    include:
+      - ksops
+  become: true
+  args:
+    creates: /usr/local/bin/ksops

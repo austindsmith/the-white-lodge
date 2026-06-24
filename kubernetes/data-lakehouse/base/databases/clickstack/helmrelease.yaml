@@ -1,0 +1,76 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: clickstack
+spec:
+  interval: 1h
+  releaseName: clickstack
+  dependsOn:
+    - name: clickstack-operators
+  chart:
+    spec:
+      chart: clickstack
+      version: 2.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: clickstack
+  valuesFrom:
+    - kind: Secret
+      name: clickstack-secrets
+      valuesKey: values.yaml
+  values:
+    hyperdx:
+      config:
+        USAGE_STATS_ENABLED: "false"
+      ingress:
+        enabled: false
+      service:
+        type: ClusterIP
+    mongodb:
+      spec:
+        statefulSet:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: mongod
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 256Mi
+            volumeClaimTemplates:
+              - metadata:
+                  name: data-volume
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  storageClassName: longhorn-single-replica
+                  resources:
+                    requests:
+                      storage: 10Gi
+              - metadata:
+                  name: logs-volume
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  storageClassName: longhorn-single-replica
+                  resources:
+                    requests:
+                      storage: 2Gi
+    clickhouse:
+      keeper:
+        spec:
+          containerTemplate:
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+          dataVolumeClaimSpec:
+            storageClassName: longhorn-single-replica
+      cluster:
+        spec:
+          containerTemplate:
+            resources:
+              requests:
+                cpu: 200m
+                memory: 512Mi
+          dataVolumeClaimSpec:
+            storageClassName: longhorn-single-replica

@@ -1,0 +1,11 @@
+apiVersion: resources.teleport.dev/v2
+kind: TeleportProvisionToken
+metadata:
+  name: db-agent-token
+spec:
+  roles:
+    - Db
+  join_method: kubernetes
+  kubernetes:
+    allow:
+      - service_account: "teleport:teleport-db-agent"

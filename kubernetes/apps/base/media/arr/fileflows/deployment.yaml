@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileflows
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: fileflows
+  template:
+    metadata:
+      labels:
+        app: fileflows
+    spec:
+      containers:
+        - name: fileflows
+          image: revenz/fileflows
+          restart: unless-stopped
+          envFrom:
+            - secretRef:
+                name: fileflows-oidc
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: America/Denver
+          volumeMounts:
+            - name: temp
+              mountPath: /temp
+            - name: data
+              mountPath: /app/Data
+            - name: logs
+              mountPath: /app/Logs
+            - name: common
+              mountPath: /app/common
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+      volumes:
+        - name: temp
+          persistentVolumeClaim:
+            claimName: fileflows-temp
+        - name: data
+          persistentVolumeClaim:
+            claimName: media
+        - name: logs
+          persistentVolumeClaim:
+            claimName: fileflows-logs
+        - name: common
+          persistentVolumeClaim:
+            claimName: fileflows-common

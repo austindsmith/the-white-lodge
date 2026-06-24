@@ -1,0 +1,129 @@
+nameOverride: ""
+fullnameOverride: "generate"
+
+frontend:
+  config:
+    enabled: false
+    mountPath: /app/wwwroot/assets/config/config.prod.json
+    subPath: config.prod.json
+    clientId: ""
+    tenantId: ""
+    redirectUri: ""
+    pageSize: 10
+    timeoutInSeconds: 1200
+    callService: true
+    authType: OAUTH
+
+image:
+  web:
+    repository: ciididea/generate-web
+    tag: v13.2
+    pullPolicy: IfNotPresent
+  background:
+    repository: ciididea/generate-background
+    tag: v13.2
+    pullPolicy: IfNotPresent
+
+app:
+  userStoreType: OAUTH
+  environment: production
+  provisionJobs: false
+  forwardedHeaders: true
+
+embedded:
+  adminUserName: Admin
+  reviewerUserName: Reviewer
+  secretKeys:
+    adminPassword: embedded_admin_password
+    reviewerPassword: embedded_reviewer_password
+
+azureAd:
+  instance: "https://login.microsoftonline.com/"
+  domain: ""
+  tenantId: ""
+  clientId: ""
+  clientSecret:
+    enabled: false
+    secretKey: generate_aad_client_secret
+
+database:
+  host: generate-mssql
+  port: 1433
+  user: sa
+  encrypt: true
+  trustServerCertificate: true
+  passwordSecretKey: generate_db_password
+  names:
+    app: Generate
+    ods: ODS
+    staging: Staging
+    rds: RDS
+    hangfire: Generate
+
+mssql:
+  enabled: true
+  image: mcr.microsoft.com/mssql/server:2022-latest
+  pid: Developer
+  storage:
+    className: longhorn
+    size: 20Gi
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      memory: 4Gi
+
+initDatabases:
+  enabled: true
+  image: mcr.microsoft.com/mssql/server:2022-latest
+
+secret:
+  create: false
+  values: {}
+
+externalSecret:
+  enabled: true
+  refreshInterval: 1h
+  secretStoreRef:
+    name: infisical
+    kind: ClusterSecretStore
+  remoteKeys:
+    dbPassword: generate_db_password
+    aadClientSecret: generate_aad_client_secret
+
+web:
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 80
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+background:
+  replicas: 1
+  service:
+    enabled: true
+    port: 80
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    #- generate.theblacklodge.dev
+    - generate.austinsmith.org
+  tls:
+    enabled: true
+    secretName: generate-tls

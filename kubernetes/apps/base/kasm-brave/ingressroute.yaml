@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kasm-brave
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`brave.theblacklodge.dev`)
+      kind: Rule
+      services:
+        - name: kasm-brave
+          port: 6901
+          scheme: https
+          serversTransport: kasm-skip-verify

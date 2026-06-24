@@ -1,0 +1,39 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: rustdesk-ws-headers
+  namespace: rustdesk
+spec:
+  headers:
+    customRequestHeaders:
+      Connection: "Upgrade"
+      Upgrade: "websocket"
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rustdesk-api
+  namespace: rustdesk
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`rustdesk.theblacklodge.dev`)
+      kind: Rule
+      services:
+        - name: rustdesk-api
+          port: 8080
+    - match: Host(`rd-id.theblacklodge.dev`)
+      kind: Rule
+      middlewares:
+        - name: rustdesk-ws-headers
+      services:
+        - name: hbbs
+          port: 21118
+    - match: Host(`rd-relay.theblacklodge.dev`)
+      kind: Rule
+      middlewares:
+        - name: rustdesk-ws-headers
+      services:
+        - name: hbbr
+          port: 21119

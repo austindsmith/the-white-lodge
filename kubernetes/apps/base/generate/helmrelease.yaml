@@ -1,0 +1,70 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: generate
+  namespace: flux-system
+spec:
+  install:
+    createNamespace: true
+  targetNamespace: generate
+  interval: 1h
+  chart:
+    spec:
+      chart: ./kubernetes/apps/base/generate/chart
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: generate-secrets
+      valuesKey: azure_domain
+      targetPath: azureAd.domain
+    - kind: Secret
+      name: generate-secrets
+      valuesKey: azure_tenant_id
+      targetPath: azureAd.tenantId
+    - kind: Secret
+      name: generate-secrets
+      valuesKey: azure_client_id
+      targetPath: azureAd.clientId
+    - kind: Secret
+      name: generate-secrets
+      valuesKey: azure_tenant_id
+      targetPath: frontend.config.tenantId
+    - kind: Secret
+      name: generate-secrets
+      valuesKey: azure_client_id
+      targetPath: frontend.config.clientId
+  values:
+    fullnameOverride: generate
+    externalSecret:
+      enabled: false
+    ingress:
+      enabled: false
+    app:
+      userStoreType: OAUTH
+      provisionJobs: true
+    database:
+      names:
+        app: Generate
+        ods: Generate
+        staging: Generate
+        rds: Generate
+        hangfire: Generate
+      passwordSecretKey: db_password
+    embedded:
+      adminUserName: Admin
+      reviewerUserName: Reviewer
+      secretKeys:
+        adminPassword: embedded_admin_password
+        reviewerPassword: embedded_reviewer_password
+    frontend:
+      config:
+        enabled: true
+        authType: OAUTH
+        redirectUri: https://generate.austinsmith.org
+    mssql:
+      storage:
+        className: longhorn
+        size: 20Gi

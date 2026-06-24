@@ -1,0 +1,3 @@
+resources:
+  - pv-data.yaml
+  - pvc-data.yaml

@@ -1,0 +1,48 @@
+- name: install longhorn dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - iscsi-initiator-utils
+      - nfs-utils
+      - cryptsetup
+      - device-mapper
+    state: present
+
+- name: enable and start iscsid
+  become: true
+  ansible.builtin.systemd:
+    name: iscsid
+    enabled: true
+    state: started
+
+- name: configure rshared root mount propagation for longhorn
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/rshared-root.service
+    mode: '0644'
+    content: |
+      [Unit]
+      Description=Set root mount propagation to rshared for Longhorn
+      DefaultDependencies=no
+      After=local-fs.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/bin/mount --make-rshared /
+      RemainAfterExit=yes
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: enable and start rshared root service
+  become: true
+  ansible.builtin.systemd:
+    name: rshared-root
+    enabled: true
+    daemon_reload: true
+    state: started
+
+- name: apply rshared propagation to current session
+  become: true
+  ansible.builtin.command: mount --make-rshared /
+  changed_when: false

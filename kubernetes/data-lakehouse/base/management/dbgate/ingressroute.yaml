@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dbgate
+  namespace: data
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`dbgate.theblacklodge.dev`)
+      kind: Rule
+      services:
+        - name: dbgate
+          port: 3000

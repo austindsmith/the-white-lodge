@@ -1,0 +1,26 @@
+- name: Install firewalld
+  ansible.builtin.package:
+    name: firewalld
+    state: present
+
+- name: Disable and stop ufw
+  ansible.builtin.systemd:
+    name: ufw
+    state: stopped
+    enabled: false
+  when: ansible_facts.services['ufw.service'] is defined
+
+- name: Enable and start firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Apply firewall rules
+  ansible.posix.firewalld:
+    service: "{{ item.service }}"
+    zone: "{{ item.zone | default('public') }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  loop: "{{ firewall_services }}"

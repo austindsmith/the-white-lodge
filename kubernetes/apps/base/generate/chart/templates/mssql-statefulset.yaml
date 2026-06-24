@@ -1,0 +1,77 @@
+{{- if .Values.mssql.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.database.host }}
+  labels:
+    {{- include "generate.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mssql
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: mssql
+  ports:
+    - name: mssql
+      port: {{ .Values.database.port }}
+      targetPort: mssql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "generate.fullname" . }}-mssql
+  labels:
+    {{- include "generate.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mssql
+spec:
+  serviceName: {{ .Values.database.host }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: mssql
+  template:
+    metadata:
+      labels:
+        {{- include "generate.labels" . | nindent 8 }}
+        app.kubernetes.io/component: mssql
+    spec:
+      securityContext:
+        fsGroup: 10001
+      containers:
+        - name: mssql
+          image: {{ .Values.mssql.image }}
+          ports:
+            - name: mssql
+              containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_PID
+              value: {{ .Values.mssql.pid | quote }}
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "generate.secretName" . }}
+                  key: {{ .Values.database.passwordSecretKey }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/opt/mssql
+          readinessProbe:
+            tcpSocket:
+              port: mssql
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          resources:
+            {{- toYaml .Values.mssql.resources | nindent 12 }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: {{ .Values.mssql.storage.className }}
+        resources:
+          requests:
+            storage: {{ .Values.mssql.storage.size }}
+{{- end }}

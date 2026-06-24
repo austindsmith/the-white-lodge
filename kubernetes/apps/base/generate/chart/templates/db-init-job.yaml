@@ -1,0 +1,43 @@
+{{- if .Values.initDatabases.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "generate.fullname" . }}-db-init
+  labels:
+    {{- include "generate.labels" . | nindent 4 }}
+    app.kubernetes.io/component: db-init
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 10
+  template:
+    metadata:
+      labels:
+        {{- include "generate.labels" . | nindent 8 }}
+        app.kubernetes.io/component: db-init
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: db-init
+          image: {{ .Values.initDatabases.image }}
+          env:
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "generate.secretName" . }}
+                  key: {{ .Values.database.passwordSecretKey }}
+          command:
+            - /bin/bash
+            - -c
+            - |
+              SQLCMD="/opt/mssql-tools18/bin/sqlcmd -S {{ .Values.database.host }},{{ .Values.database.port }} -U {{ .Values.database.user }} -P $SA_PASSWORD -C -b"
+              until $SQLCMD -Q "SELECT 1" > /dev/null 2>&1; do
+                echo "waiting for sql server"
+                sleep 5
+              done
+              {{- range list .Values.database.names.app .Values.database.names.ods .Values.database.names.staging .Values.database.names.rds }}
+              $SQLCMD -Q "IF DB_ID('{{ . }}') IS NULL CREATE DATABASE [{{ . }}];"
+              {{- end }}
+{{- end }}

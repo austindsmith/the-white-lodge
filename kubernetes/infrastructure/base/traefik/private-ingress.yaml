@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: private-ingress
+spec:
+    ingressClassName: ENC[AES256_GCM,data:Ut4+F4NXE8EiiNw5x5NjrGM=,iv:FRHORSrPH6J8bvJSyYDCja0tBV/Zj6qOcRxeZcZcJI0=,tag:ReKk8G82y0zHthOplOaupg==,type:str]
+    rules:
+        - host: ENC[AES256_GCM,data:lOC/4eyzWDB60Ozq1l01xTcnFk3e0lJ+R1JtDw==,iv:5i5dnAMazijEA6kf9qy3U4BDpmnVrC2pWil3L0u0MQo=,tag:CgWZMBpZOaCkWlklZYTlCw==,type:str]
+          http:
+            paths:
+                - path: ENC[AES256_GCM,data:zA==,iv:8Ea1NrquWrnVimCDMENgD/CVmBcfM1PjKYJQmwMvUII=,tag:wFdB5SsgBQ0Z/H9xis0jvA==,type:str]
+                  pathType: ENC[AES256_GCM,data:cEC9yvYi,iv:0jYQqRmrc5r5wMWbI4nsRHrMSFNFKaVmKqF1ktfz/fk=,tag:ScYDpYt9CQWKsxqrJ233cw==,type:str]
+                  backend:
+                    service:
+                        name: ENC[AES256_GCM,data:H+nSrwHWsg==,iv:wJv4Uw0hD85EL4kvXIbsvQmOxpVsGNsc9QMfDFrWpoI=,tag:msnQX5byypG/mfkXGd71TQ==,type:str]
+                        port:
+                            number: ENC[AES256_GCM,data:brc=,iv:ytprlmOSDU40j5dW0Neq0vyvaBpg8IjDdesTPeG1Ayg=,tag:CdNKPVabwuPdF5sguIYwCQ==,type:int]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0bWJ4OW1wNmQxNmFkMkQ4
+            VFp1dDJIekpHcXpPNjJ3RElaQ1FJVEhyVFdJCk9oNUFKWERnYjRvWGQrNUo3MkJs
+            L0NzdDRmKzRORERqNVk4R3IzRURvQjgKLS0tIEFrL0o5UVFtNmhZRjhKZ2ZVYnZT
+            Q0t4UUNWZThScDBxbDdUZXczZG1HVlEKn3NNuKoSfLKr1Ml/IC85LWz0q1pXnsM7
+            zUQ17GrKoXJQFV2Tl2bKI6iV6R6aOFb/3nVfS0mR1nA+qxG45lFV/Q==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n
+    encrypted_regex: ^(data|stringData|spec)$
+    lastmodified: "2026-06-13T02:43:06Z"
+    mac: ENC[AES256_GCM,data:Dw7PsvNMNw0yllxfoNKUMnEftWvBne3N43cTO0aLxol49IO4yZilQHTDg9fKLyzOP+ZfFGQM+2hgmCS3FIl4jJ4Sq2QMjbnrDZNCzDxQajhZLMiYrrrhARHwMkXLvxt8XEyM22zILCbKgAiGT7NmXwJssWBaRPBT2Fb2x4YKqNA=,iv:UJYREVqxpTBlzq3a+mhN3qcPyB7fMP7x6rJ8wwP6++Y=,tag:5GgIeOAdJ6MWWQ1xccPagQ==,type:str]
+    version: 3.13.1

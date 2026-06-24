@@ -1,0 +1,11 @@
+resources:
+  - cert-manager
+  - metallb
+  - cloudflare-tunnel
+  - traefik
+  - longhorn
+  - synology-csi
+  #- rustfs
+  #- cloudnative-pg
+  #- teleport
+  #- atlas

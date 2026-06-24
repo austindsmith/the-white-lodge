@@ -1,0 +1,22 @@
+creation_rules:
+  # JSON
+  - path_regex: .*.json
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+  # Kubernetes
+  - path_regex: kubernetes/.*ya?ml$
+    encrypted_regex: '^(data|stringData|spec)$'
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+  # General yaml
+  - path_regex: .*.ya?ml$
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+  # Packer
+  - path_regex: .*.hcl$
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+    # Terraform
+  - path_regex: .*.tf$
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+  - path_regex: .*.tfvars$
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"
+    # Environment variable files
+  - path_regex: .*.env
+    age: "age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n"

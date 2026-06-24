@@ -1,0 +1,14 @@
+apiVersion: resources.teleport.dev/v2
+kind: TeleportUser
+metadata:
+  name: austin
+spec:
+  roles:
+    - access
+    - editor
+    - db-access
+  traits:
+    logins:
+      - root
+      - ansible
+      - austin

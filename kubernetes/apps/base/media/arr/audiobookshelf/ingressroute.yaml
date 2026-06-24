@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: audiobookshelf-ingress
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`audiobookshelf.theblacklodge.dev`)
+      kind: Rule
+      services:
+        - name: audiobookshelf
+          port: 7878

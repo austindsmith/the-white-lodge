@@ -1,0 +1,21 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Github:
+    - The Black Lodge:
+        - abbr: TBL
+          href: https://github.com/austindsmith/the-black-lodge
+
+    - The White Lodge:
+        - abbr: YT
+          href: https://github.com/austindsmith/the-white-lodge
+
+    - The Docs Lodge:
+        - abbr: YT
+          href: https://github.com/austindsmith/the-docs-lodge
+
+    - austinsmith.org:
+        - abbr: AS
+          href: https://github.com/austindsmith/austinsmith
+

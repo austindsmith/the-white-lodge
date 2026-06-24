@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cluster-ca-bundle
+  namespace: teleport
+spec:
+  secretName: cluster-ca-bundle
+  issuerRef:
+    name: cluster-ca
+    kind: ClusterIssuer
+  commonName: teleport.teleport.svc.cluster.local
+  dnsNames:
+    - teleport.teleport.svc.cluster.local
+  duration: 8760h
+  renewBefore: 720h

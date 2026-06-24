@@ -1,0 +1,92 @@
+- name: Install SOPS
+  become: true
+  hosts: all
+  tasks:
+    - name: Download SOPS
+      ansible.builtin.get_url:
+        url: https://github.com/getsops/sops/releases/download/v3.13.1/sops-v3.13.1.linux.amd64
+        dest: /usr/local/bin/sops
+        mode: '0755'
+
+- name: Install server management tools
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Cockpit
+      ansible.builtin.include_role:
+        name: linux-system-roles.cockpit
+
+
+- name: Prepare nodes for Kubernetes
+  hosts: k3s_cluster
+  become: true
+  tasks:
+    - name: Run kubernetes role
+      ansible.builtin.include_role:
+        name: kubernetes
+
+- name: Create k3s cluster
+  ansible.builtin.import_playbook: k3s.orchestration.site
+
+- name: Apply Traefik CRDs
+  hosts: k3s_cluster
+  gather_facts: false
+  tasks:
+    - name: Apply Traefik CRDs
+      become: true
+      kubernetes.core.k8s:
+        state: present
+        src: "https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml"
+        kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Install local tooling
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install flux
+      ansible.builtin.shell:
+        cmd: curl -s https://fluxcd.io/install.sh | bash
+      args:
+        creates: /usr/local/bin/flux
+    - name: Get latest kustomize version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest
+        return_content: true
+      register: kustomize_release
+    - name: Install kustomize
+      ansible.builtin.unarchive:
+        src: "https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_release.json.tag_name }}/kustomize_{{ kustomize_release.json.tag_name | regex_replace('kustomize/', '') }}_linux_amd64.tar.gz"
+        dest: /usr/local/bin
+        remote_src: true
+      args:
+        creates: /usr/local/bin/kustomize
+    - name: Get latest ksops version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/viaduct-ai/kustomize-sops/releases/latest
+        return_content: true
+      register: ksops_release
+    - name: Install ksops
+      ansible.builtin.unarchive:
+        src: "https://github.com/viaduct-ai/kustomize-sops/releases/download/{{ ksops_release.json.tag_name }}/ksops_{{ ksops_release.json.tag_name | replace('v', '') }}_Linux_x86_64.tar.gz"
+        dest: /usr/local/bin
+        remote_src: true
+        include:
+          - ksops
+      args:
+        creates: /usr/local/bin/ksops
+
+- name: Bootstrap Flux
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  environment:
+    KUBECONFIG: "{{ lookup('env', 'HOME') }}/.kube/config"
+  tasks:
+    - name: Create Flux namespace
+      ansible.builtin.script: "{{ playbook_dir }}/files/flux_namespace.sh"
+    - name: Create Flux secret
+      ansible.builtin.script: "{{ playbook_dir }}/files/flux_secret.sh"
+    - name: Bootstrap Flux
+      ansible.builtin.script: "{{ playbook_dir }}/files/flux_bootstrap.sh"

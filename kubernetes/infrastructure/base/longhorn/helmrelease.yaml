@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  install:
+    createNamespace: true
+  interval: 1h
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.11.2
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+  values:
+    defaultBackupStore:
+      backupTarget: nfs://192.168.1.131:/volume1/backups/longhorn
+      backupTargetCredentialSecret: ""
+      pollInterval: 300
+    longhornUI:
+      replicas: 1

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: neko
+  name: neko
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: neko
+  template:
+    metadata:
+      labels:
+        io.kompose.service: neko
+    spec:
+      containers:
+        - name: neko
+          image: ghcr.io/m1k1o/neko/firefox:latest
+          envFrom:
+            - secretRef:
+                name: neko-secrets
+          env:
+            - name: NEKO_DESKTOP_SCREEN
+              value: 1920x1080@30
+            - name: NEKO_WEBRTC_ICELITE
+              value: "1"
+            - name: NEKO_WEBRTC_TCPMUX
+              value: "59000"
+            - name: NEKO_WEBRTC_UDPMUX
+              value: "59000"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 59000
+              protocol: TCP
+            - containerPort: 59000
+              protocol: UDP
+      restartPolicy: Always

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbgate
+  namespace: data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbgate
+  template:
+    metadata:
+      labels:
+        app: dbgate
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: dbgate
+          image: dbgate/dbgate:7.2.0-alpine
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: false
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: CONNECTIONS
+              value: "PRIMARY"
+            - name: ENGINE_PRIMARY
+              value: "postgres@dbgate-plugin-postgres"
+            - name: SERVER_PRIMARY
+              value: "app-cluster-rw.cloudnative-pg.svc"
+            - name: PORT_PRIMARY
+              value: "5432"
+            - name: LABEL_PRIMARY
+              value: "app-cluster-rw"
+            - name: USER_PRIMARY
+              valueFrom:
+                secretKeyRef:
+                  name: dbgate-cloudnative-pg-secret
+                  key: username
+            - name: PASSWORD_MODE_PRIMARY
+              value: "askPassword"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

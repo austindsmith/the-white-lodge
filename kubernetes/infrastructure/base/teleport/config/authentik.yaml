@@ -1,0 +1,30 @@
+apiVersion: resources.teleport.dev/v3
+kind: TeleportOIDCConnector
+metadata:
+    name: authentik
+spec:
+    client_id: ENC[AES256_GCM,data:sgLBL6mHTyURoZdo8S+8gUGgrYk94y8hU4yGromMkmlvLIieeKXgyQ==,iv:G1cD9V+DW4ISgfFJpXUtw77fVXmKNSxSILvVPh5XF0w=,tag:dDDLjR+hEZfKLGdIW/rguQ==,type:str]
+    client_secret: ENC[AES256_GCM,data:VHJvCku1pN5hNIpInEtEI2418qruK6lyb2t1BEBGOlgeUes79aXEFxNAEpSU6VtUo6WptdBzhz0ebUTS53Ae1QF3IT7dPlr9pdfphMNehNhY7AsYF0tC4KLnRHkSPU1ePvWGlvRhaq/6oI2oHZSydVyRbPkSkTu2uE9yaw2wvhg=,iv:Rppbq0+BxstlE8jVmZ8RzYZMyGqIk8Og+8lXldzuEzM=,tag:2lq3HG75V7wOWImhtJdS+w==,type:str]
+    issuer_url: ENC[AES256_GCM,data:0pudbc0cM2pFvP/HDZxG4cbWW7cf8HGb+c8xnLxMHL9ZpG2W+tfPL4OLSrawwdr5i5rXbS27HbFzJ34=,iv:iO0FeuUCe6xKq6TgnfZi+RZsCUT+XldTQBuqPRiet38=,tag:mD/9oV7g+uM6+Gs0vCANWg==,type:str]
+    redirect_url:
+        - ENC[AES256_GCM,data:P0Q9tFC4fjVFBrK7PGEaryU1rn+FM2T30fCIEY2dONj+SqedwrqyIY0wee7g7YKOG83kqBBxjGzTsQ==,iv:XSVPr340Xq7yWYhVYpqO1zhqq4t1PI0KLXErH5637Do=,tag:RCo90wnta3t5+VpY7Q2x+g==,type:str]
+    claims_to_roles:
+        - claim: ENC[AES256_GCM,data:r/MS,iv:dBg56ULLr5dspcyvbhvz/ZnEq90a+joSP5NLD2MP8GE=,tag:3T+XWAcM/NR8XyIH8QTR2Q==,type:str]
+          value: ENC[AES256_GCM,data:qWi0TeUV,iv:tzEMkCGF1mWZow98Zwr8AiveTrDEQ/1R/xQ/yoQsXvk=,tag:/csOPExJfX3hga9N0jC5lA==,type:str]
+          roles:
+            - ENC[AES256_GCM,data:ts8lOfQ=,iv:mxLMQluB9TwMd/xQth6+Uw3f8RCPO8k+9cjGp8b+JxY=,tag:t10yLvmVVoPtD/a1VXhOzg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0QnFDVFloQW04U3dRNEw2
+            V0lzUnArQzFyWjFsRENWQmp4TlpCV25ORnhRCmU5TXM5Q3pOY0hWeHlxeUd6YW9N
+            ZFZ6bjZWUm9PQXVwZEJQVExYcElvY2MKLS0tIHltVkovMzJzdjdSYjdRbXovaUNR
+            RjZiVUUzWWI5S0szbDhnYjg0NFhjTjAKFaUy5ReTUk9iSlCYaHYMve0HxMFTapeW
+            b0nlnXpwaeaIAQw7ohoEr0DCdkT6JDpdPFKgJ9CSQM7c2XCqeWIQOg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n
+    encrypted_regex: ^(data|stringData|spec)$
+    lastmodified: "2026-06-10T04:00:47Z"
+    mac: ENC[AES256_GCM,data:risfK1bhqy/yqYoWNRaJwHpAUqb27r9mOHiWEZ0c5fEfdaIUDm+3vMJragkYwS6rMuk7OSST8ExfimuHAfKiKsu0CywACLNOct9HckLsL68L13/qoCv1McXSsvIfgYvqgwJ+HS2IwM44QQrn0QxgABs1jjrmb1e7DKmeU8Cmkzg=,iv:JENk+QOfBTNCAiJdgLfaURShjoW4bkgPK/5TZuJ8q6I=,tag:tlC6G5WDmrDwzceZNN6SyA==,type:str]
+    version: 3.13.1

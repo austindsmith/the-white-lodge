@@ -1,0 +1,12 @@
+resources:
+  - authentik
+  - headlamp
+  - media
+  #- semaphore
+  #- rustdesk
+  #- kasm-firefox
+  #- homepage
+  #- generate
+  #- jupyterhub
+  #- dagster
+  #- coder
