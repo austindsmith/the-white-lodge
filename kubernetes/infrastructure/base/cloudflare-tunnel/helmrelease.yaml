@@ -15,6 +15,7 @@ spec:
         name: cloudflare-tunnel
   values:
     cloudflare:
+      tunnelName: base-kubernetes-cluster
       secretRef:
         name: cloudflare-tunnel
         apiTokenKey: cloudflare-api-token
