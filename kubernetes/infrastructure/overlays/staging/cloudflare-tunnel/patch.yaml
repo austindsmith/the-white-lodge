@@ -6,4 +6,4 @@ metadata:
 spec:
   values:
     cloudflare:
-      tunnelName: production-kubernetes-cluster
+      tunnelName: staging-kubernetes-cluster

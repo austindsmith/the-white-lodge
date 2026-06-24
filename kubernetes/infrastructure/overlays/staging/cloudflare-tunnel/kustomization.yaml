@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ./kubernetes/infrastructure/base/cloudflare-tunnel
-  - ./ingress.yaml
 
 patches:
   - path: patch.yaml
