@@ -6,4 +6,4 @@ resources:
   - ./namespace.yaml
   - ./helmrelease.yaml
   - ./helmrepository.yaml
-  - ./secret.yaml
+  #- ./secret.yaml
