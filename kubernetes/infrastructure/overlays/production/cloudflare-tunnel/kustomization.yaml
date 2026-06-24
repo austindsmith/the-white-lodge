@@ -5,4 +5,4 @@ resources:
   - ../../../base/cloudflare-tunnel
 
 patches:
-  - path: secret.yaml
+  - path: ./secret.yaml
