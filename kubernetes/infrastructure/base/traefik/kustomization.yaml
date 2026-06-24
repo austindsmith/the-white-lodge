@@ -6,6 +6,3 @@ resources:
   - namespace.yaml
   - helmrepository.yaml
   - helmrelease.yaml
-  - dashboard-ingress.yaml
-  - cloudflare-ingress.yaml
-  - private-ingress.yaml
