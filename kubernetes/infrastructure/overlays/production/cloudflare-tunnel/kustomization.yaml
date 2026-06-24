@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ../../../base/cloudflare-tunnel
-  - ./secret.yaml
 
 patches:
-  - path: patch.yaml
+  - path: secret.yaml
