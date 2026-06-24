@@ -5,6 +5,3 @@ resources:
   - ../../../base/traefik
   - ./ingress.yaml
   - ./private-ingress.yaml
-
-patches:
-  - path: patch.yaml
