@@ -15,13 +15,3 @@ spec:
                 name: traefik
                 port:
                   number: 80
-    - host: "*.austinsmith.org"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: traefik
-                port:
-                  number: 80
