@@ -20,6 +20,6 @@ spec:
         name: cloudflare-tunnel
         apiTokenKey: cloudflare-api-token
         accountIDKey: cloudflare-account-id
-        #tunnelNameKey: cloudflare-tunnel-name
+        tunnelNameKey: cloudflare-tunnel-name
     cloudflared:
       protocol: http2
