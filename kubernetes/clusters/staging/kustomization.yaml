@@ -1,4 +1,5 @@
 resources:
+  - cluster-vars.yaml
   - cloudnative-pg-crds.yaml
   - atlas-crds.yaml
   #- clickstack-operators.yaml

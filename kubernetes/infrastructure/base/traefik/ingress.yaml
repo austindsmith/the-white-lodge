@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: cloudflare-tunnel
   rules:
-    - host: "*.thewhitelodge.org"
+    - host: "*.${cluster_domain}"
       http:
         paths:
           - path: /
@@ -26,7 +26,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.thewhitelodge.org`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+    - match: Host(`traefik.${cluster_domain}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
       kind: Rule
       services:
         - name: api@internal
