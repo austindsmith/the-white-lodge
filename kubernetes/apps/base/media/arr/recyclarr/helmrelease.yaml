@@ -82,7 +82,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: recyclarr.theblacklodge.dev
+          - host: recyclarr.${cluster_domain}
             paths:
               - path: /
                 service:

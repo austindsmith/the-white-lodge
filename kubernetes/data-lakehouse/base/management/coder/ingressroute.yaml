@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`coder.theblacklodge.dev`)
+    - match: Host(`coder.${cluster_domain}`)
       kind: Rule
       services:
         - name: coder

@@ -9,7 +9,7 @@ metadata:
 data:
   sabnzbd.ini: |
     [misc]
-    host_whitelist = sabnzbd.theblacklodge.dev,
+    host_whitelist = sabnzbd.${cluster_domain},
     username =
     password =
     trusted_clients = 10.42.0.0/16,10.43.0.0/16,

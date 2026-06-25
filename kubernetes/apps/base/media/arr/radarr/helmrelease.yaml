@@ -80,7 +80,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: radarr.theblacklodge.dev
+          - host: radarr.${cluster_domain}
             paths:
               - path: /
                 service:

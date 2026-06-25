@@ -80,7 +80,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: sonarr.theblacklodge.dev
+          - host: sonarr.${cluster_domain}
             paths:
               - path: /
                 service:

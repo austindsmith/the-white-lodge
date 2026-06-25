@@ -68,7 +68,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: seerr.theblacklodge.dev
+          - host: seerr.${cluster_domain}
             paths:
               - path: /
                 service:

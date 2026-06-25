@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`dagster.theblacklodge.dev`)
+    - match: Host(`dagster.${cluster_domain}`)
       kind: Rule
       services:
         - name: dagster-dagster-webserver

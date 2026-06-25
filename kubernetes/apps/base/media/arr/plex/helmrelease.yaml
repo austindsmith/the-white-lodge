@@ -73,7 +73,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: plex.theblacklodge.dev
+          - host: plex.${cluster_domain}
             paths:
               - path: /
                 service:

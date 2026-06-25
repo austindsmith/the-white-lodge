@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`bytebase.theblacklodge.dev`)
+    - match: Host(`bytebase.${cluster_domain}`)
       kind: Rule
       services:
         - name: bytebase-entrypoint

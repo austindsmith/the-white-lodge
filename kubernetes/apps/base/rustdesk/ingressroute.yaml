@@ -18,19 +18,19 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`rustdesk.theblacklodge.dev`)
+    - match: Host(`rustdesk.${cluster_domain}`)
       kind: Rule
       services:
         - name: rustdesk-api
           port: 8080
-    - match: Host(`rd-id.theblacklodge.dev`)
+    - match: Host(`rd-id.${cluster_domain}`)
       kind: Rule
       middlewares:
         - name: rustdesk-ws-headers
       services:
         - name: hbbs
           port: 21118
-    - match: Host(`rd-relay.theblacklodge.dev`)
+    - match: Host(`rd-relay.${cluster_domain}`)
       kind: Rule
       middlewares:
         - name: rustdesk-ws-headers

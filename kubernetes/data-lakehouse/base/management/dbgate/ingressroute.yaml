@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`dbgate.theblacklodge.dev`)
+    - match: Host(`dbgate.${cluster_domain}`)
       kind: Rule
       services:
         - name: dbgate

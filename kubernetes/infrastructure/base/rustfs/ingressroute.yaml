@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: s3.theblacklodge.dev
+    - host: s3.${cluster_domain}
       http:
         paths:
           - path: /
@@ -15,7 +15,7 @@ spec:
                 name: rustfs-svc
                 port:
                   number: 9000
-    - host: rustfs.theblacklodge.dev
+    - host: rustfs.${cluster_domain}
       http:
         paths:
           - path: /

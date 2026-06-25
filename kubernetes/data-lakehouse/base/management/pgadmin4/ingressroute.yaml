@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`pgadmin4.theblacklodge.dev`)
+    - match: Host(`pgadmin4.${cluster_domain}`)
       kind: Rule
       services:
         - name: pgadmin4

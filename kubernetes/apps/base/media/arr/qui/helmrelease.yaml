@@ -79,7 +79,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: qui.theblacklodge.dev
+          - host: qui.${cluster_domain}
             paths:
               - path: /
                 service:

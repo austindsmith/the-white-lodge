@@ -71,7 +71,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: notifier.theblacklodge.dev
+          - host: notifier.${cluster_domain}
             paths:
               - path: /
                 service:

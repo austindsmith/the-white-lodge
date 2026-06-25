@@ -73,7 +73,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: tautulli.theblacklodge.dev
+          - host: tautulli.${cluster_domain}
             paths:
               - path: /
                 service:
