@@ -3,8 +3,6 @@ kind: HelmRelease
 metadata:
   name: cloudnative-pg
 spec:
-  dependsOn:
-    - cert-manager
   install:
     crds: Create
   upgrade:
