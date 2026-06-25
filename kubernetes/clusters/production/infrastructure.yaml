@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: cert-manager
     - name: cloudnative-pg-crds
     - name: atlas-crds
   interval: 10m
