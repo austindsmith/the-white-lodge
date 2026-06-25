@@ -2,3 +2,6 @@ resources:
   - cluster-vars.yaml
   - infrastructure.yaml
   - apps.yaml
+  - atlas-crds.yaml
+  - cloudnative-pg-crds.yaml
+  - metallb-config.yaml

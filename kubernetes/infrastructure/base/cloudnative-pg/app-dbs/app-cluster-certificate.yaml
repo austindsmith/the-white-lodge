@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: app-cluster-server
-  namespace: cloudnative-pg
+  namespace: app-dbs
 spec:
   secretName: app-cluster-server-tls
   issuerRef:

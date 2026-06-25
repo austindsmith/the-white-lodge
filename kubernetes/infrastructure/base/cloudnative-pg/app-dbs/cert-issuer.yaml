@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: selfsigned-bootstrap
-  namespace: cloudnative-pg
+  namespace: app-dbs
 spec:
   selfSigned: {}
 ---
@@ -10,7 +10,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pg-client-ca
-  namespace: cloudnative-pg
+  namespace: app-dbs
 spec:
   isCA: true
   commonName: pg-client-ca
@@ -29,7 +29,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: pg-client-ca
-  namespace: cloudnative-pg
+  namespace: app-dbs
 spec:
   ca:
     secretName: pg-client-ca
@@ -38,7 +38,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pg-replication-cert
-  namespace: cloudnative-pg
+  namespace: app-dbs
   labels:
     cnpg.io/reload: ""
 spec:
@@ -57,7 +57,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pgadmin-client-cert
-  namespace: cloudnative-pg
+  namespace: app-dbs
 spec:
   commonName: postgres
   secretName: pgadmin-client-cert

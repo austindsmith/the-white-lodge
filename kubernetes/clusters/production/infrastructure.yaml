@@ -4,6 +4,9 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cloudnative-pg-crds
+    - name: atlas-crds
   interval: 10m
   sourceRef:
     kind: GitRepository
