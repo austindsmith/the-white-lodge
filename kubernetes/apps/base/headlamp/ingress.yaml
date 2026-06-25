@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: headlamp.theblacklodge.dev
+    - host: "headlamp.${cluster_domain}"
       http:
         paths:
           - path: /

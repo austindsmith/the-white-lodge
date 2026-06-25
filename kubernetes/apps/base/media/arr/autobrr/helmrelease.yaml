@@ -76,7 +76,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: autobrr.theblacklodge.dev
+          - host: "autobrr.${cluster_domain}"
             paths:
               - path: /
                 service:

@@ -7,7 +7,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`homepage.theblacklodge.dev`)
+      match: Host(`homepage.${cluster_domain}`)
       services:
         - kind: Service
           name: homepage

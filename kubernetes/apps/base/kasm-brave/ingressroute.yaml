@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`brave.theblacklodge.dev`)
+    - match: Host(`brave.${cluster_domain}`)
       kind: Rule
       services:
         - name: kasm-brave

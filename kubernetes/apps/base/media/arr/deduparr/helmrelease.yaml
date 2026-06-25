@@ -81,7 +81,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: deduparr.theblacklodge.dev
+          - host: "deduparr.${cluster_domain}"
             paths:
               - path: /
                 service:

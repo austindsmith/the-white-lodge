@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`audiobookshelf.theblacklodge.dev`)
+    - match: Host(`audiobookshelf.${cluster_domain}`)
       kind: Rule
       services:
         - name: audiobookshelf

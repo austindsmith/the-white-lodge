@@ -68,7 +68,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: agregarr.theblacklodge.dev
+          - host: "agregarr.${cluster_domain}"
             paths:
               - path: /
                 service:

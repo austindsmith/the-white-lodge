@@ -73,7 +73,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: bazarr.theblacklodge.dev
+          - host: "bazarr.${cluster_domain}"
             paths:
               - path: /
                 service:
