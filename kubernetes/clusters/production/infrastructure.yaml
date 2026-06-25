@@ -13,5 +13,9 @@ spec:
     secretRef:
       name: sops-age
   path: ./kubernetes/infrastructure/overlays/production
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
   prune: true
   wait: true

@@ -17,3 +17,7 @@ spec:
     secretRef:
       name: sops-age
   path: ./kubernetes/infrastructure/base
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
