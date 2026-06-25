@@ -45,7 +45,7 @@ spec:
   values:
     authentik:
       postgresql:
-        host: app-cluster-rw.cloudnative-pg.svc.cluster.local
+        host: app-cluster-rw.app-dbs.svc.cluster.local
         name: "authentik"
         user: "authentik"
         port: 5432
