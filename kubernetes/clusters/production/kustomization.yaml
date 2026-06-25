@@ -1,4 +1,4 @@
 resources:
   - cluster-vars.yaml
   - infrastructure.yaml
-  #- apps.yaml
+  - apps.yaml
