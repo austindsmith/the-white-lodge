@@ -17,6 +17,14 @@ spec:
         kind: HelmRepository
         name: traefik
   values:
+    api:
+      dashboard: true
+    ingressRoute:
+      dashboard:
+        enabled: true
+        entryPoints:
+          - web
+        matchRule: Host(`traefik.${cluster_domain}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
     service:
       annotations:
         metallb.io/loadBalancerIPs: 192.168.100.200
