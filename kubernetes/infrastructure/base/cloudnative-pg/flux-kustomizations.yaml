@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./operator
+  path: ./kubernetes/infrastructure/base/cloudnative-pg/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,7 +20,7 @@ spec:
   interval: 10m
   dependsOn:
     - name: cnpg-apps-operator
-  path: ./cluster
+  path: ./kubernetes/infrastructure/base/cloudnative-pg/cluster
   prune: true
   sourceRef:
     kind: GitRepository
