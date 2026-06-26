@@ -1,8 +1,6 @@
 resources:
   - cluster-vars.yaml
-  - cert-manager.yaml
-  - atlas-crds.yaml
-  - cloudnative-pg-crds.yaml
+  - bootstrap.yaml
   - infrastructure.yaml
-  - apps.yaml
-  - metallb-config.yaml
+  #- apps.yaml
+  #- metallb-config.yaml

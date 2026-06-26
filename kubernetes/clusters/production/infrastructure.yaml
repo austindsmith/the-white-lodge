@@ -5,9 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cert-manager
-    - name: cloudnative-pg-crds
-    - name: atlas-crds
+    - name: bootstrap
   interval: 10m
   sourceRef:
     kind: GitRepository

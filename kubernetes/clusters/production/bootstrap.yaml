@@ -1,11 +1,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: atlas-crds
+  name: bootstrap
   namespace: flux-system
 spec:
   interval: 10m
-  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -13,4 +12,10 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  path: ./kubernetes/infrastructure/base/atlas/crds
+  path: ./kubernetes/bootstrap/overlays/production
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+  prune: true
+  wait: true
