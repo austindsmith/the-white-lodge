@@ -1,0 +1,62 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: cnpg-apps
+spec:
+  selfSigned: {}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cnpg-apps-server-cert
+  labels:
+    cnpg.io/reload: ""
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cnpg-apps-server-cert
+spec:
+  secretName: cnpg-apps-server-cert
+  usages:
+    - server auth
+  dnsNames:
+    - app-cluster-rw
+    - app-cluster-ro
+    - app-cluster-r
+    - app-cluster-rw.cnpg-apps.svc
+    - app-cluster-ro.cnpg-apps.svc
+    - app-cluster-r.cnpg-apps.svc
+    - app-cluster-rw.cnpg-apps.svc.cluster.local
+    - app-cluster-ro.cnpg-apps.svc.cluster.local
+    - app-cluster-r.cnpg-apps.svc.cluster.local
+    - app-cluster-1.app-cluster.cnpg-apps.svc.cluster.local
+    - app-cluster-2.app-cluster.cnpg-apps.svc.cluster.local
+    - app-cluster-3.app-cluster.cnpg-apps.svc.cluster.local
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+    group: cert-manager.io
+---
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cnpg-apps-client-cert
+  labels:
+    cnpg.io/reload: ""
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cnpg-apps-client-cert
+spec:
+  secretName: cnpg-apps-client-cert
+  usages:
+    - client auth
+  commonName: streaming_replica
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+    group: cert-manager.io

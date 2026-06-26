@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cnpg-apps
+  namespace: cnpg-apps
+spec:
+  instances: 3
+  enableSuperuserAccess: true
+  certificates:
+    serverTLSSecret: cnpg-apps-server-cert
+    serverCASecret: cnpg-apps-server-cert
+    clientCASecret: cnpg-apps-client-cert
+    replicationTLSSecret: cnpg-apps-client-cert
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: app-secret
+        #postInitApplicationSQLRefs:
+        #  secretRefs:
+        #    - name: my-secret
+        #      key: secret.sql
+        #  configMapRefs:
+        #    - name: my-configmap
+        #      key: configmap.sql
+  storage:
+    size: 15Gi
+  monitoring:
+    enablePodMonitor: true

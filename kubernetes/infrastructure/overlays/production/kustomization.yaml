@@ -6,4 +6,4 @@ resources:
   - ./cloudflare-tunnel
   - ./traefik
   - ./longhorn
-  #- ./cloudnative-pg
+  - ./cloudnative-pg

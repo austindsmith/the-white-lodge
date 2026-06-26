@@ -1,11 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: app-dbs
+namespace: cnpg-apps
 resources:
   - namespace.yaml
-  - cert-issuer.yaml
+  - certificates.yaml
   - helmrepository.yaml
   - helmrelease.yaml
-  - app-cluster.yaml # Note, this may cause ordering issues
-  - app-databases.yaml
+  - cluster.yaml
   - secret.yaml
