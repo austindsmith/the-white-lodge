@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: cnpg-system
 resources:
   - namespace.yaml
-  - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.29/releases/cnpg-1.29.1.yaml
+  - https://github.com/cloudnative-pg/cloudnative-pg//releases/cnpg-1.29.1.yaml?ref=release-1.29
