@@ -1,22 +1,24 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cnpg-apps
+  name: apps-cluster
   namespace: cnpg-apps
+  annotations:
+    kustomize.toolkit.fluxcd.io/depends-on: helm.toolkit.fluxcd.io/namespaces/cnpg-apps/cloudnative-pg
 spec:
   instances: 3
   enableSuperuserAccess: true
   certificates:
-    serverTLSSecret: cnpg-apps-server-cert
-    serverCASecret: cnpg-apps-server-cert
-    clientCASecret: cnpg-apps-client-cert
-    replicationTLSSecret: cnpg-apps-client-cert
+    serverTLSSecret: apps-cluster-server-cert
+    serverCASecret: apps-cluster-server-cert
+    clientCASecret: apps-cluster-client-cert
+    replicationTLSSecret: apps-cluster-client-cert
   bootstrap:
     initdb:
       database: app
       owner: app
       secret:
-        name: app-secret
+        name: apps-credentials
         #postInitApplicationSQLRefs:
         #  secretRefs:
         #    - name: my-secret
