@@ -4,7 +4,5 @@ namespace: cnpg-apps
 resources:
   - namespace.yaml
   - certificates.yaml
-  - helmrepository.yaml
-  - helmrelease.yaml
   - cluster.yaml
   - secret.yaml
