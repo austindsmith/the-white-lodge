@@ -1,5 +1,14 @@
 # Cloudnative PG
 
+## Notes
+
+Adding the below to metadata triggers to a reload on changes to the file. Useful for situations where otherwise a resource would need to be deleted and a deployment restarted with `kubectl rollout restart`
+
+```yaml
+labels:
+  cnpg.io/reload: ""
+```
+
 ## Naming conventions
 
 | File                  | Resource Kind        | Name                      |
