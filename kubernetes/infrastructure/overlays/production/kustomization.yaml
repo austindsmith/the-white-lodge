@@ -8,3 +8,4 @@ resources:
   - ./longhorn
   - ./cloudnative-pg
   - ./synology-csi
+  - ./metallb
