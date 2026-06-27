@@ -5,7 +5,8 @@ resources:
   - traefik
   - longhorn
   - synology-csi
+  - cloudnative-pg
+
   #- rustfs
-  #- cloudnative-pg
   #- teleport
   #- atlas
