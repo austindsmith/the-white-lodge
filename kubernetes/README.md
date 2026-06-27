@@ -4,6 +4,24 @@
 
 - Consider switching to RKE2, it's like k3s with better security defaults.
 
+Checking possible chart values:
+
+```bash
+helm show values metallb/metallb --version 0.15.2
+```
+
+Checking possible chart metadata
+
+```bash
+helm show all metallb/metallb --version 0.15.2
+```
+
+Template out a chart
+
+```bash
+helm template metallb metallb/metallb --version 0.15.2 | grep -E "^kind:|^  name:"
+```
+
 ## Apps to download
 
 - [x] Gluetun/arr stack

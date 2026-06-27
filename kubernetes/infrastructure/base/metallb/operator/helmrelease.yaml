@@ -16,6 +16,8 @@ spec:
   install:
     createNamespace: true
   values:
+    crds:
+      enabled: true
     frrk8s:
       enabled: false
     speaker:
