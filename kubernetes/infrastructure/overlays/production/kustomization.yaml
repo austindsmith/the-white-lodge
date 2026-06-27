@@ -9,4 +9,4 @@ resources:
   - ./cloudnative-pg
   - ./synology-csi
   - ./metallb
-  - ./rustfs
+  #- ./rustfs
