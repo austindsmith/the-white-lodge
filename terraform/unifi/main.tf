@@ -64,7 +64,7 @@ resource "ansible_playbook" "wireguard" {
 }
 
 resource "ansible_playbook" "site" {
-  playbook   = "${path.cwd}/../../ansible/site.yml"
+  playbook   = "${path.cwd}/../../ansible/playbooks/kubernetes.yml"
   name       = data.sops_file.unifi.data["netcup_host"]
   replayable = true
   extra_vars = {
