@@ -27,6 +27,6 @@ spec:
       distributed:
         enabled: false
     storageclass:
-      name: synology-csi-nfs-retain
+      name: synology-csi-synology-iscsi
       dataStorageSize: 50Gi
       logStorageSize: 1Gi
