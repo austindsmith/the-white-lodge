@@ -463,5 +463,5 @@ entries:
     identifiers:
       username: akadmin
     attrs:
-      enabled: false
+      enabled: true
       name: akadmin
