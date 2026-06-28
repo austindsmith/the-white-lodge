@@ -45,7 +45,7 @@ spec:
   values:
     authentik:
       postgresql:
-        host: apps-cluster-rw.app-dbs.svc.cluster.local
+        host: apps-cluster-rw.cnpg-apps.svc.cluster.local
         name: "authentik"
         user: "authentik"
         port: 5432
