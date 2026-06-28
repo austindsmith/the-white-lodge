@@ -2,10 +2,274 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: authentik
-  namespace: cnpg-apps
+  namespace: cloudnative-pg
 spec:
   name: authentik
   owner: authentik
   cluster:
-    name: apps-cluster
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: immich
+  namespace: cloudnative-pg
+spec:
+  name: immich
+  owner: immich
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: n8n
+  namespace: cloudnative-pg
+spec:
+  name: n8n
+  owner: n8n
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: nextcloud
+  namespace: cloudnative-pg
+spec:
+  name: nextcloud
+  owner: nextcloud
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: mealie
+  namespace: cloudnative-pg
+spec:
+  name: mealie
+  owner: mealie
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: paperless-ngx
+  namespace: cloudnative-pg
+spec:
+  name: paperless-ngx
+  owner: paperless-ngx
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: semaphore
+  namespace: cloudnative-pg
+spec:
+  name: semaphore
+  owner: semaphore
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: bytebase
+  namespace: cloudnative-pg
+spec:
+  name: bytebase
+  owner: bytebase
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: dbgate
+  namespace: cloudnative-pg
+spec:
+  name: dbgate
+  owner: dbgate
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: radarr
+  namespace: cloudnative-pg
+spec:
+  name: radarr
+  owner: radarr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: sonarr-main
+  namespace: cloudnative-pg
+spec:
+  name: sonarr-main
+  owner: sonarr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: sonarr-log
+  namespace: cloudnative-pg
+spec:
+  name: sonarr-log
+  owner: sonarr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: bazarr
+  namespace: cloudnative-pg
+spec:
+  name: bazarr
+  owner: bazarr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: prowlarr
+  namespace: cloudnative-pg
+spec:
+  name: prowlarr
+  owner: prowlarr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: autobrr
+  namespace: cloudnative-pg
+spec:
+  name: autobrr
+  owner: autobrr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: deduparr
+  namespace: cloudnative-pg
+spec:
+  name: deduparr
+  owner: deduparr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: qui
+  namespace: cloudnative-pg
+spec:
+  name: qui
+  owner: qui
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: wikijs
+  namespace: cloudnative-pg
+spec:
+  name: wikijs
+  owner: wikijs
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: romm
+  namespace: cloudnative-pg
+spec:
+  name: romm
+  owner: romm
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: zammad
+  namespace: cloudnative-pg
+spec:
+  name: zammad
+  owner: zammad
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: sabnzbd
+  namespace: cloudnative-pg
+spec:
+  name: sabnzbd
+  owner: sabnzbd
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: wizarrr
+  namespace: cloudnative-pg
+spec:
+  name: wizarrr
+  owner: wizarrr
+  cluster:
+    name: app-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: test
+  namespace: cloudnative-pg
+spec:
+  name: test
+  owner: test
+  cluster:
+    name: app-cluster
   databaseReclaimPolicy: retain
