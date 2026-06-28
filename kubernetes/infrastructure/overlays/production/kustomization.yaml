@@ -10,5 +10,4 @@ resources:
   - ./synology-csi
   - ./metallb
   - ./rustfs
-  - ./test
   #- ./teleport

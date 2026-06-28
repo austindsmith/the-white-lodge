@@ -4,8 +4,8 @@ namespace: headlamp
 
 resources:
   - namespace.yaml
-  - helmrelease.yaml
-  - helmrepository.yaml
+  - helm-release.yaml
+  - helm-repository.yaml
   - ingress.yaml
   - rbac.yaml
-  - secret.yaml
+  - external-secret.yaml
