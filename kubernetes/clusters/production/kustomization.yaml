@@ -1,5 +1,6 @@
 resources:
   - cluster-vars.yaml
+  - core.yaml
   - infrastructure.yaml
   - apps.yaml
   #- metallb-config.yaml
