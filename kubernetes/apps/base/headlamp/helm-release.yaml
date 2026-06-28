@@ -17,7 +17,7 @@ spec:
     config:
       watchPlugins: true
       oidc:
-        issuerURL: "https://authentik.theblacklodge.dev/application/o/headlamp/"
+        issuerURL: "https://authentik.${cluster_domain}/application/o/headlamp/"
         scopes: "openid email profile groups"
     pluginsManager:
       enabled: true
