@@ -16,6 +16,6 @@ spec:
         name: external-secrets
         namespace: flux-system
   values:
-    installCRDs: false
+    installCRDs: true
   install:
     createNamespace: true
