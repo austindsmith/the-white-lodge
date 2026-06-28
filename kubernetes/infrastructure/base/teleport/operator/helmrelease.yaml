@@ -76,9 +76,9 @@ spec:
       tokenName: db-agent-token
     roles: db
     databases:
-      - name: app-cluster-rw
+      - name: apps-cluster-rw
         protocol: postgres
-        uri: app-cluster-rw.cloudnative-pg.svc.cluster.local:5432
+        uri: apps-cluster-rw.cloudnative-pg.svc.cluster.local:5432
         tls:
           mode: verify-ca
           ca_cert_file: "/etc/teleport-tls-db/db-ca/ca.crt"
@@ -87,7 +87,7 @@ spec:
     extraVolumes:
       - name: db-ca
         secret:
-          secretName: app-cluster-server-ca
+          secretName: apps-cluster-server-ca
     extraVolumeMounts:
       - name: db-ca
         mountPath: /etc/teleport-tls-db/db-ca
