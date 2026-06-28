@@ -21,9 +21,9 @@ spec:
             #  - secretRef:
             #      name: tautulli-secret
             env:
-              TAUTULLI_HTTP_BASE_URL: https://tautulli.theblacklodge.dev
+              TAUTULLI_HTTP_BASE_URL: https://tautulli.${cluster_domain}
               TAUTULLI_HTTP_PORT: &port 80
-              TZ: America/Denver
+              TZ: ${timezone}
               LOG_LEVEL: "info"
               PORT: &port 80
             probes:

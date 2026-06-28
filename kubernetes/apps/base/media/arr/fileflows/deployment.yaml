@@ -27,7 +27,7 @@ spec:
             - name: PGID
               value: "1000"
             - name: TZ
-              value: America/Denver
+              value: ${timezone}
           volumeMounts:
             - name: temp
               mountPath: /temp

@@ -1,35 +1,36 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: prowlarr
 spec:
   chartRef:
     kind: OCIRepository
-    name: radarr
+    name: prowlarr
   interval: 1h
   values:
     controllers:
-      sonarr:
+      prowlarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/sonarr
-              tag: 4.0.17.2969@sha256:6806001ccc2ec95d941c9c0de012dbcb59c6a33932cfc17f71e300bdd48cabfe
+              repository: ghcr.io/home-operations/prowlarr
+              tag: 2.4.0.5397@sha256:8a140c9104c754a272f5e0d1dfcb32a06f07946a431a45c1083a16344f531748
             envFrom:
               - secretRef:
-                  name: sonarr-secret
+                  name: prowlarr-secret
             env:
-              SONARR__APP__INSTANCENAME: Sonarr
-              SONARR__APP__THEME: dark
-              SONARR__AUTH__METHOD: External
-              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              SONARR__LOG__DBENABLED: "False"
-              SONARR__LOG__LEVEL: info
-              SONARR__SERVER__PORT: &port 80
-              SONARR__UPDATE__BRANCH: develop
-              TZ: America/Denver
+              PROWLARR__APP__INSTANCENAME: Prowlarr
+              PROWLARR__POSTGRES__HOST: ${apps_pg_host}
+              PROWLARR__APP__THEME: dark
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              PROWLARR__LOG__DBENABLED: "False"
+              PROWLARR__LOG__LEVEL: info
+              PROWLARR__SERVER__PORT: &port 80
+              PROWLARR__UPDATE__BRANCH: develop
+              TZ: ${timezone}
               LOG_LEVEL: "info"
               PORT: &port 80
             probes:
@@ -80,7 +81,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: sonarr.${cluster_domain}
+          - host: prowlarr.${cluster_domain}
             paths:
               - path: /
                 service:
@@ -88,7 +89,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: sonarr-config
+        existingClaim: prowlarr-config
         globalMounts:
           - path: /config
       media:

@@ -38,7 +38,7 @@ spec:
     database:
       type: postgres
       name: semaphore
-      host: app-cluster-rw.cloudnative-pg.svc.cluster.local
+      host: ${app_db_service}
       port: 5432
       usernameFromSecret: true
       usernameKey: username
@@ -54,8 +54,8 @@ spec:
       providers:
         authentik:
           display_name: Authentik
-          provider_url: https://authentik.theblacklodge.dev/application/o/semaphore/
-          redirect_url: https://semaphore.theblacklodge.dev/api/auth/oidc/authentik/redirect
+          provider_url: https://authentik.${cluster_domain}/application/o/semaphore/
+          redirect_url: https://semaphore.${cluster_domain}/api/auth/oidc/authentik/redirect
           username_claim: preferred_username
           name_claim: preferred_username
           email_claim: email

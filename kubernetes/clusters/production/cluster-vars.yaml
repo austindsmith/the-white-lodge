@@ -5,3 +5,7 @@ metadata:
   namespace: flux-system
 data:
   cluster_domain: thewhitelodge.org
+  cluster_lb_ip: 192.168.100.200
+  apps_pg_host: app-cluster-rw.cnpg-apps.svc.cluster.local
+  apps_pg_port: 5432
+  timezone: America/Denver

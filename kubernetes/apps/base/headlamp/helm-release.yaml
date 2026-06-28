@@ -34,4 +34,4 @@ spec:
           maxConcurrent: 2
   valuesFrom:
     - kind: Secret
-      name: headlamp
+      name: headlamp-external-secret

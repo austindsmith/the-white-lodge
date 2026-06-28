@@ -1,37 +1,38 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: autobrr
 spec:
   chartRef:
     kind: OCIRepository
-    name: radarr
+    name: autobrr
   interval: 1h
   values:
     controllers:
-      radarr:
+      autobrr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/radarr
-              tag: 6.2.1.10461@sha256:0756fffa75b30219e3dbac8d027a5389f53cbb34ae83fa4b0976c1b0524c8eb1
+              repository: ghcr.io/autobrr/autobrr
+              tag: v1.80.0@sha256:944b1c438302ed10bef810a49f2eb7f334b5abf578db473bcb8d997db3978227
             envFrom:
               - secretRef:
-                  name: radarr-secret
+                  name: autobrr-external-secret
             env:
-              RADARR__APP__INSTANCENAME: Radarr
-              RADARR__APP__THEME: dark
-              RADARR__AUTH__METHOD: External
-              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              RADARR__LOG__DBENABLED: "False"
-              RADARR__LOG__LEVEL: info
-              RADARR__SERVER__PORT: &port 80
-              RADARR__UPDATE__BRANCH: develop
-              TZ: America/Denver
-              LOG_LEVEL: "info"
-              PORT: &port 80
+              AUTOBRR__POSTGRES_HOST: ${apps_pg_host}
+              AUTOBRR__POSTGRES_PORT: ${apps_pg_port}
+              AUTOBRR__OIDC_ENABLED: true
+              AUTOBRR__OIDC_ISSUER: https://authentik.${cluster_domain}/application/o/autobrr/
+              AUTOBRR__OIDC_REDIRECT_URL: https://autobrr.${cluster_domain}/api/auth/oidc/callback
+              AUTOBRR__HOST: 0.0.0.0
+              AUTOBRR__PORT: &port 80
+              AUTOBRR__METRICS_ENABLED: true
+              AUTOBRR__METRICS_HOST: 0.0.0.0
+              AUTOBRR__METRICS_PORT: &metricsPort 9094
+              AUTOBRR__CHECK_FOR_UPDATES: false
+              AUTOBRR__LOG_LEVEL: INFO
             probes:
               liveness:
                 enabled: true
@@ -44,7 +45,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
+                    path: /api/healthz/readiness
                     port: *port
                   periodSeconds: 10
                   timeoutSeconds: 5
@@ -80,7 +81,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: radarr.${cluster_domain}
+          - host: "autobrr.${cluster_domain}"
             paths:
               - path: /
                 service:
@@ -88,7 +89,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: radarr-config
+        existingClaim: autobrr-config
         globalMounts:
           - path: /config
       media:

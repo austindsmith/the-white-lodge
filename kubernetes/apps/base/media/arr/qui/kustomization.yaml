@@ -5,7 +5,7 @@ namespace: media
 
 resources:
   #- ./grafanadashboard.yaml
-  - ./pvc-config.yaml
-  - ./helmrelease.yaml
-  - ./ocirepository.yaml
-  - ./secret.yaml
+  - pvc-config.yaml
+  - helm-release.yaml
+  - oci-repository.yaml
+  - secret.yaml

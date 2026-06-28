@@ -1,34 +1,35 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prowlarr
+  name: sonarr
 spec:
   chartRef:
     kind: OCIRepository
-    name: prowlarr
+    name: radarr
   interval: 1h
   values:
     controllers:
-      prowlarr:
+      sonarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/prowlarr
-              tag: 2.4.0.5397@sha256:8a140c9104c754a272f5e0d1dfcb32a06f07946a431a45c1083a16344f531748
+              repository: ghcr.io/home-operations/sonarr
+              tag: 4.0.17.2969@sha256:6806001ccc2ec95d941c9c0de012dbcb59c6a33932cfc17f71e300bdd48cabfe
             envFrom:
               - secretRef:
-                  name: prowlarr-secret
+                  name: sonarr-secret
             env:
-              PROWLARR__APP__INSTANCENAME: Prowlarr
-              PROWLARR__APP__THEME: dark
-              PROWLARR__AUTH__METHOD: External
-              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              PROWLARR__LOG__DBENABLED: "False"
-              PROWLARR__LOG__LEVEL: info
-              PROWLARR__SERVER__PORT: &port 80
-              PROWLARR__UPDATE__BRANCH: develop
+              SONARR__POSTGRES__HOST: ${apps_db_host}
+              SONARR__APP__INSTANCENAME: Sonarr
+              SONARR__APP__THEME: dark
+              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              SONARR__LOG__DBENABLED: "False"
+              SONARR__LOG__LEVEL: info
+              SONARR__SERVER__PORT: &port 80
+              SONARR__UPDATE__BRANCH: develop
               TZ: America/Denver
               LOG_LEVEL: "info"
               PORT: &port 80
@@ -80,7 +81,7 @@ spec:
       app:
         className: traefik
         hosts:
-          - host: prowlarr.${cluster_domain}
+          - host: sonarr.${cluster_domain}
             paths:
               - path: /
                 service:
@@ -88,7 +89,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: prowlarr-config
+        existingClaim: sonarr-config
         globalMounts:
           - path: /config
       media:

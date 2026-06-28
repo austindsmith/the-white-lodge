@@ -1,3 +1,3 @@
 resources:
-  - ./pv-media.yaml
-  - ./pvc-media.yaml
+  - pv-media.yaml
+  - pvc-media.yaml

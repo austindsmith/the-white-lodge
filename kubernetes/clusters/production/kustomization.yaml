@@ -3,4 +3,3 @@ resources:
   - core.yaml
   - infrastructure.yaml
   - apps.yaml
-  #- metallb-config.yaml

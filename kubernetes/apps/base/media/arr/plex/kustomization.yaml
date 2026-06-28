@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: media
 
 resources:
-  - ocirepository.yaml
-  - helmrelease.yaml
+  - oci-repository.yaml
+  - helm-release.yaml
   - pvc-config.yaml
-  - secret.yaml
+  - external-secret.yaml
