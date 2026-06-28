@@ -65,3 +65,13 @@
       ansible.builtin.systemd:
         name: "wg-quick@{{ wg_interface }}"
         state: restarted
+
+    - name: Wait for WireGuard handshake
+      ansible.builtin.command:
+        cmd: "wg show {{ wg_interface }} latest-handshakes"
+      register: wg_handshake
+      changed_when: false
+      retries: 30
+      delay: 2
+      until: >
+        wg_handshake.stdout.split()[1] | int > 0
