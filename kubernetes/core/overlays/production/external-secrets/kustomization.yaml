@@ -3,4 +3,3 @@ kind: Kustomization
 
 resources:
   - ./flux-kustomizations.yaml
-  - ./testsecret.yaml
