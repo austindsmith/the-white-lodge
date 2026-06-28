@@ -4,6 +4,13 @@ metadata:
   name: rustfs
 spec:
   interval: 1h
+  timeout: 10m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: rustfs

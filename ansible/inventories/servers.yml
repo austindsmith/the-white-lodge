@@ -3,6 +3,6 @@ all:
     cloud:
       hosts:
         kubernetes-server-01:
-          ansible_host: 192.168.2.5
-          ansible_become_user: "{{ vault_become_user }}"
-          ansible_become_password: "{{ vault_become_password }}"
+          ansible_host: "{{ lookup('community.general.onepassword', 'netcup', field='wg_ip_address', vault='the-white-lodge') }}"
+          ansible_become_user: "{{ lookup('community.general.onepassword', 'ansible', field='become_user', vault='the-white-lodge') }}"
+          ansible_become_password: "{{ lookup('community.general.onepassword', 'ansible', field='password', vault='the-white-lodge') }}"

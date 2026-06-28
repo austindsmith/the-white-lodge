@@ -7,7 +7,7 @@ terraform/staging/
 *auto.tfvars*
 .venv
 .vault_pass
-*.env
+#*.env
 *.log
 kubernetes/dev/platform/external-secrets/Secret.yaml
 **build/
