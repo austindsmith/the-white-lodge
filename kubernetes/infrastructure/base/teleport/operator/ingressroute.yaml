@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`teleport.${cluster_domain}`)
+    - match: teleport.${cluster_domain}
       kind: Rule
       services:
         - name: teleport
