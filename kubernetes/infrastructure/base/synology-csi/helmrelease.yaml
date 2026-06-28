@@ -27,3 +27,10 @@ spec:
           location: /volume1
           fsType: ext4
           formatOptions: "-E nodiscard -E lazy_itable_init=1,lazy_journal_init=1"
+      nfs-retain:
+        mountOptions:
+          - vers=4.1
+        parameters:
+          protocol: nfs
+          mountPermissions: "0"
+        reclaimPolicy: Retain

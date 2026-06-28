@@ -3,4 +3,6 @@ all:
     cloud:
       hosts:
         kubernetes-server-01:
-          ansible_host: 152.53.52.163
+          ansible_host: 192.168.2.5
+          ansible_become_user: "{{ vault_become_user }}"
+          ansible_become_password: "{{ vault_become_password }}"

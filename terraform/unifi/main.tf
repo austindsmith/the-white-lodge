@@ -1,18 +1,22 @@
 terraform {
-  # Utilizes .envrc to pull from encrypted secret.yaml.
   backend "local" { path = "../../.tfstate/unifi/terraform.tfstate" }
   required_providers {
-    # Allows access to netcup. See hornc-greedy/netcup GitHub for API access docs.
     unifi = {
       source  = "ubiquiti-community/unifi"
       version = "0.53.0"
     }
-    # Allows SOPs decryption of secrets.
+    wireguard = {
+      source  = "OJFord/wireguard"
+      version = "0.4.0"
+    }
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.4.0"
+    }
     sops = {
       source  = "carlpett/sops"
       version = "~> 1.4"
     }
-    # Allows access to local file system.
     local = {
       source  = "hashicorp/local"
       version = "~> 2.9.0"
@@ -30,10 +34,55 @@ provider "unifi" {
   allow_insecure = true
 }
 
+provider "wireguard" {}
+
+resource "wireguard_asymmetric_key" "netcup" {}
 
 resource "unifi_wireguard_peer" "netcup" {
   network_id   = data.sops_file.unifi.data["wg_server_id"]
   name         = "netcup"
   interface_ip = data.sops_file.unifi.data["wg_interface_ip"]
-  public_key   = data.sops_file.unifi.data["wg_public_key"]
+  public_key   = wireguard_asymmetric_key.netcup.public_key
+}
+
+resource "ansible_playbook" "wireguard" {
+  playbook   = "${path.cwd}/../../ansible/playbooks/wireguard.yml"
+  name       = data.sops_file.unifi.data["netcup_host"]
+  replayable = true
+  extra_vars = {
+    wg_interface_ip              = data.sops_file.unifi.data["wg_interface_ip"]
+    wg_server_endpoint           = data.sops_file.unifi.data["wg_server_endpoint"]
+    wg_server_pubkey             = data.sops_file.unifi.data["wg_server_pubkey"]
+    wg_listen_port               = data.sops_file.unifi.data["wg_listen_port"]
+    wg_private_key               = wireguard_asymmetric_key.netcup.private_key
+    ansible_user                 = data.sops_file.unifi.data["ansible_user"]
+    ansible_become_user          = data.sops_file.unifi.data["ansible_become_user"]
+    ansible_become_password      = data.sops_file.unifi.data["ansible_become_password"]
+    ansible_ssh_private_key_file = data.sops_file.unifi.data["ansible_ssh_private_key_file"]
+  }
+  depends_on = [unifi_wireguard_peer.netcup]
+}
+
+resource "ansible_playbook" "site" {
+  playbook   = "${path.cwd}/../../ansible/site.yml"
+  name       = data.sops_file.unifi.data["netcup_host"]
+  replayable = true
+  extra_vars = {
+    ansible_user                 = data.sops_file.unifi.data["ansible_user"]
+    ansible_become_user          = data.sops_file.unifi.data["ansible_become_user"]
+    ansible_become_password      = data.sops_file.unifi.data["ansible_become_password"]
+    ansible_ssh_private_key_file = data.sops_file.unifi.data["ansible_ssh_private_key_file"]
+  }
+  depends_on = [ansible_playbook.wireguard]
+}
+
+output "wg_public_key" {
+  description = "netcup public WireGuard key"
+  value       = wireguard_asymmetric_key.netcup.public_key
+}
+
+output "wg_private_key" {
+  description = "netcup private WireGuard key"
+  value       = wireguard_asymmetric_key.netcup.private_key
+  sensitive   = true
 }
