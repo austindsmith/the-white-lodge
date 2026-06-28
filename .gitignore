@@ -27,6 +27,5 @@ tmp/
 *.log
 *.old
 *.iso
-secrets*
 windows-README.md
 .generated*
