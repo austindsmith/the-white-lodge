@@ -4,4 +4,5 @@ namespace: cnpg-apps
 resources:
   - certificates.yaml
   - cluster.yaml
+  - databases.yaml
   - secret.yaml
