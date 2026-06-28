@@ -43,7 +43,7 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  become: true
+  become: false
   tasks:
     - name: Install flux
       ansible.builtin.shell:
