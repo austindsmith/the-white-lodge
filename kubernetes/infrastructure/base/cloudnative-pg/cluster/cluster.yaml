@@ -30,3 +30,10 @@ spec:
     size: 15Gi
   monitoring:
     enablePodMonitor: true
+
+  managed:
+    roles:
+      - name: authentik
+        login: true
+        passwordSecret:
+          name: authentik-db-secret
