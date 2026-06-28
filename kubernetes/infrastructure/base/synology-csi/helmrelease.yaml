@@ -28,6 +28,7 @@ spec:
           fsType: ext4
           formatOptions: "-E nodiscard -E lazy_itable_init=1,lazy_journal_init=1"
       nfs-retain:
+        disabled: false
         mountOptions:
           - vers=4.1
         parameters:
