@@ -4,6 +4,12 @@
 
 - Consider switching to RKE2, it's like k3s with better security defaults.
 
+Force delete namespace:
+
+```bash
+kubectl get namespace authentik -o json | jq '.spec.finalizers = []' | kubectl replace --raw "/api/v1/namespaces/authentik/finalize" -f -
+```
+
 Checking possible chart values:
 
 ```bash
