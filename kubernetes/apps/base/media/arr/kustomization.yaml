@@ -1,12 +1,12 @@
 resources:
   - agregarr
-  - autobrr
+  #- autobrr
   - bazarr
   #- deduparr
   - plex
   - prowlarr
   - qbittorrent-vpn
-  #- qui
+  - qui
   - radarr
   - sabnzbd
   - seerr
