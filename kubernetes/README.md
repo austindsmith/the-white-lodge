@@ -7,7 +7,7 @@
 Force delete namespace:
 
 ```bash
-kubectl get namespace authentik -o json | jq '.spec.finalizers = []' | kubectl replace --raw "/api/v1/namespaces/authentik/finalize" -f -
+kubectl get namespace media -o json | jq '.spec.finalizers = []' | kubectl replace --raw "/api/v1/namespaces/media/finalize" -f -
 ```
 
 Checking possible chart values:
