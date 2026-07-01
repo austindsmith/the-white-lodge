@@ -21,8 +21,8 @@ spec:
               - secretRef:
                   name: qui-secret
             env:
-              QUI__DATABASE_HOST: ${apps_db_host}
-              QUI__DATABASE_PORT: ${apps_db_port}
+              QUI__DATABASE_HOST: ${apps_pg_host}
+              QUI__DATABASE_PORT: ${apps_pg_port}
               QUI__AUTH_DISABLED: true
               QUI__I_ACKNOWLEDGE_THIS_IS_A_BAD_IDEA: true
               QUI__AUTH_DISABLED_ALLOWED_CIDRS: 0.0.0.0/0
