@@ -26,9 +26,6 @@ spec:
         TZ: ${timezone}
         PUID: "1000"
         PGID: "1000"
-      envFrom:
-        - secretRef:
-            name: qbittorrent-env
       config:
         bootstrap:
           enabled: true
@@ -66,7 +63,7 @@ spec:
         SERVER_FEATURES: p2p
       envFrom:
         - secretRef:
-            name: gluetun-external-secret
+            name: gluetun
 
     volumes:
       - name: tmp

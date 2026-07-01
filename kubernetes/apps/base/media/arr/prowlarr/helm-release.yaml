@@ -19,7 +19,7 @@ spec:
               tag: 2.4.0.5397@sha256:8a140c9104c754a272f5e0d1dfcb32a06f07946a431a45c1083a16344f531748
             envFrom:
               - secretRef:
-                  name: prowlarr-secret
+                  name: prowlarr
             env:
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__POSTGRES__HOST: ${apps_pg_host}

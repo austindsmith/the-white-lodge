@@ -19,7 +19,7 @@ spec:
               tag: v1.80.0@sha256:944b1c438302ed10bef810a49f2eb7f334b5abf578db473bcb8d997db3978227
             envFrom:
               - secretRef:
-                  name: autobrr-external-secret
+                  name: autobrr
             env:
               AUTOBRR__POSTGRES_HOST: ${apps_pg_host}
               AUTOBRR__POSTGRES_PORT: ${apps_pg_port}
