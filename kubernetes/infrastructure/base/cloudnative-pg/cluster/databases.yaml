@@ -253,11 +253,11 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: wizarrr
+  name: wizarr
   namespace: cnpg-apps
 spec:
-  name: wizarrr
-  owner: wizarrr
+  name: wizarr
+  owner: wizarr
   cluster:
     name: apps-cluster
   databaseReclaimPolicy: retain
