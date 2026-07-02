@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
   mountOptions:
-    - nfsvers=4.1
+    - nfsvers=3
     - hard
     - noatime
     - nconnect=4
