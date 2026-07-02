@@ -40,9 +40,9 @@ spec:
           image: lscr.io/linuxserver/sabnzbd:latest
           env:
             - name: PUID
-              value: "1000"
+              value: "1037"
             - name: PGID
-              value: "1000"
+              value: "100"
             - name: UMASK
               value: "002"
             - name: TZ
