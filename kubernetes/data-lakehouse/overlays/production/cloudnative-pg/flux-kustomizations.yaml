@@ -1,0 +1,35 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cnpg-data-operator
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./kubernetes/data-lakehouse/base/cloudnative-pg/operator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cnpg-data-cluster
+  namespace: flux-system
+spec:
+  interval: 10m
+  dependsOn:
+    - name: cnpg-data-operator
+  path: ./kubernetes/data-lakehouse/base/cloudnative-pg/cluster
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age

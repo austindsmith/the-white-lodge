@@ -2,7 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: source
-  namespace: data-dbs
+  namespace: data
 spec:
   name: source
   owner: data
@@ -14,7 +14,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: staging
-  namespace: data-dbs
+  namespace: data
 spec:
   name: staging
   owner: data
@@ -26,7 +26,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: marts
-  namespace: data-dbs
+  namespace: data
 spec:
   name: marts
   owner: data
@@ -38,7 +38,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: scratch
-  namespace: data-dbs
+  namespace: data
 spec:
   name: scratch
   owner: data

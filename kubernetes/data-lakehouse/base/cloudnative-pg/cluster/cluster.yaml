@@ -2,7 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: data-cluster
-  namespace: data-dbs
+  namespace: data
 spec:
   instances: 3
   enableSuperuserAccess: true
