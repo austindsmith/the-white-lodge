@@ -11,11 +11,11 @@ spec:
     config:
       useExistingConfigMap: homepage-config
       allowedHosts:
-        - homepage.theblacklodge.dev
+        - homepage.${cluster_domain}
     enableRbac: true
     env:
       - name: HOMEPAGE_ALLOWED_HOSTS
-        value: homepage.theblacklodge.dev
+        value: homepage.${cluster_domain}
     envFrom:
       - secretRef:
           name: homepage-credentials
