@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tautulli-config-backup
+  namespace: media
+spec:
+  schedule: "0 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: docker.io/minio/mc:latest
+              command:
+                - sh
+                - -c
+                - |
+                  mc alias set rustfs $RUSTFS_ENDPOINT $RUSTFS_ACCESS_KEY $RUSTFS_SECRET_KEY
+                  mc cp /config/config.ini rustfs/backups/tautulli/config-$(date +%Y%m%d%H%M).ini
+              envFrom:
+                - secretRef:
+                    name: rustfs-backup-creds
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+                  readOnly: true
+          volumes:
+            - name: config
+              persistentVolumeClaim:
+                claimName: tautulli-config

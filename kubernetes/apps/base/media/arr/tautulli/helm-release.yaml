@@ -12,14 +12,23 @@ spec:
       tautulli:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          seed-config:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.20"
+            command:
+              - sh
+              - -c
+              - |
+                if [ ! -f /config/config.ini ]; then
+                  cp /template/config.ini /config/config.ini
+                fi
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/tautulli
               tag: 2.17.1@sha256:2183820d45a1413b4b8868fc18ad5eb9259630ea0151348cdc9cfb4017a0dd33
-            #envFrom:
-            #  - secretRef:
-            #      name: tautulli-secret
             env:
               TAUTULLI_HTTP_BASE_URL: https://tautulli.${cluster_domain}
               TAUTULLI_HTTP_PORT: &port 80
@@ -51,7 +60,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: {drop: ["ALL"]}
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
@@ -84,5 +93,12 @@ spec:
         existingClaim: tautulli-config
         globalMounts:
           - path: /config
+      config-template:
+        type: secret
+        name: tautulli-config-template
+        advancedMounts:
+          tautulli:
+            seed-config:
+              - path: /template
       tmp:
         type: emptyDir
