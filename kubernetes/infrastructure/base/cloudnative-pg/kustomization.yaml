@@ -5,4 +5,5 @@ resources:
   - certificates.yaml
   - cluster.yaml
   - databases.yaml
+  - namespace.yaml
   - secret.yaml
