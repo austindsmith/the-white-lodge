@@ -4,8 +4,10 @@ metadata:
   name: cluster-vars
   namespace: flux-system
 data:
-  cluster_domain: thewhitelodge.org
-  cluster_lb_ip: 192.168.100.200
   apps_pg_host: apps-cluster-rw.cnpg-apps.svc.cluster.local
   apps_pg_port: "5432"
+  cluster_domain: thewhitelodge.org
+  cluster_lb_ip: 192.168.100.200
+  media_puid: 1037
+  media_pgid: 100
   timezone: America/Denver
