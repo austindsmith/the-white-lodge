@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - external-secrets
   - github-receiver
+  - cloudnative-pg
