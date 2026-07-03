@@ -5,4 +5,4 @@ resources:
   - certificates.yaml
   - cluster.yaml
   - databases.yaml
-  - secret.yaml
+  - external-secret.yaml
