@@ -53,8 +53,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: data
-              mountPath: /data
+            - name: media
+              mountPath: /media
           resources:
             requests:
               cpu: 100m
@@ -65,7 +65,7 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: sabnzbd-config
-        - name: data
+        - name: media
           persistentVolumeClaim:
             claimName: media
         - name: seed

@@ -56,12 +56,12 @@ locals {
   prowlarr_url     = local.prowlarr["PROWLARR_URL"].value
   prowlarr_host    = local.prowlarr["PROWLARR_HOST"].value
 
-  qbittorrent_api_key        = local.qbittorrent["api_key"].value
-  qbittorrent_url            = local.qbittorrent["url"].value
+  qbittorrent_api_key        = local.qbittorrent["QBITTORRENT_API_KEY"].value
+  qbittorrent_url            = local.qbittorrent["QBITTORRENT_HOST"].value
   qbittorrent_enable         = true
   qbittorrent_priority       = 1
   qbittorrent_name           = "qbittorrent"
-  qbittorrent_host           = local.qbittorrent["url"].value
+  qbittorrent_host           = local.qbittorrent["QBITTORRENT_HOST"].value
   qbittorrent_port           = 8080
   qbittorrent_first_and_last = true
   qbittorrent_username       = data.onepassword_item.qbittorrent.username

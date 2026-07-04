@@ -7,5 +7,13 @@ resources:
   - helm-repository.yaml
   - ingress-route.yaml
   - pvc-config.yaml
-  - secret.yaml
   - external-secret.yaml
+
+
+configMapGenerator:
+  - name: qbittorrent-config-files
+    files:
+      - configs/categories.json
+      - configs/qBittorrent.conf
+    options:
+      disableNameSuffixHash: true

@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: media-ids
-  namespace: media
-data:
-  puid: "1037"
-  pgid: "100"

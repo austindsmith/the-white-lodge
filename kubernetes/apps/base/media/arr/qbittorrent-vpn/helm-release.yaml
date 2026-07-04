@@ -31,7 +31,7 @@ spec:
           enabled: true
           existingConfig:
             type: secret
-            name: qbittorrent-config
+            name: qbittorrent-config-files
             key: qBittorrent.conf
       persistence:
         data:
@@ -41,6 +41,11 @@ spec:
       volumeMounts:
         - name: tmp
           mountPath: /tmp
+        - name: qbittorrent-configs
+          mountPath: /config/qBittorrent/categories.json
+          subPath: categories.json
+          readOnly: true
+
 
     gluetun:
       startupProbe:
@@ -68,3 +73,6 @@ spec:
     volumes:
       - name: tmp
         emptyDir: {}
+      - name: qbittorrent-configs
+        configMap:
+          name: qbittorrent-config-files
