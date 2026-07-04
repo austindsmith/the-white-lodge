@@ -1,10 +1,9 @@
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: configarr
 spec:
-  schedule: "0 * * * *" # Runs every hour
+  schedule: "0 * * * *"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
@@ -15,17 +14,17 @@ spec:
             - name: configarr
               image: ghcr.io/raydak-labs/configarr:latest
               imagePullPolicy: Always
-              tty: true # for color support
+              tty: true
               envFrom:
                 - secretRef:
                     name: configarr-sonarr
                 - secretRef:
                     name: configarr-radarr
               volumeMounts:
-                - mountPath: /app/repos # Cache repositories
+                - mountPath: /app/repos
                   name: app-data
                   subPath: configarr-repos
-                - name: config-volume # Mount specific config
+                - name: config-volume
                   mountPath: /app/config/config.yml
                   subPath: config.yml
           volumes:
@@ -45,24 +44,29 @@ data:
   config.yml: |
     trashGuideUrl: https://github.com/TRaSH-Guides/Guides
     recyclarrConfigUrl: https://github.com/recyclarr/config-templates
-
     sonarr:
       series:
         base_url: !env SONARR_HOST
         api_key: !env SONARR_API_KEY
-
         quality_definition:
           type: series
-
         include:
-          # WEB-1080p
           - template: sonarr-quality-definition-series
           - template: sonarr-v4-quality-profile-web-1080p
           - template: sonarr-v4-custom-formats-web-1080p
-
-          # WEB-2160p
           - template: sonarr-v4-quality-profile-web-2160p
           - template: sonarr-v4-custom-formats-web-2160p
-
         custom_formats: []
-    radarr: {}
+    radarr:
+      movies:
+        base_url: !env RADARR_HOST
+        api_key: !env RADARR_API_KEY
+        quality_definition:
+          type: movie
+        include:
+          - template: radarr-quality-definition-movie
+          - template: radarr-quality-profile-hd-bluray-web
+          - template: radarr-custom-formats-hd-bluray-web
+          - template: radarr-quality-profile-uhd-bluray-web
+          - template: radarr-custom-formats-uhd-bluray-web
+        custom_formats: []

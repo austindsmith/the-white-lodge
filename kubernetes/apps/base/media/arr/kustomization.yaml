@@ -2,6 +2,7 @@ resources:
   - agregarr
   - autobrr
   - bazarr
+  - configarr
   #- deduparr
   - plex
   - prowlarr
