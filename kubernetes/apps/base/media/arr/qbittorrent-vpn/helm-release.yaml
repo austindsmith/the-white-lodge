@@ -24,8 +24,8 @@ spec:
     qbittorrent:
       env:
         TZ: ${timezone}
-        PUID: "${media_puid}"
-        PGID: "${media_pgid}"
+        PUID: '"${media_puid}"'
+        PGID: '"${media_pgid}"'
       config:
         bootstrap:
           enabled: true
