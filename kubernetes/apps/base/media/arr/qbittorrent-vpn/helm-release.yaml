@@ -18,21 +18,14 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: qbittorrent-vpn
-  valuesFrom:
-    - kind: ConfigMap
-      name: media-ids
-      valuesKey: puid
-      targetPath: qbittorrent.env.PUID
-    - kind: ConfigMap
-      name: media-ids
-      valuesKey: pgid
-      targetPath: qbittorrent.env.PGID
   values:
     strategy:
       type: Recreate
     qbittorrent:
       env:
         TZ: ${timezone}
+        PUID: "1037"
+        PGID: "100"
       config:
         bootstrap:
           enabled: true
