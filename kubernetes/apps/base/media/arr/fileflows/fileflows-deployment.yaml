@@ -7,7 +7,13 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: fileflows
   template:
+    metadata:
+      labels:
+        app: fileflows
     spec:
       containers:
         - env:
