@@ -32,6 +32,8 @@ spec:
             - name: TZ
               value: ${timezone}
           volumeMounts:
+            - name: data
+              mountPath: /app/Data
             - name: temp
               mountPath: /temp
             - name: media
@@ -47,6 +49,9 @@ spec:
             limits:
               memory: 1Gi
       volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: fileflows-data
         - name: temp
           persistentVolumeClaim:
             claimName: fileflows-temp
