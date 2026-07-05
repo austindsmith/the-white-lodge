@@ -1,0 +1,2 @@
+firewall_ports:
+  - port: 32400/tcp
