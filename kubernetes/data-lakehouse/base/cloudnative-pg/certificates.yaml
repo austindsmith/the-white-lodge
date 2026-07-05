@@ -25,15 +25,15 @@ spec:
     - data-cluster-rw
     - data-cluster-ro
     - data-cluster-r
-    - data-cluster-rw.cnpg-data.svc
-    - data-cluster-ro.cnpg-data.svc
-    - data-cluster-r.cnpg-data.svc
-    - data-cluster-rw.cnpg-data.svc.cluster.local
-    - data-cluster-ro.cnpg-data.svc.cluster.local
-    - data-cluster-r.cnpg-data.svc.cluster.local
-    - data-cluster-1.data-cluster.cnpg-data.svc.cluster.local
-    - data-cluster-2.data-cluster.cnpg-data.svc.cluster.local
-    - data-cluster-3.data-cluster.cnpg-data.svc.cluster.local
+    - data-cluster-rw.data.svc
+    - data-cluster-ro.data.svc
+    - data-cluster-r.data.svc
+    - data-cluster-rw.data.svc.cluster.local
+    - data-cluster-ro.data.svc.cluster.local
+    - data-cluster-r.data.svc.cluster.local
+    - data-cluster-1.data-cluster.data.svc.cluster.local
+    - data-cluster-2.data-cluster.data.svc.cluster.local
+    - data-cluster-3.data-cluster.data.svc.cluster.local
   issuerRef:
     name: selfsigned-issuer
     kind: Issuer

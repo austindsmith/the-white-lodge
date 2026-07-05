@@ -7,17 +7,14 @@ spec:
   instances: 3
   enableSuperuserAccess: true
   certificates:
-    clientCASecret: pg-client-ca-bundle
-    replicationTLSSecret: pg-replication-cert
-  postgresql:
-    pg_hba:
-      - hostssl all all all cert
-      - host all all all scram-sha-256
+    serverTLSSecret: data-cluster-server-cert
+    serverCASecret: data-cluster-server-cert
+    clientCASecret: data-cluster-client-cert
+    replicationTLSSecret: data-cluster-client-cert
   bootstrap:
     initdb:
-      owner: postgres
-  superuserSecret:
-    name: cloudnative-pg-admin
+      database: app
+      owner: data
   storage:
     size: 15Gi
   managed:
