@@ -6,7 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: core
-  interval: 10m
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
