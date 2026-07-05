@@ -4,5 +4,6 @@ metadata:
   name: flaresolverr
   namespace: media
 spec:
+  type: oci
   interval: 24h
-  url: oci://ghcr.io/m0nsterrr/helm-charts/flaresolverr
+  url: oci://ghcr.io/m0nsterrr/helm-charts
