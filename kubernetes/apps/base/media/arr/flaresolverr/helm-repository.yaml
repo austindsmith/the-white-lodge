@@ -2,6 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: flaresolverr
+  namespace: media
 spec:
   interval: 24h
   url: oci://ghcr.io/m0nsterrr/helm-charts/flaresolverr
