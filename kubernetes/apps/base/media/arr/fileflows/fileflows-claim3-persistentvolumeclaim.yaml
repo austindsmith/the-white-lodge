@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    io.kompose.service: fileflows-claim3
+  namespace: media
   name: fileflows-claim3
 spec:
   accessModes:
