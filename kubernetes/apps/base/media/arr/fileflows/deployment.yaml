@@ -19,9 +19,6 @@ spec:
         - name: fileflows
           image: revenz/fileflows
           restart: unless-stopped
-          envFrom:
-            - secretRef:
-                name: fileflows-oidc
           env:
             - name: PUID
               value: "1037"
