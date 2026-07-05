@@ -3,7 +3,6 @@ resources:
   - autobrr
   - bazarr
   - configarr
-  #- deduparr
   - plex
   - prowlarr
   - qbittorrent-vpn
@@ -14,3 +13,4 @@ resources:
   - sonarr
   - tautulli
   - flaresolverr
+  - fileflows

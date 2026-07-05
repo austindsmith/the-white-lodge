@@ -6,6 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: core
+    - name: metallb-config
   interval: 10m
   sourceRef:
     kind: GitRepository
