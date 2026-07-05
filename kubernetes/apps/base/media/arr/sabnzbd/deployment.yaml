@@ -69,5 +69,5 @@ spec:
           persistentVolumeClaim:
             claimName: media
         - name: sabnzbd-config-files
-          configMap:
-            name: sabnzbd-config-files
+          secret:
+            secretName: sabnzbd-config-files
