@@ -13,4 +13,4 @@ resources:
   - sonarr
   - tautulli
   - flaresolverr
-  #- fileflows
+  - fileflows
