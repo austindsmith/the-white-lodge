@@ -1,0 +1,18 @@
+services:
+  fileflows:
+    image: revenz/fileflows
+    restart: unless-stopped
+    ports:
+      - "19200:5000"
+    environment:
+      - TempPathHost=/app/temp
+      - BROWSER_START_DIR=/apps/media
+      - TZ=America/Denver
+      - PUID=1037
+      - PGID=100
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /app/temp:/temp
+      - /app/data:/app/Data
+      - /app/logs:/app/Logs
+      - /apps/media:/app/common

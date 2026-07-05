@@ -3,8 +3,10 @@ kind: Kustomization
 namespace: media
 
 resources:
-  - pvc-config.yaml
+  - fileflows-claim1-persistentvolumeclaim.yaml
+  - fileflows-claim2-persistentvolumeclaim.yaml
+  - fileflows-claim3-persistentvolumeclaim.yaml
+  - fileflows-claim4-persistentvolumeclaim.yaml
+  - fileflows-deployment.yaml
+  - fileflows-service.yaml
   - ingress-route.yaml
-  - deployment.yaml
-  - service.yaml
-  #- ./secret.yaml
