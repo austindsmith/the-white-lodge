@@ -7,5 +7,6 @@ spec:
   selector:
     app: fileflows
   ports:
-    - name: http
-      port: 19200
+    - protocol: TCP
+      port: 80
+      targetPort: 19200
