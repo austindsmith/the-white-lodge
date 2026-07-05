@@ -8,5 +8,5 @@ spec:
     app: fileflows
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 19200
+      port: 19200
+      targetPort: 5000

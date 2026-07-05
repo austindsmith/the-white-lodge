@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fileflows
   namespace: media
+  name: fileflows
 spec:
   replicas: 1
   strategy:
@@ -16,45 +16,48 @@ spec:
         app: fileflows
     spec:
       containers:
-        - name: fileflows
-          image: revenz/fileflows
-          env:
-            - name: PUID
-              value: "1037"
+        - env:
+            - name: BROWSER_START_DIR
+              value: /apps/media
             - name: PGID
               value: "100"
+            - name: PUID
+              value: "1037"
             - name: TZ
-              value: ${timezone}
+              value: America/Denver
+            - name: TempPathHost
+              value: /app/temp
+          image: revenz/fileflows
+          name: fileflows
+          ports:
+            - containerPort: 5000
+              protocol: TCP
           volumeMounts:
-            - name: data
-              mountPath: /app/Data
-            - name: temp
-              mountPath: /temp
-            - name: media
-              mountPath: /app/media
-            - name: logs
-              mountPath: /app/Logs
-            - name: common
-              mountPath: /app/common
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              memory: 1Gi
+            - mountPath: /app/media
+              name: fileflows-media
+            - mountPath: /temp
+              name: fileflows-temp
+            - mountPath: /app/Data
+              name: fileflows-data
+            - mountPath: /app/Logs
+              name: fileflows-logs
+            - mountPath: /app/common
+              name: fileflows-common
+      restartPolicy: Always
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: fileflows-data
-        - name: temp
-          persistentVolumeClaim:
-            claimName: fileflows-temp
-        - name: media
-          persistentVolumeClaim:
-            claimName: media
-        - name: logs
-          persistentVolumeClaim:
-            claimName: fileflows-logs
-        - name: common
+        - name: fileflows-media
+          existingClaim: media
+          globalMounts:
+            - path: /media
+        - name: fileflows-common
           persistentVolumeClaim:
             claimName: fileflows-common
+        - name: fileflows-data
+          persistentVolumeClaim:
+            claimName: fileflows-data
+        - name: fileflows-logs
+          persistentVolumeClaim:
+            claimName: fileflows-logs
+        - name: fileflows-temp
+          persistentVolumeClaim:
+            claimName: fileflows-temp
