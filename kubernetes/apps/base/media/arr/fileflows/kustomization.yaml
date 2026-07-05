@@ -6,5 +6,5 @@ resources:
   - pvc-config.yaml
   - ingress-route.yaml
   - deployment.yaml
-  #- service.yaml
+  - service.yaml
   #- ./secret.yaml
