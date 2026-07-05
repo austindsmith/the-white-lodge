@@ -86,7 +86,7 @@ metrics:
     #   annotations:
     #     description: Radarr service is down.
     #     summary: Radarr is down.
-    #   expr: |
+ oci://ghcr.io/m0nsterrr/helm-charts/flaresolverr   #   expr: |
     #     radarr_system_status == 0
     #   for: 5m
     #   labels:
