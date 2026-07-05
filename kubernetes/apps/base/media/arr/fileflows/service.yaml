@@ -8,4 +8,4 @@ spec:
     app: fileflows
   ports:
     - name: http
-      port: 9696
+      port: 19200
