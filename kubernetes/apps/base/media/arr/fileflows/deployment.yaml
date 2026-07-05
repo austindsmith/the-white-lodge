@@ -34,8 +34,8 @@ spec:
           volumeMounts:
             - name: temp
               mountPath: /temp
-            - name: data
-              mountPath: /app/Data
+            - name: media
+              mountPath: /app/media
             - name: logs
               mountPath: /app/Logs
             - name: common
