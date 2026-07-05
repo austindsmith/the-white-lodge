@@ -11,4 +11,4 @@ spec:
       kind: Rule
       services:
         - name: fileflows
-          port: 5000
+          port: 19200
