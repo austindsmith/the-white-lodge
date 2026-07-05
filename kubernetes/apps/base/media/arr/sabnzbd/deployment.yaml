@@ -16,9 +16,9 @@ spec:
         app: sabnzbd
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 1037
+        runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: seed-config
@@ -33,7 +33,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: seed
+            - name: sabnzbd-config-files
               mountPath: /seed
       containers:
         - name: sabnzbd
@@ -68,6 +68,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
-        - name: seed
+        - name: sabnzbd-config-files
           configMap:
-            name: sabnzbd-config-seed
+            name: sabnzbd-config-files

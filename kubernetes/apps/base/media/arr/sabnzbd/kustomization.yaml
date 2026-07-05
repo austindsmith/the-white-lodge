@@ -7,4 +7,11 @@ resources:
   - ingress-route.yaml
   - deployment.yaml
   - service.yaml
-  - configmap.yaml
+  - external-secret.yaml
+
+configMapGenerator:
+  - name: sabnzbd-config-files
+    files:
+      - configs/sabnzbd.ini
+    options:
+      disableNameSuffixHash: true
