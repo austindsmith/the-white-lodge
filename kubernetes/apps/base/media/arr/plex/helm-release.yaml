@@ -59,9 +59,9 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: ${media_puid}
-        runAsGroup: ${media_pgid}
-        fsGroup: ${media_pgid}
+#        runAsUser: ${media_puid}
+#        runAsGroup: ${media_pgid}
+#        fsGroup: ${media_pgid}
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
