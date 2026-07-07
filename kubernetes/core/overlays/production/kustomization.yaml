@@ -2,11 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-<<<<<<< HEAD
-=======
   - cert-manager
   - external-secrets
->>>>>>> b27791a (fixing plex porting)
   - github-receiver
   - cloudnative-pg
   - metallb
