@@ -9,6 +9,14 @@ spec:
   interval: 1h
   values:
     controllers:
+      seed-settings:
+        image:
+          repository: docker.io/library/busybox
+          tag: "1.37"
+        command:
+          - sh
+          - -c
+          - '[ -f /app/config.toml ] || cp /seed/config.toml /app/config.toml'
       qui:
         annotations:
           reloader.stakater.com/auto: "true"
@@ -88,10 +96,12 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      config:
-        existingClaim: qui-config
+      settings:
+        type: secret
+        name: qui-settings
         globalMounts:
-          - path: /config
+          - path: /seed
+            readOnly: true
       media:
         existingClaim: media
         globalMounts:

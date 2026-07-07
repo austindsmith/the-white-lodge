@@ -9,6 +9,15 @@ spec:
   interval: 1h
   values:
     controllers:
+      initContainers:
+        seed-settings:
+          image:
+            repository: docker.io/library/busybox
+            tag: "1.37"
+          command:
+            - sh
+            - -c
+            - '[ -f /app/config/settings.json ] || cp /seed/settings.json /app/config/settings.json'
       agregarr:
         annotations:
           reloader.stakater.com/auto: "true"
@@ -75,6 +84,12 @@ spec:
                   identifier: app
                   port: http
     persistence:
+      settings:
+        type: secret
+        name: agregarr-settings
+        globalMounts:
+          - path: /seed
+            readOnly: true
       config:
         existingClaim: agregarr-config
         globalMounts:

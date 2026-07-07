@@ -1,0 +1,17 @@
+wg_interface_ip: "{{ lookup('community.general.onepassword', 'wireguard-netcup', field='interface_ip', vault='the-white-lodge') }}"
+wg_server_endpoint: "{{ lookup('community.general.onepassword', 'wireguard-netcup', field='server_endpoint', vault='the-white-lodge') }}"
+wg_server_pubkey: "{{ lookup('community.general.onepassword', 'wireguard-netcup', field='server_public_key', vault='the-white-lodge') }}"
+wg_private_key: "{{ lookup('community.general.onepassword', 'wireguard-netcup', field='private_key', vault='the-white-lodge') }}"
+
+firewall_services:
+  - service: ssh
+
+firewall_ports:
+  - port: 6443/tcp
+  - port: 10250/tcp
+  - port: 8472/udp
+  - port: 32400/tcp
+
+firewall_trusted_sources:
+  - 10.42.0.0/16
+  - 10.43.0.0/16

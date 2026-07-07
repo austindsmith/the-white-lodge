@@ -1,4 +1,6 @@
-- name: Configure firewall settings
-  hosts: cloud
-  roles:
-    - firewall
+- name: Wireguard
+  ansible.builtin.import_playbook: wireguard.yml
+- name: Firewall
+  ansible.builtin.import_playbook: firewall.yml
+- name: Kubernetes
+  ansible.builtin.import_playbook: kubernetes.yml

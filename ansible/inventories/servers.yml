@@ -3,6 +3,9 @@ all:
     cloud:
       hosts:
         kubernetes-server-01:
-          ansible_host: "{{ lookup('community.general.onepassword', 'netcup', field='wg_ip_address', vault='the-white-lodge') }}"
+          wg_listen_port: "{{ lookup('community.general.onepassword', 'unifi', field='wg_listen_port', vault='the-white-lodge') }}"
+          wan_ip: "{{ lookup('community.general.onepassword', 'netcup', field='public_ip_address', vault='the-white-lodge') }}"
+          wg_ip: "{{ lookup('community.general.onepassword', 'netcup', field='wg_ip_address', vault='the-white-lodge') }}"
+          ansible_host: "{{ wan_ip if (use_wan | default(false)) else wg_ip }}"
           ansible_become_user: "{{ lookup('community.general.onepassword', 'ansible', field='become_user', vault='the-white-lodge') }}"
           ansible_become_password: "{{ lookup('community.general.onepassword', 'ansible', field='password', vault='the-white-lodge') }}"

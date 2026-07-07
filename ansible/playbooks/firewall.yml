@@ -1,0 +1,56 @@
+- name: Configure firewall
+  become: true
+  hosts: all
+  tasks:
+    - name: Install firewalld
+      ansible.builtin.package:
+        name: firewalld
+        state: present
+
+    - name: Disable and stop ufw
+      ansible.builtin.systemd:
+        name: ufw
+        state: stopped
+        enabled: false
+      when: ansible_facts.services['ufw.service'] is defined
+
+    - name: Enable and start firewalld
+      ansible.builtin.systemd:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Allow firewall services
+      ansible.posix.firewalld:
+        service: "{{ item.service }}"
+        zone: "{{ item.zone | default('public') }}"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop: "{{ firewall_services }}"
+
+    - name: Allow firewall ports
+      ansible.posix.firewalld:
+        port: "{{ item.port }}"
+        zone: "{{ item.zone | default('public') }}"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop: "{{ firewall_ports }}"
+
+    - name: Trust cluster CIDRs
+      ansible.posix.firewalld:
+        source: "{{ item }}"
+        zone: trusted
+        permanent: true
+        state: enabled
+        immediate: true
+      loop: "{{ firewall_trusted_sources }}"
+
+    - name: Enable masquerade
+      ansible.posix.firewalld:
+        masquerade: true
+        zone: public
+        permanent: true
+        state: enabled
+        immediate: true

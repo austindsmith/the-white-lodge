@@ -1,9 +1,8 @@
 - name: Enroll netcup as WireGuard peer
-  hosts: all
+  hosts: cloud
   become: true
-  #gather_facts: true
-
   vars:
+    ansible_host: "{{ wan_ip }}"
     wg_interface: wg0
     wg_config_path: "/etc/wireguard/{{ wg_interface }}.conf"
     wg_allowed_ips: "192.168.1.0/24, 192.168.2.0/24, 192.168.50.0/24"
@@ -37,7 +36,7 @@
 
           [Peer]
           PublicKey = {{ wg_server_pubkey }}
-          Endpoint = {{ wg_server_endpoint }}:{{ wg_listen_port }}
+          Endpoint = {{ wg_server_endpoint }}
           AllowedIPs = {{ wg_allowed_ips }}
           PersistentKeepalive = {{ wg_persistent_keepalive }}
       notify: Restart wireguard
@@ -45,13 +44,6 @@
     - name: Gather service facts
       ansible.builtin.service_facts:
 
-    #- name: Open wireguard port in firewalld
-    #  ansible.posix.firewalld:
-    #    port: "{{ wg_listen_port }}/udp"
-    #    permanent: true
-    #    immediate: true
-    #    state: enabled
-    #  when: "'firewalld.service' in ansible_facts.services"
 
     - name: Enable and start wireguard interface
       ansible.builtin.systemd:

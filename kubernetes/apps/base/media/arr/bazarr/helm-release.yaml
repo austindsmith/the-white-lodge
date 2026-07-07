@@ -9,6 +9,14 @@ spec:
   interval: 1h
   values:
     controllers:
+      seed-settings:
+        image:
+          repository: docker.io/library/busybox
+          tag: "1.37"
+        command:
+          - sh
+          - -c
+          - '[ -f /app/config.yaml ] || cp /seed/config.yaml /app/config.yaml'
       bazarr:
         annotations:
           reloader.stakater.com/auto: "true"
@@ -83,6 +91,16 @@ spec:
                   identifier: app
                   port: http
     persistence:
+      seed:
+        existingClaim: qui-config
+        globalMounts:
+          - path: /app/config
+      settings:
+        type: secret
+        name: bazarr-settings
+        globalMounts:
+          - path: /seed
+            readOnly: true
       config:
         existingClaim: bazarr-config
         globalMounts:
