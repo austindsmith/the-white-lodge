@@ -3,7 +3,7 @@ resources:
   - autobrr
   - bazarr
   - configarr
-#  - plex
+  - plex
   - prowlarr
   - qbittorrent-vpn
   - qui
