@@ -6,7 +6,6 @@ resources:
   - ./traefik
   - ./longhorn
   - ./cloudnative-pg
-  - ./synology-csi
   - ./metallb
   - ./rustfs
   #- ./teleport
