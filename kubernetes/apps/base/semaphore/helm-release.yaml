@@ -38,7 +38,7 @@ spec:
     database:
       type: postgres
       name: semaphore
-      host: ${app_db_service}
+      host: ${apps_pg_host}
       port: 5432
       usernameFromSecret: true
       usernameKey: username
