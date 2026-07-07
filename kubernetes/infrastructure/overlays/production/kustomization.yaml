@@ -7,5 +7,5 @@ resources:
   - ./longhorn
   - ./cloudnative-pg
   - ./metallb
-  - ./rustfs
+  #- ./rustfs
   #- ./teleport
