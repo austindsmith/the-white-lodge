@@ -1,5 +1,6 @@
 resources:
   - cluster-vars.yaml
+  - external-secrets.yaml
   - core.yaml
   - infrastructure.yaml
   - apps.yaml
