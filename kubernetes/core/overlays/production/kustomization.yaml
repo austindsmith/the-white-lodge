@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - cert-manager
-  - external-secrets
   - github-receiver
   - cloudnative-pg
   - metallb
