@@ -24,6 +24,9 @@ spec:
               PLEX_ADVERTISE_URL: "https://plex.${cluster_domain}:443,http://${cluster_lb_ip}:32400"
               TZ: ${timezone}
               LOG_LEVEL: "info"
+              PUID: "1037"
+              PGID: "100"
+            hostNetwork: true
             probes:
               liveness:
                 enabled: true
@@ -59,9 +62,9 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: ${media_puid}
-        runAsGroup: ${media_pgid}
-        fsGroup: ${media_pgid}
+        runAsUser: 1000
+        runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
