@@ -4,7 +4,7 @@ metadata:
   name: core
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 10mflx
   sourceRef:
     kind: GitRepository
     name: flux-system
