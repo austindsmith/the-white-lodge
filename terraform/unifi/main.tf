@@ -17,7 +17,6 @@ terraform {
 }
 
 provider "onepassword" {
-  account = "my.1password.com"
 }
 
 data "onepassword_vault" "white_lodge" {
