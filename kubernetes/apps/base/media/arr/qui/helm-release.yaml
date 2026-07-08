@@ -10,15 +10,15 @@ spec:
   values:
     controllers:
       qui:
-        initContainers:
-          seed-settings:
-            image:
-              repository: docker.io/library/busybox
-              tag: "1.37"
-            command:
-              - sh
-              - -c
-              - '[ -f /app/config.toml ] || cp /seed/config.toml /app/config.toml'
+        #initContainers:
+        #  seed-settings:
+        #    image:
+        #      repository: docker.io/library/busybox
+        #      tag: "1.37"
+        #    command:
+        #      - sh
+        #      - -c
+        #      - '[ -f /app/config.toml ] || cp /seed/config.toml /app/config.toml'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:

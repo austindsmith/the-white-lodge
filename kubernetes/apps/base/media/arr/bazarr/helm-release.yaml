@@ -10,15 +10,15 @@ spec:
   values:
     controllers:
       bazarr:
-        initContainers:
-          seed-settings:
-            image:
-              repository: docker.io/library/busybox
-              tag: "1.37"
-            command:
-              - sh
-              - -c
-              - '[ -f /app/config.yaml ] || cp /seed/config.yaml /app/config.yaml'
+        #initContainers:
+        #  seed-settings:
+        #    image:
+        #      repository: docker.io/library/busybox
+        #      tag: "1.37"
+        #    command:
+        #      - sh
+        #      - -c
+        #      - '[ -f /app/config.yaml ] || cp /seed/config.yaml /app/config.yaml'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
