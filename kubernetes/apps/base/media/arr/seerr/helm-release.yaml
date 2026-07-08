@@ -18,7 +18,7 @@ spec:
             command:
               - sh
               - -c
-              - '[ -f /config/settings.json ] || cp /seed/settings.json /config/settings.json'
+              - '[ -f /app/config/settings.json ] || cp /seed/settings.json /app/config/settings.json'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -93,7 +93,7 @@ spec:
       config:
         existingClaim: seerr-config
         globalMounts:
-          - path: /config
+          - path: /app/config
       media:
         existingClaim: media
         globalMounts:
