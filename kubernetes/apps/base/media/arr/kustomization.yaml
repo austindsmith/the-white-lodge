@@ -3,13 +3,13 @@ resources:
   - autobrr
   - bazarr
   - configarr
-  #- plex
+  - plex
   - prowlarr
   - qbittorrent-vpn
-  #- qui
+  - qui
   - radarr
   - sabnzbd
-  #- seerr
+  - seerr
   - sonarr
   - tautulli
   - flaresolverr
