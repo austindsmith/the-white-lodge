@@ -1,7 +1,7 @@
 resources:
   - agregarr
   - autobrr
-  #- bazarr
+  - bazarr
   - configarr
   - plex
   - prowlarr
@@ -9,7 +9,7 @@ resources:
   - qui
   - radarr
   - sabnzbd
-  - seerr
+  #- seerr
   - sonarr
   - tautulli
   - flaresolverr
