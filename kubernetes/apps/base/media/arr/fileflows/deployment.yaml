@@ -33,7 +33,7 @@ spec:
             - containerPort: 5000
               protocol: TCP
           volumeMounts:
-            - mountPath: /app/media
+            - mountPath: /media
               name: fileflows-media
             - mountPath: /temp
               name: fileflows-temp
@@ -46,9 +46,8 @@ spec:
       restartPolicy: Always
       volumes:
         - name: fileflows-media
-          existingClaim: media
-          globalMounts:
-            - path: /media
+          persistentVolumeClaim:
+            claimName: media
         - name: fileflows-common
           persistentVolumeClaim:
             claimName: fileflows-common
