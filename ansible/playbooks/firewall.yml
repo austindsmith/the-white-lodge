@@ -54,11 +54,3 @@
         permanent: true
         state: enabled
         immediate: true
-
-    - name: Forward Plex port to MetalLB VIP
-      ansible.posix.firewalld:
-        rich_rule: rule family=ipv4 forward-port port=32400 protocol=tcp to-addr=192.168.100.202
-        zone: public
-        permanent: true
-        immediate: true
-        state: enabled

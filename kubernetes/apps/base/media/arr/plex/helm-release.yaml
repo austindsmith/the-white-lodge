@@ -72,9 +72,9 @@ spec:
             port: *port
       external:
         controller: plex
-        type: LoadBalancer
-        annotations:
-          metallb.io/loadBalancerIPs: 192.168.100.202
+        type: ClusterIP
+        externalIPs:
+          - 152.53.52.163
         ports:
           plex:
             port: 32400
