@@ -65,19 +65,19 @@ spec:
         runAsGroup: 100
         fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
-        service:
-          app:
-            ports:
-              http:
-                port: *port
-          external:
-            controller: plex
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.100.202
-            ports:
-              plex:
-                port: 32400
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+      external:
+        controller: plex
+        type: LoadBalancer
+        annotations:
+          metallb.io/loadBalancerIPs: 192.168.100.202
+        ports:
+          plex:
+            port: 32400
     ingress:
       app:
         className: traefik
