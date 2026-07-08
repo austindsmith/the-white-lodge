@@ -93,7 +93,7 @@ spec:
       config:
         existingClaim: seerr-config
         globalMounts:
-          - path: /app/config
+          - path: /config
       media:
         existingClaim: media
         globalMounts:

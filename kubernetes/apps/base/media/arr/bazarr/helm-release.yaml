@@ -92,10 +92,6 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      seed:
-        existingClaim: qui-config
-        globalMounts:
-          - path: /app/config
       settings:
         type: secret
         name: bazarr-settings

@@ -18,7 +18,7 @@ spec:
             command:
               - sh
               - -c
-              - '[ -f /app/config.toml ] || cp /seed/config.toml /app/config.toml'
+              - '[ -f /config/config.toml ] || cp /seed/config.toml /config/config.toml'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -99,6 +99,10 @@ spec:
                   identifier: app
                   port: http
     persistence:
+      config:
+        existingClaim: qui-config
+        globalMounts:
+          - path: /config
       settings:
         type: secret
         name: qui-settings
