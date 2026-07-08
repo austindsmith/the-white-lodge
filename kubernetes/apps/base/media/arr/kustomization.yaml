@@ -9,7 +9,7 @@ resources:
   - qui
   - radarr
   - sabnzbd
-  #- seerr
+  - seerr
   - sonarr
   - tautulli
   - flaresolverr
