@@ -1,15 +1,15 @@
 resources:
   - agregarr
   - autobrr
-  - bazarr
+  #- bazarr
   - configarr
   - plex
   - prowlarr
   - qbittorrent-vpn
-  - qui
+  #- qui
   - radarr
   - sabnzbd
-  - seerr
+  #- seerr
   - sonarr
   - tautulli
   - flaresolverr
