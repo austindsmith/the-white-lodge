@@ -30,6 +30,8 @@ spec:
               - secretRef:
                   name: qui-secret
             env:
+              PUID: "1037"
+              PGID: "100"
               QUI__DATABASE_HOST: ${apps_pg_host}
               QUI__DATABASE_PORT: ${apps_pg_port}
               QUI__AUTH_DISABLED: true
