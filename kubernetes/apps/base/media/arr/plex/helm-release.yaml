@@ -21,7 +21,7 @@ spec:
               - secretRef:
                   name: plex
             env:
-              PLEX_ADVERTISE_URL: "https://plex.${cluster_domain}:443,https://${cluster_lb_ip}:32400;https://152.53.52.163:32400"
+              PLEX_ADVERTISE_URL: "https://plex.${cluster_domain}:443,http://192.168.100.202:32400;http://152.53.52.163:32400"
               TZ: ${timezone}
               LOG_LEVEL: "info"
               PUID: "1037"
