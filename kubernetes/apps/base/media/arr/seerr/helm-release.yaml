@@ -10,15 +10,15 @@ spec:
   values:
     controllers:
       seerr:
-        #initContainers:
-        #  seed-settings:
-        #    image:
-        #      repository: docker.io/library/busybox
-        #      tag: "1.37"
-        #    command:
-        #      - sh
-        #      - -c
-        #      - '[ -f /app/settings.json ] || cp /seed/settings.json /app/settings.json'
+        initContainers:
+          seed-settings:
+            image:
+              repository: docker.io/library/busybox
+              tag: "1.37"
+            command:
+              - sh
+              - -c
+              - '[ -f /config/settings.json ] || cp /seed/settings.json /config/settings.json'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
