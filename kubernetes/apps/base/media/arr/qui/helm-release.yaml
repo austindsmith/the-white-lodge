@@ -76,13 +76,13 @@ spec:
                 memory: 256Mi
               limits:
                 memory: 2Gi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: ${media_puid}
-        runAsGroup: ${media_pgid}
-        fsGroup: ${media_pgid}
-        fsGroupChangePolicy: OnRootMismatch
+    #defaultPodOptions:
+    #  securityContext:
+    #    runAsNonRoot: true
+    #    runAsUser: ${media_puid}
+    #    runAsGroup: ${media_pgid}
+    #    fsGroup: ${media_pgid}
+    #    fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         ports:
