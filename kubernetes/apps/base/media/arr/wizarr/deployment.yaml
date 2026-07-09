@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr
+  name: wizarr
   namespace: media
 spec:
   replicas: 1
@@ -9,47 +9,40 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: radarr
+      app: wizarr
   template:
     metadata:
       labels:
-        app: radarr
+        app: wizarr
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
       containers:
-        - name: radarr
-          image: lscr.io/linuxserver/radarr:latest
+        - name: wizarr
+          image: ghcr.io/wizarrrr/wizarr:latest
           env:
             - name: PUID
               value: "1000"
             - name: PGID
               value: "1000"
-            - name: UMASK
-              value: "002"
             - name: TZ
               value: America/Denver
+            - name: DISABLE_BUILTIN_AUTH
+              value: "false"
           ports:
             - name: http
-              containerPort: 7878
+              containerPort: 5690
           volumeMounts:
-            - name: config
-              mountPath: /config
-            - name: data
-              mountPath: /data
+            - name: database
+              mountPath: /data/database
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 50m
+              memory: 128Mi
             limits:
-              memory: 1Gi
+              memory: 512Mi
       volumes:
-        - name: config
+        - name: database
           persistentVolumeClaim:
-            claimName: radarr-config
-        - name: data
-          persistentVolumeClaim:
-            claimName: media
+            claimName: wizarr-database

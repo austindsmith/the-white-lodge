@@ -7,9 +7,9 @@ data:
     {
       "Servers": {
         "1": {
-          "Name": "app-cluster",
+          "Name": "apps-cluster",
           "Group": "Servers",
-          "Host": "app-cluster-rw",
+          "Host": "apps-cluster-rw",
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",

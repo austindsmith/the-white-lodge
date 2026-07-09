@@ -37,11 +37,11 @@ spec:
             - name: ENGINE_PRIMARY
               value: "postgres@dbgate-plugin-postgres"
             - name: SERVER_PRIMARY
-              value: "app-cluster-rw.cloudnative-pg.svc"
+              value: "data-cluster-rw.data.svc.cluster.local"
             - name: PORT_PRIMARY
               value: "5432"
             - name: LABEL_PRIMARY
-              value: "app-cluster-rw"
+              value: "data-cluster-rw"
             - name: USER_PRIMARY
               valueFrom:
                 secretKeyRef:

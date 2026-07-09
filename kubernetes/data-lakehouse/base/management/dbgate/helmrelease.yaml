@@ -35,8 +35,8 @@ spec:
     app:
       kind: "Postgres"
       service:
-        name: "app-cluster-rw"
-        namespace: "cloudnative-pg"
+        name: "data-cluster-rw"
+        namespace: "data"
       authSecret:
         name: "dbgate-cloudnative-pg-secret"
       tls:

@@ -21,9 +21,9 @@ spec:
   values:
     bytebase:
       option:
-        external-url: "https://bytebase.theblacklodge.dev"
+        external-url: "https://bytebase.${cluster_domain}"
         externalPg: # Bytebase will ignore the bytebase.option.externalPg.url if this is specified.
-          pgHost: "app-cluster-rw.cloudnative-pg.svc.cluster.local"
+          pgHost: "data-cluster-rw.data.svc.cluster.local"
           pgPort: "5432"
           pgUsername: "bytebase"
           pgDatabase: "bytebase"
