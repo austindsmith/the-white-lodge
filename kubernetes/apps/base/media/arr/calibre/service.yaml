@@ -8,5 +8,8 @@ spec:
     app: calibre
   ports:
     - name: http
-      port: 8181
+      port: 8080
       targetPort: http
+    - name: webserver
+      port: 8081
+      targetPort: webserver

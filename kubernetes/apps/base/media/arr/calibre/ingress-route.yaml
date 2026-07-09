@@ -10,5 +10,10 @@ spec:
     - match: Host(`calibre.${cluster_domain}`)
       kind: Rule
       services:
-        - name: lidarr
-          port: 8181
+        - name: calibre
+          port: 8080
+    - match: Host(`calibre-server.${cluster_domain}`)
+      kind: Rule
+      services:
+        - name: calibre
+          port: 8081

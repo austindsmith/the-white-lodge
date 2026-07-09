@@ -15,26 +15,23 @@ spec:
       labels:
         app: calibre
     spec:
-      securityContext:
-        runAsUser: ${media_puid}
-        runAsGroup: ${media_pgid}
-        fsGroup: ${media_pgid}
-        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: calibre
           image: lscr.io/linuxserver/calibre:latest
           env:
             - name: PUID
-              value: "1037"
+              value: "${media_puid}"
             - name: PGID
-              value: "100"
+              value: "${media_pgid}"
             - name: UMASK
               value: "002"
             - name: TZ
               value: America/Denver
           ports:
             - name: http
-              containerPort: 8181
+              containerPort: 8080
+            - name: webserver
+              containerPort: 8081
           volumeMounts:
             - name: config
               mountPath: /config
@@ -43,9 +40,9 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 256Mi
+              memory: 512Mi
             limits:
-              memory: 1Gi
+              memory: 2Gi
       volumes:
         - name: config
           persistentVolumeClaim:

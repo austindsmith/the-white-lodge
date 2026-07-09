@@ -4,6 +4,6 @@ namespace: media
 
 resources:
   - pvc-config.yaml
-  - ingress-route.yaml
   - deployment.yaml
   - service.yaml
+  - ingress-route.yaml
