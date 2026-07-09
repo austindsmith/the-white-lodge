@@ -58,5 +58,5 @@ spec:
           persistentVolumeClaim:
             claimName: fileflows-logs
         - name: fileflows-temp
-          persistentVolumeClaim:
-            claimName: fileflows-temp
+          emptyDir:
+            sizeLimit: 100Gi
