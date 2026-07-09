@@ -32,25 +32,25 @@ spec:
         secret: pgadmin-pgpass
         mountPath: /pgpass-src
         readOnly: true
-    extraInitContainers: |
-      - name: stage-pgpass
-        image: dpage/pgadmin4:latest
-        command:
-          - /bin/sh
-          - -c
-          - >
-            mkdir -p /var/lib/pgadmin/storage/austindsmith_accounts_proton.me &&
-            cp /pgpass-src/pgpassfile /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/file.pgpass &&
-            chmod 600 /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/file.pgpass &&
-            cp /client-cert-src/tls.crt /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.crt &&
-            cp /client-cert-src/tls.key /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.key &&
-            chmod 600 /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.key
-        securityContext:
-          runAsUser: 5050
-        volumeMounts:
-          - name: pgadmin-data
-            mountPath: /var/lib/pgadmin
-          - name: pgpass-src
-            mountPath: /pgpass-src
-          - name: pgadmin-client-cert
-            mountPath: /client-cert-src
+#    extraInitContainers: |
+#      - name: stage-pgpass
+#        image: dpage/pgadmin4:latest
+#        command:
+#          - /bin/sh
+#          - -c
+#          - >
+#            mkdir -p /var/lib/pgadmin/storage/austindsmith_accounts_proton.me &&
+#            cp /pgpass-src/pgpassfile /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/file.pgpass &&
+#            chmod 600 /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/file.pgpass &&
+#            cp /client-cert-src/tls.crt /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.crt &&
+#            cp /client-cert-src/tls.key /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.key &&
+#            chmod 600 /var/lib/pgadmin/storage/austindsmith_accounts_proton.me/postgresql.key
+#        securityContext:
+#          runAsUser: 5050
+#        volumeMounts:
+#          - name: pgadmin-data
+#            mountPath: /var/lib/pgadmin
+#          - name: pgpass-src
+#            mountPath: /pgpass-src
+#          - name: pgadmin-client-cert
+#            mountPath: /client-cert-src
