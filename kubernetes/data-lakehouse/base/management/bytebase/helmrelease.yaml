@@ -15,8 +15,8 @@ spec:
         name: bytebase
   valuesFrom:
     - kind: Secret
-      name: bytebase
-      valuesKey: postgres_password
+      name: data-db-secret
+      valuesKey: password
       targetPath: bytebase.option.externalPg.pgPassword
   values:
     bytebase:
