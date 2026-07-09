@@ -20,9 +20,9 @@ spec:
           image: lscr.io/linuxserver/calibre:latest
           env:
             - name: PUID
-              value: "${media_puid}"
+              value: "1037"
             - name: PGID
-              value: "${media_pgid}"
+              value: "100"
             - name: UMASK
               value: "002"
             - name: TZ
