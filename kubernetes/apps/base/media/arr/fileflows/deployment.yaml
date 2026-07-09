@@ -27,9 +27,9 @@ spec:
               value: "1037"
             - name: TZ
               value: America/Denver
-          envFrom:
-            - secretRef:
-                name: fileflows-oidc
+          #envFrom:
+          #  - secretRef:
+          #      name: fileflows-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
