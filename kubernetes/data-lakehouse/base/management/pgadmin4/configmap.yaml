@@ -10,7 +10,7 @@ data:
         "1": {
           "Name": "apps-cluster",
           "Group": "Servers",
-          "Host": "apps-cluster-rw",
+          "Host": "apps-cluster-rw.media.svc.cluster.local",
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",
@@ -22,7 +22,7 @@ data:
         "2": {
           "Name": "data-cluster",
           "Group": "Servers",
-          "Host": "data-cluster-rw",
+          "Host": "data-cluster-rw.data.svc.cluster.local",
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",

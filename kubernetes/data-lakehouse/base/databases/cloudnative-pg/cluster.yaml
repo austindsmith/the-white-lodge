@@ -15,11 +15,7 @@ spec:
     initdb:
       database: app
       owner: data
+      secret:
+        name: data-db-secret
   storage:
     size: 15Gi
-  managed:
-    roles:
-      - name: data
-        login: true
-        passwordSecret:
-          name: data-db-secret
