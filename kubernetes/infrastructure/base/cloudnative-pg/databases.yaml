@@ -13,6 +13,18 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
+  name: lidarr
+  namespace: cnpg-apps
+spec:
+  name: lidarr
+  owner: lidarr
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
   name: immich
   namespace: cnpg-apps
 spec:

@@ -33,6 +33,10 @@ spec:
         login: true
         passwordSecret:
           name: immich-db-secret
+      - name: lidarr
+        login: true
+        passwordSecret:
+          name: lidarr-db-secret
       - name: n8n
         login: true
         passwordSecret:
