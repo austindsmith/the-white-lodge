@@ -8,4 +8,4 @@ resources:
   - cloudnative-pg
   - metallb
   - rustfs
-  - teleport
+  #- teleport
