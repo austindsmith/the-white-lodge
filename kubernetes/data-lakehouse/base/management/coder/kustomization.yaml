@@ -3,14 +3,6 @@ kind: Kustomization
 namespace: coder
 
 resources:
-  - ./ingressroute.yaml
-  - ./namespace.yaml
-
-helmCharts:
-  - name: coder
-    repo: https://helm.coder.com/v2
-    version: 2.34.0-rc.0
-    releaseName: coder
-    namespace: coder
-    valuesFile: values.yaml
-    kubeVersion: v1.36.1
+  - helmrelease.yaml
+  - helmrepository.yaml
+  - ingressroute.yaml
