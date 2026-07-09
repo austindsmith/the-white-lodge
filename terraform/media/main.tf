@@ -21,7 +21,6 @@ terraform {
 }
 
 provider "onepassword" {
-  account = "my.1password.com"
 }
 
 data "onepassword_item" "prowlarr" {
@@ -76,12 +75,12 @@ locals {
   sabnzbd_name           = "sabnzbd"
   sabnzbd_host           = local.sabnzbd["url"].value
   sabnzbd_port           = 8080
-  sabnzbd_api_key        = local.sabnzbd["api_key"].value
+  sabnzbd_api_key        = local.sabnzbd["SABNZBD_API_KEY"].value
   sabnzbd_first_and_last = true
 
-  sonarr_api_key = local.sonarr["api_key"].value
-  sonarr_url     = local.sonarr["url"].value
-  sonarr_host    = local.sonarr["host"].value
+  sonarr_api_key = local.sonarr["SONARR_API_KEY"].value
+  sonarr_url     = local.sonarr["SONARR_URL"].value
+  sonarr_host    = local.sonarr["SONARR_HOST"].value
 
 }
 
