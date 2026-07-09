@@ -18,6 +18,10 @@ spec:
       name: data-db-secret
       valuesKey: password
       targetPath: bytebase.option.externalPg.pgPassword
+    - kind: Secret
+      name: data-db-secret
+      valuesKey: username
+      targetPath: bytebase.option.externalPg.pgUsername
   values:
     bytebase:
       option:
@@ -25,5 +29,4 @@ spec:
         externalPg: # Bytebase will ignore the bytebase.option.externalPg.url if this is specified.
           pgHost: "data-cluster-rw.data.svc.cluster.local"
           pgPort: "5432"
-          pgUsername: "bytebase"
-          pgDatabase: "bytebase"
+          pgDatabase: "scratch"
