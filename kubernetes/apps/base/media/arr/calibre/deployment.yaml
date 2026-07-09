@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lidarr
+  name: calibre
   namespace: media
 spec:
   replicas: 1
@@ -9,11 +9,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: lidarr
+      app: calibre
   template:
     metadata:
       labels:
-        app: lidarr
+        app: calibre
     spec:
       securityContext:
         runAsUser: ${media_puid}
@@ -21,8 +21,8 @@ spec:
         fsGroup: ${media_pgid}
         fsGroupChangePolicy: OnRootMismatch
       containers:
-        - name: lidarr
-          image: lscr.io/linuxserver/lidarr:latest
+        - name: calibre
+          image: lscr.io/linuxserver/calibre:latest
           env:
             - name: PUID
               value: "1037"
@@ -34,7 +34,7 @@ spec:
               value: America/Denver
           ports:
             - name: http
-              containerPort: 8686
+              containerPort: 8181
           volumeMounts:
             - name: config
               mountPath: /config
@@ -49,7 +49,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: lidarr-config
+            claimName: calibre-config
         - name: media
           persistentVolumeClaim:
             claimName: media

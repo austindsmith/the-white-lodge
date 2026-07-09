@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lidarr
+  name: calibre
   namespace: media
 spec:
   selector:
-    app: lidarr
+    app: calibre
   ports:
     - name: http
-      port: 8686
+      port: 8181
       targetPort: http
