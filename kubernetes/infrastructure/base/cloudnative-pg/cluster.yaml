@@ -6,6 +6,8 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/depends-on: helm.toolkit.fluxcd.io/namespaces/cnpg-apps/cloudnative-pg
 spec:
+  service:
+    type: LoadBalancer
   instances: 3
   enableSuperuserAccess: true
   certificates:
@@ -24,6 +26,16 @@ spec:
   monitoring:
     enablePodMonitor: true
   managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: "cnpg-apps-lb"
+              annotations:
+                metallb.io/loadBalancerIPs: 192.168.100.203
+            spec:
+              type: LoadBalancer
     roles:
       - name: authentik
         login: true

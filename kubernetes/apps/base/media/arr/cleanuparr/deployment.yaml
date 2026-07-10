@@ -1,55 +1,82 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr
   namespace: media
+  name: fileflows
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: radarr
+      app: fileflows
   template:
     metadata:
       labels:
-        app: radarr
+        app: fileflows
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
       containers:
-        - name: radarr
-          image: lscr.io/linuxserver/radarr:latest
+        - name: fileflows
+          image: revenz/fileflows
           env:
-            - name: PUID
-              value: "1000"
+            - name: BROWSER_START_DIR
+              value: /apps/media
             - name: PGID
-              value: "1000"
-            - name: UMASK
-              value: "002"
+              value: "100"
+            - name: PUID
+              value: "1037"
             - name: TZ
               value: America/Denver
+          #envFrom:
+          #  - secretRef:
+          #      name: fileflows-oidc
           ports:
-            - name: http
-              containerPort: 7878
-          volumeMounts:
-            - name: config
-              mountPath: /config
-            - name: data
-              mountPath: /data
+            - containerPort: 5000
+              protocol: TCP
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 4000m
+              memory: 2Gi
             limits:
-              memory: 1Gi
+              cpu: "10"
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: /media
+              name: fileflows-media
+            - mountPath: /temp
+              name: fileflows-temp
+            - mountPath: /app/Data
+              name: fileflows-data
+            - mountPath: /app/Logs
+              name: fileflows-logs
+            - mountPath: /app/common
+              name: fileflows-common
+      restartPolicy: Always
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: radarr-config
-        - name: data
+        - name: fileflows-media
           persistentVolumeClaim:
             claimName: media
+        - name: fileflows-common
+          persistentVolumeClaim:
+            claimName: fileflows-common
+        - name: fileflows-data
+          persistentVolumeClaim:
+            claimName: fileflows-data
+        - name: fileflows-logs
+          persistentVolumeClaim:
+            claimName: fileflows-logs
+        - name: fileflows-temp
+          emptyDir:
+            sizeLimit: 100Gi

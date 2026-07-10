@@ -3,7 +3,8 @@ kind: Kustomization
 namespace: media
 
 resources:
-  - ./pvc-config.yaml
-  - ./ocirepository.yaml
-  - ./helmrelease.yaml
-  - ./secret.yaml
+  - deployment.yaml
+  - pvc-config.yaml
+  #- secret.yaml
+  - service.yaml
+  - ingress-route.yaml

@@ -4,7 +4,7 @@ metadata:
   name: teleport-operator
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   path: ./kubernetes/infrastructure/base/teleport/operator
   prune: true
   sourceRef:
@@ -14,7 +14,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  timeout: 5m
+  timeout: 2m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -22,7 +22,7 @@ metadata:
   name: teleport-config
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   dependsOn:
     - name: teleport-operator
   path: ./kubernetes/infrastructure/base/teleport/config

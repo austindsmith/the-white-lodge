@@ -4,6 +4,12 @@
 
 - Consider switching to RKE2, it's like k3s with better security defaults.
 
+See labels that are usable as selectors for things like services
+
+```bash
+kubectl get pods --show-labels
+```
+
 Force delete namespace:
 
 ```bash

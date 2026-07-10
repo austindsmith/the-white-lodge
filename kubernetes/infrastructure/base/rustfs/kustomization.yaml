@@ -3,9 +3,9 @@ kind: Kustomization
 namespace: rustfs
 
 resources:
-  - helmrelease.yaml
-  - helmrepository.yaml
+  - helm-release.yaml
+  - helm-repository.yaml
   - namespace.yaml
-  - ingressroute.yaml
+  - ingress-route.yaml
   - service.yaml
   - secret.yaml
