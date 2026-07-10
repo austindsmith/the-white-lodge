@@ -11,6 +11,17 @@ spec:
     serverCASecret: data-cluster-server-cert
     clientCASecret: data-cluster-client-cert
     replicationTLSSecret: data-cluster-client-cert
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: "cnpg-apps-lb"
+              annotations:
+                metallb.io/loadBalancerIPs: 192.168.100.203
+            spec:
+              type: LoadBalancer
   bootstrap:
     initdb:
       database: app
