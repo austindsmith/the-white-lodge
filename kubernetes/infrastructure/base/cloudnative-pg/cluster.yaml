@@ -6,8 +6,6 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/depends-on: helm.toolkit.fluxcd.io/namespaces/cnpg-apps/cloudnative-pg
 spec:
-  service:
-    type: LoadBalancer
   instances: 3
   enableSuperuserAccess: true
   certificates:
