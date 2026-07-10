@@ -17,7 +17,7 @@ spec:
         - selectorType: rw
           serviceTemplate:
             metadata:
-              name: "cnpg-apps-lb"
+              name: "cnpg-data-lb"
               annotations:
                 metallb.io/loadBalancerIPs: 192.168.100.203
             spec:
