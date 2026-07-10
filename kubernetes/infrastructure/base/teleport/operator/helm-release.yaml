@@ -17,7 +17,7 @@ spec:
     operator:
       enabled: true
     chartMode: standalone
-    clusterName: teleport.${cluster_domain}
+    clusterName: teleport.thewhitelodge.org
     proxyListenerMode: "multiplex"
     authentication:
       type: 'github'
@@ -32,7 +32,7 @@ spec:
         auth_service:
           enabled: true
           listen_addr: 0.0.0.0:3025
-          public_addr: teleport.${cluster_domain}:3025
+          public_addr: teleport.thewhitelodge.org:3025
           web_idle_timeout: 1h
           authentication:
             locking_mode: best_effort
@@ -47,7 +47,7 @@ spec:
         proxy_service:
           enabled: true
           web_listen_addr: 0.0.0.0:3080
-          public_addr: teleport.${cluster_domain}:443
+          public_addr: teleport.thewhitelodge.org:443
           https_keypairs_reload_interval: 12h
 
     podSecurityPolicy:
@@ -70,7 +70,7 @@ spec:
     persistence:
       enabled: true
       existingClaim: teleport-auth-data
-    proxyAddr: teleport.${cluster_domain}:443
+    proxyAddr: teleport.thewhitelodge.org:443
     joinParams:
       method: kubernetes
       tokenName: db-agent-token
@@ -78,7 +78,7 @@ spec:
     databases:
       - name: apps-cluster-rw
         protocol: postgres
-        uri: apps-cluster-rw.cloudnative-pg.svc.cluster.local:5432
+        uri: apps-cluster-rw.cnpg-apps.svc.cluster.local:5432
         tls:
           mode: verify-ca
           ca_cert_file: "/etc/teleport-tls-db/db-ca/ca.crt"
