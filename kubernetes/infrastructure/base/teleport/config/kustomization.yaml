@@ -9,4 +9,3 @@ resources:
   - local-user.yaml
   - provision-tokens.yaml
   - roles.yaml
-  - pvc-config.yaml
