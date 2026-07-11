@@ -5,3 +5,4 @@ namespace: monitoring
 resources:
   - helm-release.yaml
   - ingress-route.yaml
+  - external-secrets.yaml

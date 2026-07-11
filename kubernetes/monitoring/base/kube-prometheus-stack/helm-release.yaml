@@ -19,3 +19,8 @@ spec:
     crds: Skip
   upgrade:
     crds: Skip
+  values:
+    grafana:
+      existingSecret: kube-prometheus-stack-credentials
+      userKey: username
+      passwordKey: password
