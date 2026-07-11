@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: media
+  namespace: mealie
   name: mealie-data
 spec:
   accessModes:
