@@ -1,0 +1,42 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pgadmin4
+  namespace: data
+spec:
+  install:
+    createNamespace: true
+  interval: 1h
+  chart:
+    spec:
+      chart: pgadmin4
+      version: 1.64.0
+      sourceRef:
+        kind: HelmRepository
+        name: pgadmin4
+  valuesFrom:
+    - kind: Secret
+      name: pgadmin-pgpass
+      valuesKey: pgadmin_password
+      targetPath: env.password
+  values:
+    serverDefinitions:
+      enabled: true
+      resourceType: ConfigMap
+      existingConfigmap: "pgadmin4"
+    env:
+      email: austindsmith_accounts@proton.me
+    envVarsFromSecrets: [pgadmin-oauth, pgadmin-env]
+    extraSecretMounts:
+      - name: pgpass-src
+        secret: pgadmin-pgpass
+        mountPath: /pgpass-src
+        readOnly: true
+    volumeMounts:
+      - name: cnpg-apps-client-cert
+        mountPath: /certs/postgres
+        readOnly: true
+    volumes:
+      - name: cnpg-apps-client-cert
+        secret:
+          secretName: pgadmin4-client-tls

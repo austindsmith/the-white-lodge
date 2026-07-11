@@ -3,8 +3,9 @@ kind: Kustomization
 namespace: data
 
 resources:
-  - helmrelease.yaml
-  - helmrepository.yaml
-  - ingressroute.yaml
+  - helm-release.yaml
+  - helm-repository.yaml
+  - ingress-route.yaml
   - secret.yaml
   - configmap.yaml
+  - certificates.yaml

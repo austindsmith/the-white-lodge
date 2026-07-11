@@ -14,10 +14,10 @@ data:
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",
-          "PassFile": "file.pgpass",
-          "SSLMode": "require",
-          "SSLCert": "postgresql.crt",
-          "SSLKey": "postgresql.key"
+          "SSLMode": "verify-full",
+          "SSLRootCert": "/certs/postgres/ca.crt",
+          "SSLCert": "/certs/postgres/tls.crt",
+          "SSLKey": "/certs/postgres/tls.key"
         },
         "2": {
           "Name": "data-cluster",

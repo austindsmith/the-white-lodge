@@ -59,3 +59,24 @@ spec:
     name: selfsigned-issuer
     kind: Issuer
     group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pgadmin4-client-cert
+  namespace: cnpg-apps
+spec:
+  secretName: pgadmin4-client-tls
+
+  issuerRef:
+    name: cnpg-apps-ca-issuer
+    kind: ClusterIssuer
+
+  commonName: postgres
+
+  usages:
+    - client auth
+
+  privateKey:
+    algorithm: RSA
+    size: 4096

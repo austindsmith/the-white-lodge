@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pgadmin4-client-cert
+  namespace: data
+spec:
+  secretName: pgadmin4-client-tls
+
+  issuerRef:
+    name: cnpg-apps-ca-issuer
+    kind: ClusterIssuer
+
+  commonName: postgres
+
+  usages:
+    - client auth
+
+  privateKey:
+    algorithm: RSA
+    size: 4096
