@@ -29,10 +29,6 @@ spec:
               value: "https://ntfy.sh"
             - name: NTFY_AUTH_ACCESS
               value: "*:up*:write-only"
-            - name: NTFY_CACHE_FILE
-              value: /var/lib/ntfy/cache.db
-            - name: NTFY_AUTH_FILE
-              value: /var/lib/ntfy/auth.db
             - name: NTFY_BEHIND_PROXY
               value: "true"
             - name: NTFY_ENABLE_LOGIN
