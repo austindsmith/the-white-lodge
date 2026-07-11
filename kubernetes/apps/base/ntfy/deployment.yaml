@@ -25,7 +25,6 @@ spec:
             NTFY_AUTH_ACCESS: "*:up*:write-only"
             NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
             NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
-            NTFY_AUTH_DEFAULT_ACCESS: deny-all
             NTFY_BEHIND_PROXY: true
             NTFY_ENABLE_LOGIN: true
             NTFY_ENABLE_SIGNUP: true
