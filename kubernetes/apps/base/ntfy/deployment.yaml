@@ -22,7 +22,7 @@ spec:
             - serve
           env:
             - name: NTFY_BASE_URL
-              value: http://ntfy.${cluster_domain}
+              value: https://ntfy.${cluster_domain}
             - name: NTFY_ATTACHMENT_CACHE_DIR
               value: "/var/cache/ntfy/attachments"
             - name: NTFY_UPSTREAM_BASE_URL
