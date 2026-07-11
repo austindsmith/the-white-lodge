@@ -37,6 +37,8 @@ services:
     container_name: romm-db
     restart: unless-stopped
     environment:
+      - ROMM_DB_DRIVER=postgresql
+      - DB_PORT=5432
       - MARIADB_ROOT_PASSWORD= # Use a unique, secure password
       - MARIADB_DATABASE=romm
       - MARIADB_USER=romm-user
