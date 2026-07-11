@@ -16,5 +16,5 @@ resources:
   - fileflows
   - wizarr
   - lidarr
-  - calibre
-  - calibre-web
+  #- calibre
+  #- calibre-web

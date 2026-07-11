@@ -8,5 +8,5 @@ spec:
     app: mealie
   ports:
     - protocol: TCP
-      port: 19200
-      targetPort: 5000
+      port: 9000
+      targetPort: 9925

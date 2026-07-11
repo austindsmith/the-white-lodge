@@ -2,7 +2,6 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: zammad
-  namespace: media
 spec:
   entryPoints:
     - web
@@ -11,4 +10,4 @@ spec:
       kind: Rule
       services:
         - name: zammad
-          port: 19200
+          port: 8080

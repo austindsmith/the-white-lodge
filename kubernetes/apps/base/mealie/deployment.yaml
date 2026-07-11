@@ -17,66 +17,64 @@ spec:
     spec:
       containers:
         - name: mealie
-          image: revenz/mealie
+          image: ghcr.io/mealie-recipes/mealie:v3.20.1
           env:
-            - name: BROWSER_START_DIR
-              value: /apps/media
+            - name: ALLOW_SIGNUP
+              value: "true"
             - name: PGID
               value: "100"
             - name: PUID
               value: "1037"
             - name: TZ
-              value: America/Denver
-          #envFrom:
-          #  - secretRef:
-          #      name: mealie-oidc
+              value: ${timezone}
+            - name: BASE_URL
+              value: https://mealie.${cluster_domain}
+            - name: DB_ENGINE
+              value: postgres
+            - name: POSTGRES_SERVER
+              value: ${apps_pg_host}
+            - name: POSTGRES_PORT
+              value: ${apps_pg_port}
+            - name: OIDC_AUTH_ENABLED
+              value: "true"
+            - name: OIDC_SIGNUP_ENABLED
+              value: "true"
+            - name: OIDC_PROVIDER_NAME
+              value: "Authentik"
+            - name: OIDC_REMEMBER_ME
+              value: "true"
+            - name: OIDC_USER_CLAIM
+              value: preferred_username
+            - name: OIDC_NAME_CLAIM
+              value: preferred_username
+          envFrom:
+            - secretRef:
+                name: mealie
           ports:
             - containerPort: 5000
               protocol: TCP
           resources:
             requests:
-              cpu: 4000m
-              memory: 2Gi
+              cpu: 10m
             limits:
-              cpu: "10"
-              memory: 8Gi
+              memory: 2Gi
           livenessProbe:
             httpGet:
               path: /
-              port: 5000
+              port: 9000
             initialDelaySeconds: 60
             periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /
-              port: 5000
+              port: 9000
             initialDelaySeconds: 15
             periodSeconds: 10
           volumeMounts:
-            - mountPath: /media
-              name: mealie-media
-            - mountPath: /temp
-              name: mealie-temp
-            - mountPath: /app/Data
+            - mountPath: /app/data
               name: mealie-data
-            - mountPath: /app/Logs
-              name: mealie-logs
-            - mountPath: /app/common
-              name: mealie-common
       restartPolicy: Always
       volumes:
-        - name: mealie-media
-          persistentVolumeClaim:
-            claimName: media
-        - name: mealie-common
-          persistentVolumeClaim:
-            claimName: mealie-common
         - name: mealie-data
           persistentVolumeClaim:
             claimName: mealie-data
-        - name: mealie-logs
-          persistentVolumeClaim:
-            claimName: mealie-logs
-        - name: mealie-temp
-          emptyDir:
-            sizeLimit: 100Gi

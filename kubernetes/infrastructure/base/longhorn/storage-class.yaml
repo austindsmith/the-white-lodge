@@ -31,6 +31,6 @@ metadata:
 provisioner: driver.longhorn.io
 parameters:
   numberOfReplicas: "3"
-  recurringJobSelector: '[{"name":"default-backup","isGroup":true}]'
+  recurringJobSelector: '[{"name":"volume-backups","isGroup":true}]'
 reclaimPolicy: Delete
 volumeBindingMode: Immediate

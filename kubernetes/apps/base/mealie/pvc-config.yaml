@@ -2,37 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: media
-  name: mealie-common
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn # longhorn-backup
-  resources:
-    requests:
-      storage: 2Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: media
   name: mealie-data
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: longhorn-backup
   resources:
     requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: media
-  name: mealie-logs
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
+      storage: 2Gi
