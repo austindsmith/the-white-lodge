@@ -18,6 +18,8 @@ spec:
       containers:
         - name: ntfy
           image: binwiederhier/ntfy
+          args:
+            - serve
           env:
             - name: NTFY_BASE_URL
               value: http://ntfy.${cluster_domain}
