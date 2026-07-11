@@ -32,11 +32,11 @@ spec:
             - name: NTFY_AUTH_FILE
               value: /var/lib/ntfy/auth.db
             - name: NTFY_BEHIND_PROXY
-              value: true
+              value: "true"
             - name: NTFY_ENABLE_LOGIN
-              value: true
+              value: "true"
             - name: NTFY_ENABLE_SIGNUP
-              value: true
+              value: "true"
           envFrom:
             - secretRef:
                 name: ntfy
