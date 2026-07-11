@@ -18,7 +18,7 @@ spec:
       watchPlugins: true
       oidc:
         issuerURL: "https://authentik.${cluster_domain}/application/o/headlamp/"
-        scopes: "openid email profile groups"
+        scopes: "openid email profile groups offline_access"
     pluginsManager:
       enabled: true
       configContent: |

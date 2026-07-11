@@ -15,6 +15,7 @@ spec:
       labels:
         app: fileflows
     spec:
+      hostname: fileflows
       containers:
         - name: fileflows
           image: revenz/fileflows
@@ -27,9 +28,6 @@ spec:
               value: "1037"
             - name: TZ
               value: America/Denver
-          #envFrom:
-          #  - secretRef:
-          #      name: fileflows-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -40,18 +38,26 @@ spec:
             limits:
               cpu: "4"
               memory: 8Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: 5000
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
               port: 5000
-            initialDelaySeconds: 60
-            periodSeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 10
           readinessProbe:
             httpGet:
               path: /
               port: 5000
-            initialDelaySeconds: 15
-            periodSeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
           volumeMounts:
             - mountPath: /media
               name: fileflows-media
@@ -79,4 +85,4 @@ spec:
             claimName: fileflows-logs
         - name: fileflows-temp
           emptyDir:
-            sizeLimit: 100Gi
+            sizeLimit: 50Gi
