@@ -20,6 +20,8 @@ spec:
         - name: fileflows
           image: revenz/fileflows
           env:
+            - name: FF_NO_ENCRYPT
+              value: "1"
             - name: BROWSER_START_DIR
               value: /apps/media
             - name: PGID
