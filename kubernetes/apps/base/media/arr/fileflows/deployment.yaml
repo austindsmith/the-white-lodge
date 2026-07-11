@@ -35,11 +35,11 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 1000m
-              memory: 2Gi
+              cpu: 6000m
+              memory: 12Gi
             limits:
-              cpu: "4"
-              memory: 8Gi
+              cpu: "8"
+              memory: 24Gi
           startupProbe:
             httpGet:
               path: /
