@@ -19,15 +19,24 @@ spec:
         - name: ntfy
           image: binwiederhier/ntfy
           env:
-            NTFY_BASE_URL: http://ntfy.${cluster_domain}
-            NTFY_ATTACHMENT_CACHE_DIR: "/var/cache/ntfy/attachments"
-            NTFY_UPSTREAM_BASE_URL: "https://ntfy.sh"
-            NTFY_AUTH_ACCESS: "*:up*:write-only"
-            NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
-            NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
-            NTFY_BEHIND_PROXY: true
-            NTFY_ENABLE_LOGIN: true
-            NTFY_ENABLE_SIGNUP: true
+            - name: NTFY_BASE_URL
+              value: http://ntfy.${cluster_domain}
+            - name: NTFY_ATTACHMENT_CACHE_DIR
+              value: "/var/cache/ntfy/attachments"
+            - name: NTFY_UPSTREAM_BASE_URL
+              value: "https://ntfy.sh"
+            - name: NTFY_AUTH_ACCESS
+              value: "*:up*:write-only"
+            - name: NTFY_CACHE_FILE
+              value: /var/lib/ntfy/cache.db
+            - name: NTFY_AUTH_FILE
+              value: /var/lib/ntfy/auth.db
+            - name: NTFY_BEHIND_PROXY
+              value: true
+            - name: NTFY_ENABLE_LOGIN
+              value: true
+            - name: NTFY_ENABLE_SIGNUP
+              value: true
           envFrom:
             - secretRef:
                 name: ntfy
