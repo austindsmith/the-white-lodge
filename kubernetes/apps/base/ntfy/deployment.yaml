@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: media
+  name: ntfy
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ntfy
+  template:
+    metadata:
+      labels:
+        app: ntfy
+    spec:
+      containers:
+        - name: ntfy
+          image: revenz/ntfy
+          env:
+            - name: BROWSER_START_DIR
+              value: /apps/media
+            - name: PGID
+              value: "100"
+            - name: PUID
+              value: "1037"
+            - name: TZ
+              value: America/Denver
+          #envFrom:
+          #  - secretRef:
+          #      name: ntfy-oidc
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 4000m
+              memory: 2Gi
+            limits:
+              cpu: "10"
+              memory: 8Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: /media
+              name: ntfy-media
+            - mountPath: /temp
+              name: ntfy-temp
+            - mountPath: /app/Data
+              name: ntfy-data
+            - mountPath: /app/Logs
+              name: ntfy-logs
+            - mountPath: /app/common
+              name: ntfy-common
+      restartPolicy: Always
+      volumes:
+        - name: ntfy-media
+          persistentVolumeClaim:
+            claimName: media
+        - name: ntfy-common
+          persistentVolumeClaim:
+            claimName: ntfy-common
+        - name: ntfy-data
+          persistentVolumeClaim:
+            claimName: ntfy-data
+        - name: ntfy-logs
+          persistentVolumeClaim:
+            claimName: ntfy-logs
+        - name: ntfy-temp
+          emptyDir:
+            sizeLimit: 100Gi
