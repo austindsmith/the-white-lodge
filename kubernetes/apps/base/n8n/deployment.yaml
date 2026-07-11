@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: media
-  name: nextcloud
+  name: n8n
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: nextcloud
+      app: n8n
   template:
     metadata:
       labels:
-        app: nextcloud
+        app: n8n
     spec:
       containers:
-        - name: nextcloud
-          image: revenz/nextcloud
+        - name: n8n
+          image: revenz/n8n
           env:
             - name: BROWSER_START_DIR
               value: /apps/media
@@ -29,7 +29,7 @@ spec:
               value: America/Denver
           #envFrom:
           #  - secretRef:
-          #      name: nextcloud-oidc
+          #      name: n8n-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -54,29 +54,29 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - mountPath: /media
-              name: nextcloud-media
+              name: n8n-media
             - mountPath: /temp
-              name: nextcloud-temp
+              name: n8n-temp
             - mountPath: /app/Data
-              name: nextcloud-data
+              name: n8n-data
             - mountPath: /app/Logs
-              name: nextcloud-logs
+              name: n8n-logs
             - mountPath: /app/common
-              name: nextcloud-common
+              name: n8n-common
       restartPolicy: Always
       volumes:
-        - name: nextcloud-media
+        - name: n8n-media
           persistentVolumeClaim:
             claimName: media
-        - name: nextcloud-common
+        - name: n8n-common
           persistentVolumeClaim:
-            claimName: nextcloud-common
-        - name: nextcloud-data
+            claimName: n8n-common
+        - name: n8n-data
           persistentVolumeClaim:
-            claimName: nextcloud-data
-        - name: nextcloud-logs
+            claimName: n8n-data
+        - name: n8n-logs
           persistentVolumeClaim:
-            claimName: nextcloud-logs
-        - name: nextcloud-temp
+            claimName: n8n-logs
+        - name: n8n-temp
           emptyDir:
             sizeLimit: 100Gi

@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: media
-  name: fileflows
+  name: romm
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: fileflows
+      app: romm
   template:
     metadata:
       labels:
-        app: fileflows
+        app: romm
     spec:
       containers:
-        - name: fileflows
-          image: revenz/fileflows
+        - name: romm
+          image: revenz/romm
           env:
             - name: BROWSER_START_DIR
               value: /apps/media
@@ -29,7 +29,7 @@ spec:
               value: America/Denver
           #envFrom:
           #  - secretRef:
-          #      name: fileflows-oidc
+          #      name: romm-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -54,29 +54,29 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - mountPath: /media
-              name: fileflows-media
+              name: romm-media
             - mountPath: /temp
-              name: fileflows-temp
+              name: romm-temp
             - mountPath: /app/Data
-              name: fileflows-data
+              name: romm-data
             - mountPath: /app/Logs
-              name: fileflows-logs
+              name: romm-logs
             - mountPath: /app/common
-              name: fileflows-common
+              name: romm-common
       restartPolicy: Always
       volumes:
-        - name: fileflows-media
+        - name: romm-media
           persistentVolumeClaim:
             claimName: media
-        - name: fileflows-common
+        - name: romm-common
           persistentVolumeClaim:
-            claimName: fileflows-common
-        - name: fileflows-data
+            claimName: romm-common
+        - name: romm-data
           persistentVolumeClaim:
-            claimName: fileflows-data
-        - name: fileflows-logs
+            claimName: romm-data
+        - name: romm-logs
           persistentVolumeClaim:
-            claimName: fileflows-logs
-        - name: fileflows-temp
+            claimName: romm-logs
+        - name: romm-temp
           emptyDir:
             sizeLimit: 100Gi

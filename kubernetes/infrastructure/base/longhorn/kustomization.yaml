@@ -4,7 +4,7 @@ namespace: longhorn-system
 
 resources:
   - namespace.yaml
-  - helmrelease.yaml
-  - helmrepository.yaml
-  - ingress.yaml
-  - storageclass.yaml
+  - helm-release.yaml
+  - helm-repository.yaml
+  - ingress-route.yaml
+  - storage-class.yaml

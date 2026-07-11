@@ -1,14 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: fileflows
+  name: paperless-ngx
   namespace: media
 spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`fileflows.${cluster_domain}`)
+    - match: Host(`paperless-ngx.${cluster_domain}`)
       kind: Rule
       services:
-        - name: fileflows
+        - name: paperless-ngx
           port: 19200

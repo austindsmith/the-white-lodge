@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: media
-  name: fileflows
+  name: mealie
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: fileflows
+      app: mealie
   template:
     metadata:
       labels:
-        app: fileflows
+        app: mealie
     spec:
       containers:
-        - name: fileflows
-          image: revenz/fileflows
+        - name: mealie
+          image: revenz/mealie
           env:
             - name: BROWSER_START_DIR
               value: /apps/media
@@ -29,7 +29,7 @@ spec:
               value: America/Denver
           #envFrom:
           #  - secretRef:
-          #      name: fileflows-oidc
+          #      name: mealie-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -54,29 +54,29 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - mountPath: /media
-              name: fileflows-media
+              name: mealie-media
             - mountPath: /temp
-              name: fileflows-temp
+              name: mealie-temp
             - mountPath: /app/Data
-              name: fileflows-data
+              name: mealie-data
             - mountPath: /app/Logs
-              name: fileflows-logs
+              name: mealie-logs
             - mountPath: /app/common
-              name: fileflows-common
+              name: mealie-common
       restartPolicy: Always
       volumes:
-        - name: fileflows-media
+        - name: mealie-media
           persistentVolumeClaim:
             claimName: media
-        - name: fileflows-common
+        - name: mealie-common
           persistentVolumeClaim:
-            claimName: fileflows-common
-        - name: fileflows-data
+            claimName: mealie-common
+        - name: mealie-data
           persistentVolumeClaim:
-            claimName: fileflows-data
-        - name: fileflows-logs
+            claimName: mealie-data
+        - name: mealie-logs
           persistentVolumeClaim:
-            claimName: fileflows-logs
-        - name: fileflows-temp
+            claimName: mealie-logs
+        - name: mealie-temp
           emptyDir:
             sizeLimit: 100Gi

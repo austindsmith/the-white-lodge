@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: firefox
 
 resources:
-  - ./namespace.yaml
-  - ./pvc.yaml
-  - ./deployment.yaml
-  - ./service.yaml
-  - ./ingressroute.yaml
-  - ./middleware.yaml
-  - ./configmap.yaml
-  - ./secret.yaml
+  - namespace.yaml
+  - pvc-config.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingressroute.yaml
+  - middleware.yaml
+  - configmap.yaml
+  - secret.yaml

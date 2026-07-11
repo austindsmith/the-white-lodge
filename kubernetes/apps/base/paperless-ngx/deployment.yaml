@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: media
-  name: fileflows
+  name: paperless-ngx
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: fileflows
+      app: paperless-ngx
   template:
     metadata:
       labels:
-        app: fileflows
+        app: paperless-ngx
     spec:
       containers:
-        - name: fileflows
-          image: revenz/fileflows
+        - name: paperless-ngx
+          image: revenz/paperless-ngx
           env:
             - name: BROWSER_START_DIR
               value: /apps/media
@@ -29,7 +29,7 @@ spec:
               value: America/Denver
           #envFrom:
           #  - secretRef:
-          #      name: fileflows-oidc
+          #      name: paperless-ngx-oidc
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -54,29 +54,29 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - mountPath: /media
-              name: fileflows-media
+              name: paperless-ngx-media
             - mountPath: /temp
-              name: fileflows-temp
+              name: paperless-ngx-temp
             - mountPath: /app/Data
-              name: fileflows-data
+              name: paperless-ngx-data
             - mountPath: /app/Logs
-              name: fileflows-logs
+              name: paperless-ngx-logs
             - mountPath: /app/common
-              name: fileflows-common
+              name: paperless-ngx-common
       restartPolicy: Always
       volumes:
-        - name: fileflows-media
+        - name: paperless-ngx-media
           persistentVolumeClaim:
             claimName: media
-        - name: fileflows-common
+        - name: paperless-ngx-common
           persistentVolumeClaim:
-            claimName: fileflows-common
-        - name: fileflows-data
+            claimName: paperless-ngx-common
+        - name: paperless-ngx-data
           persistentVolumeClaim:
-            claimName: fileflows-data
-        - name: fileflows-logs
+            claimName: paperless-ngx-data
+        - name: paperless-ngx-logs
           persistentVolumeClaim:
-            claimName: fileflows-logs
-        - name: fileflows-temp
+            claimName: paperless-ngx-logs
+        - name: paperless-ngx-temp
           emptyDir:
             sizeLimit: 100Gi

@@ -23,3 +23,14 @@ parameters:
   dataLocality: "disabled"
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: longhorn-backup
+provisioner: driver.longhorn.io
+parameters:
+  numberOfReplicas: "3"
+  recurringJobSelector: '[{"name":"default-backup","isGroup":true}]'
+reclaimPolicy: Delete
+volumeBindingMode: Immediate

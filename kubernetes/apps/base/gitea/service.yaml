@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fileflows
+  name: gitea
   namespace: media
 spec:
   selector:
-    app: fileflows
+    app: gitea
   ports:
     - protocol: TCP
       port: 19200
