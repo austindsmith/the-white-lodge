@@ -277,6 +277,18 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
+  name: ntfy
+  namespace: cnpg-apps
+spec:
+  name: ntfy
+  owner: ntfy
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
   name: test
   namespace: cnpg-apps
 spec:

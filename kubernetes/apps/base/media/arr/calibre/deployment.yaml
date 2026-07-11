@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: calibre
+  name: calibre-web
   namespace: media
 spec:
   replicas: 1
@@ -9,44 +9,42 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: calibre
+      app: calibre-web
   template:
     metadata:
       labels:
-        app: calibre
+        app: calibre-web
     spec:
       containers:
-        - name: calibre
+        - name: calibre-web
           image: lscr.io/linuxserver/calibre-web:latest
           env:
             - name: PUID
               value: "1037"
             - name: PGID
               value: "100"
-            - name: UMASK
-              value: "002"
             - name: TZ
               value: America/Denver
+            - name: DOCKER_MODS
+              value: linuxserver/mods:universal-calibre
           ports:
             - name: http
-              containerPort: 8080
-            - name: webserver
-              containerPort: 8081
+              containerPort: 8083
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: media
-              mountPath: /media
+            - name: books
+              mountPath: /books
           resources:
             requests:
               cpu: 100m
-              memory: 512Mi
+              memory: 256Mi
             limits:
-              memory: 2Gi
+              memory: 1Gi
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: calibre-config
-        - name: media
+        - name: books
           persistentVolumeClaim:
             claimName: media

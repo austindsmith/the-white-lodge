@@ -8,3 +8,4 @@ resources:
   - homepage
   - semaphore
   - kasm-firefox
+  - ntfy

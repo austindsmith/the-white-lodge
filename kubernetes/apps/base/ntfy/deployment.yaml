@@ -17,66 +17,52 @@ spec:
     spec:
       containers:
         - name: ntfy
-          image: revenz/ntfy
+          image: binwiederhier/ntfy
           env:
-            - name: BROWSER_START_DIR
-              value: /apps/media
-            - name: PGID
-              value: "100"
-            - name: PUID
-              value: "1037"
-            - name: TZ
-              value: America/Denver
-          #envFrom:
-          #  - secretRef:
-          #      name: ntfy-oidc
+            NTFY_BASE_URL: http://ntfy.${cluster_domain}
+            NTFY_ATTACHMENT_CACHE_DIR: "/var/cache/ntfy/attachments"
+            NTFY_UPSTREAM_BASE_URL: "https://ntfy.sh"
+            NTFY_AUTH_ACCESS: "*:up*:write-only"
+            NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
+            NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
+            NTFY_AUTH_DEFAULT_ACCESS: deny-all
+            NTFY_BEHIND_PROXY: true
+            NTFY_ENABLE_LOGIN: true
+            NTFY_ENABLE_SIGNUP: true
+          envFrom:
+            - secretRef:
+                name: ntfy
           ports:
-            - containerPort: 5000
+            - name: http
+              containerPort: 80
               protocol: TCP
           resources:
             requests:
-              cpu: 4000m
-              memory: 2Gi
+              cpu: 10m
             limits:
-              cpu: "10"
-              memory: 8Gi
+              memory: 2Gi
           livenessProbe:
             httpGet:
-              path: /
-              port: 5000
+              path: /v1/health
+              port: http
             initialDelaySeconds: 60
             periodSeconds: 30
           readinessProbe:
             httpGet:
-              path: /
-              port: 5000
+              path: /v1/health
+              port: http
             initialDelaySeconds: 15
             periodSeconds: 10
           volumeMounts:
-            - mountPath: /media
-              name: ntfy-media
-            - mountPath: /temp
-              name: ntfy-temp
-            - mountPath: /app/Data
+            - mountPath: /var/lib/ntfy
               name: ntfy-data
-            - mountPath: /app/Logs
-              name: ntfy-logs
-            - mountPath: /app/common
-              name: ntfy-common
+            - mountPath: /var/cache/ntfy/attachments
+              name: ntfy-attachments
       restartPolicy: Always
       volumes:
-        - name: ntfy-media
-          persistentVolumeClaim:
-            claimName: media
-        - name: ntfy-common
-          persistentVolumeClaim:
-            claimName: ntfy-common
         - name: ntfy-data
           persistentVolumeClaim:
             claimName: ntfy-data
-        - name: ntfy-logs
+        - name: ntfy-attachments
           persistentVolumeClaim:
-            claimName: ntfy-logs
-        - name: ntfy-temp
-          emptyDir:
-            sizeLimit: 100Gi
+            claimName: ntfy-attachments

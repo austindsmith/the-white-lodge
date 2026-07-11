@@ -123,6 +123,10 @@ spec:
         login: true
         passwordSecret:
           name: wizarr-db-secret
+      - name: ntfy
+        login: true
+        passwordSecret:
+          name: ntfy-db-secret
       - name: test
         login: true
         passwordSecret:

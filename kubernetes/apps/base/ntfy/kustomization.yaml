@@ -4,7 +4,7 @@ namespace: media
 
 resources:
   - deployment.yaml
-  - pvc-config.yaml
-  #- secret.yaml
-  - service.yaml
+  - external-secret.yaml
   - ingress-route.yaml
+  - pvc-config.yaml
+  - service.yaml
