@@ -32,7 +32,7 @@ spec:
             - name: DB_ENGINE
               value: postgres
             - name: POSTGRES_SERVER
-              value: ${apps_pg_host}
+              value: "5432"
             - name: POSTGRES_PORT
               value: ${apps_pg_port}
             - name: OIDC_AUTH_ENABLED
