@@ -8,5 +8,5 @@ spec:
     app: ntfy
   ports:
     - protocol: TCP
-      port: 19200
-      targetPort: 5000
+      port: 80
+      targetPort: 80

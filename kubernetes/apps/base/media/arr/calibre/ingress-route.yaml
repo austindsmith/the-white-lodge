@@ -11,9 +11,4 @@ spec:
       kind: Rule
       services:
         - name: calibre
-          port: 8080
-    - match: Host(`calibre-server.${cluster_domain}`)
-      kind: Rule
-      services:
-        - name: calibre
-          port: 8081
+          port: 8083
