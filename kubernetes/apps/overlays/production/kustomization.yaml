@@ -9,5 +9,5 @@ resources:
   - semaphore
   - kasm-firefox
   - ntfy
-  #- mealie
+  - mealie
   #- zammad
