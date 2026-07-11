@@ -127,10 +127,6 @@ spec:
         login: true
         passwordSecret:
           name: ntfy-db-secret
-      - name: mealie
-        login: true
-        passwordSecret:
-          name: mealie-db-secret
       - name: test
         login: true
         passwordSecret:
