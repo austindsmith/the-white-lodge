@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      containers:
+        - name: calibre
+          image: lscr.io/linuxserver/calibre:latest
+          env:
+            - name: PUID
+              value: "1037"
+            - name: PGID
+              value: "100"
+            - name: UMASK
+              value: "002"
+            - name: TZ
+              value: America/Denver
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: webserver
+              containerPort: 8081
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /media
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 2Gi
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: calibre-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

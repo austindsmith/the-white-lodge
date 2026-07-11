@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  selector:
+    app: calibre
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+    - name: webserver
+      port: 8081
+      targetPort: webserver

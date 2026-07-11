@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`calibre.${cluster_domain}`)
+      kind: Rule
+      services:
+        - name: calibre
+          port: 8080
+    - match: Host(`calibre-server.${cluster_domain}`)
+      kind: Rule
+      services:
+        - name: calibre
+          port: 8081

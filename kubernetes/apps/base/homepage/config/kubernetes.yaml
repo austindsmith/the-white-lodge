@@ -1,2 +1,2 @@
----
-# sample kubernetes config
+ingress: true
+traefik: true
