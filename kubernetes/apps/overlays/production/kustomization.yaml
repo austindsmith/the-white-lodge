@@ -10,4 +10,4 @@ resources:
   - kasm-firefox
   - ntfy
   - mealie
-  - zammad
+  #- zammad
