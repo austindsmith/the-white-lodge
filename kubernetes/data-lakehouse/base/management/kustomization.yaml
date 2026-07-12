@@ -1,5 +1,0 @@
-resources:
-  - dbgate
-  - bytebase
-  - pgadmin4
-  - coder

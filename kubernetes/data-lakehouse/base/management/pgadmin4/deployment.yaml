@@ -24,7 +24,7 @@ spec:
           command:
             - sh
             - -c
-            - cp /in/tls.crt /in/tls.key /in/ca.crt /certs/ && chmod 0600 /certs/tls.key && chmod 0644 /certs/tls.crt /certs/ca.crt
+            - cp /in/tls.crt /certs/postgresql.crt && cp /in/tls.key /certs/postgresql.key && cp /in/ca.crt /certs/root.crt && chmod 0600 /certs/postgresql.key && chmod 0644 /certs/postgresql.crt /certs/root.crt
           volumeMounts:
             - name: client-tls
               mountPath: /in
@@ -45,7 +45,7 @@ spec:
               subPath: servers.json
               readOnly: true
             - name: certs
-              mountPath: /certs
+              mountPath: /home/pgadmin/.postgresql
               readOnly: true
             - name: data
               mountPath: /var/lib/pgadmin
