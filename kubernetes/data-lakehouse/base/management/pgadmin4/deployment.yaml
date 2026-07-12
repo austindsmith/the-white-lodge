@@ -69,11 +69,11 @@ spec:
           secret:
             secretName: pgadmin4-client-tls
 
-        - name: client-tls
+        - name: apps-certs
           secret:
             secretName: pgadmin4-apps-cluster-cert
 
-        - name: client-tls
+        - name: data-certs
           secret:
             secretName: pgadmin4-data-cluster-cert
 
