@@ -13,13 +13,18 @@ spec:
       labels:
         app: pgadmin4
     spec:
+      securityContext:
+        runAsUser: 5050
+        runAsGroup: 5050
+        fsGroup: 5050
+        fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: prepare-certs
           image: busybox:1.37
           command:
             - sh
             - -c
-            - cp /in/tls.crt /in/tls.key /in/ca.crt /certs/ && chmod 0600 /certs/tls.key && chmod 0644 /certs/tls.crt /certs/ca.crt && chown -R 5050:5050 /certs
+            - cp /in/tls.crt /in/tls.key /in/ca.crt /certs/ && chmod 0600 /certs/tls.key && chmod 0644 /certs/tls.crt /certs/ca.crt
           volumeMounts:
             - name: client-tls
               mountPath: /in
