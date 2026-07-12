@@ -3,20 +3,18 @@ kind: ConfigMap
 metadata:
   name: pgadmin4-servers
   namespace: data
-  data:
-    servers.json: |
-      {
-        "Servers": {
-          "1": {
-            "Name": "apps-cluster",
-            "Group": "CNPG",
-            "Host": "apps-cluster-rw.cnpg-apps.svc.cluster.local",
-            "Port": 5432,
-            "MaintenanceDB": "postgres",
-            "Username": "postgres",
-            "ConnectionParameters": {
-              "sslmode": "verify-full"
-            }
-          }
+data:
+  servers.json: |
+    {
+      "Servers": {
+        "1": {
+          "Name": "apps-cluster",
+          "Group": "CNPG",
+          "Host": "apps-cluster-rw.cnpg-apps.svc.cluster.local",
+          "Port": 5432,
+          "MaintenanceDB": "postgres",
+          "Username": "postgres",
+          "SSLMode": "verify-full",
         }
       }
+    }

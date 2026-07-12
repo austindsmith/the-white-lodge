@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - bytebase
   - dbgate
-  - pgadmin4
+  #- pgadmin4
