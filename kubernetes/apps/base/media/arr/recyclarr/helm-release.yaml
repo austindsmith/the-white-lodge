@@ -5,7 +5,8 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: recyclarr
+    name: bjw-s-labs
+    namespace: flux-system
   interval: 1h
   values:
     controllers:

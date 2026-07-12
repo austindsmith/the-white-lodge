@@ -4,6 +4,5 @@ namespace: media
 
 resources:
   - pvc-config.yaml
-  - oci-repository.yaml
   - helm-release.yaml
   - secret.yaml

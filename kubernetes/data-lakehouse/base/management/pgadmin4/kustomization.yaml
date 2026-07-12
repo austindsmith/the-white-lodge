@@ -7,3 +7,4 @@ resources:
   - service.yaml
   - pvc-config.yaml
   - external-secret.yaml
+  - ingress-route.yaml

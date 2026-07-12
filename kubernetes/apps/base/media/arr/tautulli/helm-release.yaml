@@ -5,7 +5,8 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: tautulli
+    name: bjw-s-labs
+    namespace: flux-system
   interval: 1h
   values:
     controllers:
@@ -60,7 +61,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
