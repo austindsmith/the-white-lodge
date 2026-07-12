@@ -31,17 +31,9 @@ spec:
           image: dpage/pgadmin4:9.8
           ports:
             - containerPort: 80
-          env:
-            - name: PGADMIN_DEFAULT_EMAIL
-              valueFrom:
-                secretKeyRef:
-                  name: pgadmin4-credentials
-                  key: email
-            - name: PGADMIN_DEFAULT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pgadmin4-credentials
-                  key: password
+          envFrom:
+            - secretRef:
+                name: pgadmin4
           volumeMounts:
             - name: servers
               mountPath: /pgadmin4/servers.json
