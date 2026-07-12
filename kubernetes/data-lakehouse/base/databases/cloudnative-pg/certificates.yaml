@@ -22,6 +22,8 @@ spec:
     - data-cluster-rw.data.svc.cluster.local
     - data-cluster-ro.data.svc.cluster.local
     - data-cluster-r.data.svc.cluster.local
+  ipAddresses:
+    - 192.168.100.210
   issuerRef:
     name: data-ca-issuer
     kind: ClusterIssuer
