@@ -1,24 +1,15 @@
 apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: selfsigned-issuer
-  namespace: data
-spec:
-  selfSigned: {}
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: data-cluster-server-cert
-  labels:
-    cnpg.io/reload: ""
----
-apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: data-cluster-server-cert
+  namespace: data
 spec:
   secretName: data-cluster-server-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: ""
+  duration: 2160h
+  renewBefore: 360h
   usages:
     - server auth
   dnsNames:
@@ -31,31 +22,27 @@ spec:
     - data-cluster-rw.data.svc.cluster.local
     - data-cluster-ro.data.svc.cluster.local
     - data-cluster-r.data.svc.cluster.local
-    - data-cluster-1.data-cluster.data.svc.cluster.local
-    - data-cluster-2.data-cluster.data.svc.cluster.local
-    - data-cluster-3.data-cluster.data.svc.cluster.local
   issuerRef:
-    name: selfsigned-issuer
-    kind: Issuer
+    name: data-ca-issuer
+    kind: ClusterIssuer
     group: cert-manager.io
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: data-cluster-client-cert
-  labels:
-    cnpg.io/reload: ""
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: data-cluster-client-cert
+  namespace: data
 spec:
   secretName: data-cluster-client-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: ""
+  duration: 2160h
+  renewBefore: 360h
   usages:
     - client auth
   commonName: streaming_replica
   issuerRef:
-    name: selfsigned-issuer
-    kind: Issuer
+    name: data-ca-issuer
+    kind: ClusterIssuer
     group: cert-manager.io

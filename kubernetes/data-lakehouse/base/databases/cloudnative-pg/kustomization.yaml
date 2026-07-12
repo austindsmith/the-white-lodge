@@ -6,3 +6,4 @@ resources:
   - cluster.yaml
   - databases.yaml
   - external-secret.yaml
+  - push-secret.yaml

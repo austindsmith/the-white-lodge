@@ -7,3 +7,4 @@ resources:
   - databases.yaml
   - namespace.yaml
   - secret.yaml
+  - push-secret.yaml

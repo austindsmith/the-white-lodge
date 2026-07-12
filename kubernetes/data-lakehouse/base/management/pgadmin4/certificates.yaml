@@ -1,19 +1,39 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: pgadmin4-client-cert
+  name: pgadmin4-apps-cluster-cert
   namespace: data
 spec:
-  secretName: pgadmin4-client-tls
+  secretName: pgadmin4-apps-cluster-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: ""
   duration: 2160h
   renewBefore: 360h
-  commonName: postgres
   usages:
     - client auth
-  privateKey:
-    algorithm: RSA
-    size: 4096
+  commonName: postgres
   issuerRef:
     name: cnpg-apps-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pgadmin4-data-cluster-cert
+  namespace: data
+spec:
+  secretName: pgadmin4-data-cluster-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: ""
+  duration: 2160h
+  renewBefore: 360h
+  usages:
+    - client auth
+  commonName: postgres
+  issuerRef:
+    name: data-ca-issuer
     kind: ClusterIssuer
     group: cert-manager.io

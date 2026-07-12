@@ -24,10 +24,21 @@ spec:
           command:
             - sh
             - -c
-            - cp /in/tls.crt /certs/postgresql.crt && cp /in/tls.key /certs/postgresql.key && cp /in/ca.crt /certs/root.crt && chmod 0600 /certs/postgresql.key && chmod 0644 /certs/postgresql.crt /certs/root.crt
+            - |
+              for cluster in apps-cluster data-cluster; do
+                mkdir -p /certs/$cluster
+                cp /in-$cluster/tls.crt /certs/$cluster/postgresql.crt
+                cp /in-$cluster/tls.key /certs/$cluster/postgresql.key
+                cp /in-$cluster/ca.crt /certs/$cluster/root.crt
+              done
+              chmod -R 0600 /certs/*/postgresql.key
+              chmod -R 0644 /certs/*/postgresql.crt /certs/*/root.crt
           volumeMounts:
-            - name: client-tls
-              mountPath: /in
+            - name: apps-cluster-tls
+              mountPath: /in-apps-cluster
+              readOnly: true
+            - name: data-cluster-tls
+              mountPath: /in-data-cluster
               readOnly: true
             - name: certs
               mountPath: /certs
@@ -45,7 +56,7 @@ spec:
               subPath: servers.json
               readOnly: true
             - name: certs
-              mountPath: /home/pgadmin/.postgresql
+              mountPath: /home/pgadmin/.postgresql-certs
               readOnly: true
             - name: data
               mountPath: /var/lib/pgadmin
@@ -53,9 +64,12 @@ spec:
         - name: servers
           configMap:
             name: pgadmin4-servers
-        - name: client-tls
+        - name: apps-cluster-tls
           secret:
-            secretName: pgadmin4-client-tls
+            secretName: pgadmin4-apps-cluster-cert
+        - name: data-cluster-tls
+          secret:
+            secretName: pgadmin4-data-cluster-cert
         - name: certs
           emptyDir: {}
         - name: data

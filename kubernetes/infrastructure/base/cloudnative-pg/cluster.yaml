@@ -37,6 +37,14 @@ spec:
                 metallb.io/loadBalancerIPs: 192.168.100.202
             spec:
               type: LoadBalancer
+        - selectorType: ro
+          serviceTemplate:
+            metadata:
+              name: "cnpg-apps-ro-lb"
+              annotations:
+                metallb.io/loadBalancerIPs: 192.168.100.203
+            spec:
+              type: LoadBalancer
     roles:
       - name: authentik
         login: true

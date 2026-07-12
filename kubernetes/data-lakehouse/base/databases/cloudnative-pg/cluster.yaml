@@ -17,9 +17,9 @@ spec:
         - selectorType: rw
           serviceTemplate:
             metadata:
-              name: "cnpg-data-lb"
+              name: "data-cluster-lb"
               annotations:
-                metallb.io/loadBalancerIPs: 192.168.100.203
+                metallb.io/loadBalancerIPs: 192.168.100.210
             spec:
               type: LoadBalancer
   bootstrap:
