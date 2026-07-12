@@ -13,6 +13,9 @@ spec:
     serverCASecret: apps-cluster-server-cert
     clientCASecret: apps-cluster-client-cert
     replicationTLSSecret: apps-cluster-client-cert
+  postgresql:
+    pg_hba:
+      - hostssl all postgres all cert
   bootstrap:
     initdb:
       database: app
