@@ -64,7 +64,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pgadmin4-client-cert
-  namespace: cnpg-apps
+  namespace: data
 spec:
   secretName: pgadmin4-client-tls
 
