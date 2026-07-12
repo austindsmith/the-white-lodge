@@ -10,7 +10,7 @@ data:
         "1": {
           "Name": "apps-cluster",
           "Group": "Servers",
-          "Host": "apps-cluster-rw.media.svc.cluster.local",
+          "Host": "apps-cluster-rw.cnpg-apps.svc.cluster.local",
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",
