@@ -25,43 +25,61 @@ spec:
             - sh
             - -c
             - |
+              cp /in/tls.crt /certs/postgresql.crt && cp /in/tls.key /certs/postgresql.key && cp /in/ca.crt /certs/root.crt && chmod 0600 /certs/postgresql.key && chmod 0644 /certs/postgresql.crt /certs/root.crt
               for cluster in apps-cluster data-cluster; do
                 mkdir -p /certs/$cluster
                 cp /in-$cluster/tls.crt /certs/$cluster/postgresql.crt
                 cp /in-$cluster/tls.key /certs/$cluster/postgresql.key
                 cp /in-$cluster/ca.crt /certs/$cluster/root.crt
               done
-              mkdir -p /home-postgresql
-              cp /in-apps-cluster/ca.crt /home-postgresql/root.crt
-              chmod -R 0600 /certs/*/postgresql.key
-              chmod -R 0644 /certs/*/postgresql.crt /certs/*/root.crt
-              chmod 0644 /home-postgresql/root.crt
           volumeMounts:
-            - name: apps-cluster-tls
+            - name: client-tls
+              mountPath: /in
+            - name: apps-certs
               mountPath: /in-apps-cluster
-              readOnly: true
-            - name: data-cluster-tls
+            - name: data-certs
               mountPath: /in-data-cluster
               readOnly: true
             - name: certs
               mountPath: /certs
-            - name: home-postgresql
-              mountPath: /home-postgresql
       containers:
         - name: pgadmin4
           image: dpage/pgadmin4:9.8
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: pgadmin4
           volumeMounts:
             - name: servers
               mountPath: /pgadmin4/servers.json
               subPath: servers.json
               readOnly: true
             - name: certs
-              mountPath: /home/pgadmin/.postgresql-certs
-              readOnly: true
-            - name: home-postgresql
               mountPath: /home/pgadmin/.postgresql
+              readOnly: true
             - name: data
               mountPath: /var/lib/pgadmin
       volumes:
-        - name: home-postgresql
+        - name: servers
+          configMap:
+            name: pgadmin4-servers
+
+        - name: client-tls
+          secret:
+            secretName: pgadmin4-client-tls
+
+        - name: client-tls
+          secret:
+            secretName: pgadmin4-apps-cluster-cert
+
+        - name: client-tls
+          secret:
+            secretName: pgadmin4-data-cluster-cert
+
+        - name: certs
           emptyDir: {}
+
+        - name: data
+          persistentVolumeClaim:
+            claimName: pgadmin4-data
