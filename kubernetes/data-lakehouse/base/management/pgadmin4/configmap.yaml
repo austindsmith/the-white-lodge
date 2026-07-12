@@ -14,7 +14,7 @@ data:
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",
-          "SSLMode": "verify-full",
+          "SSLMode": "require",
           "SSLCert": "/home/pgadmin/.postgresql-certs/apps-cluster/postgresql.crt",
           "SSLKey": "/home/pgadmin/.postgresql-certs/apps-cluster/postgresql.key",
           "SSLRootCert": "/home/pgadmin/.postgresql-certs/apps-cluster/root.crt"
@@ -26,7 +26,7 @@ data:
           "Port": 5432,
           "MaintenanceDB": "postgres",
           "Username": "postgres",
-          "SSLMode": "verify-full",
+          "SSLMode": "require",
           "SSLCert": "/home/pgadmin/.postgresql-certs/data-cluster/postgresql.crt",
           "SSLKey": "/home/pgadmin/.postgresql-certs/data-cluster/postgresql.key",
           "SSLRootCert": "/home/pgadmin/.postgresql-certs/data-cluster/root.crt"
