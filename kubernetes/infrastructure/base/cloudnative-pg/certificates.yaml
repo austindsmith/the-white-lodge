@@ -50,6 +50,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: apps-cluster-client-cert
+  labels:
+    cnpg.io/reload: ""
 spec:
   secretName: apps-cluster-client-cert
   usages:
@@ -65,18 +67,16 @@ kind: Certificate
 metadata:
   name: pgadmin4-client-cert
   namespace: data
+  labels:
+    cnpg.io/reload: ""
 spec:
   secretName: pgadmin4-client-tls
-
   issuerRef:
     name: cnpg-apps-ca-issuer
     kind: ClusterIssuer
-
   commonName: postgres
-
   usages:
     - client auth
-
   privateKey:
     algorithm: RSA
     size: 4096
