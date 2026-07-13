@@ -47,7 +47,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-offline_access]]
       redirect_uris:
         - matching_mode: regex
-          url: https://headlamp.${cluster_domain}/oidc-callback
+          url: https://headlamp.thewhitelodge.org/oidc-callback
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -78,7 +78,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-profile]]
       redirect_uris:
         - matching_mode: regex
-          url: https://pangolin.${cluster_domain}/auth/idp/1/oidc/callback
+          url: https://pangolin.thewhitelodge.org/auth/idp/1/oidc/callback
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -140,7 +140,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-profile]]
       redirect_uris:
         - matching_mode: strict
-          url: https://proxmox.${cluster_domain}
+          url: https://proxmox.thewhitelodge.org
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -171,7 +171,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-profile]]
       redirect_uris:
         - matching_mode: strict
-          url: https://pgadmin4.${cluster_domain}/oauth2/authorize
+          url: https://pgadmin4.thewhitelodge.org/oauth2/authorize
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -202,7 +202,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-profile]]
       redirect_uris:
         - matching_mode: strict
-          url: https://semaphore.${cluster_domain}/api/auth/oidc/authentik/redirect
+          url: https://semaphore.thewhitelodge.org/api/auth/oidc/authentik/redirect
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -233,7 +233,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-profile]]
       redirect_uris:
         - matching_mode: strict
-          url: https://teleport.${cluster_domain}/v1/webapi/oidc/callback
+          url: https://teleport.thewhitelodge.org/v1/webapi/oidc/callback
 
   - model: authentik_providers_oauth2.oauth2provider
     state: present
@@ -264,7 +264,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [name, "authentik default OAuth Mapping: OpenID 'profile'"]]
       redirect_uris:
         - matching_mode: regex
-          url: https://autobrr.${cluster_domain}/api/auth/oidc/callback
+          url: https://autobrr.thewhitelodge.org/api/auth/oidc/callback
 
 
   - model: authentik_providers_oauth2.oauth2provider
@@ -297,7 +297,7 @@ entries:
         - !Find [authentik_providers_oauth2.scopemapping, [managed, goauthentik.io/providers/oauth2/scope-offline_access]]
       redirect_uris:
         - matching_mode: regex
-          url: https://mealie.${cluster_domain}/oidc-callback
+          url: https://mealie.thewhitelodge.org/oidc-callback
 
 
   - model: authentik_core.application
