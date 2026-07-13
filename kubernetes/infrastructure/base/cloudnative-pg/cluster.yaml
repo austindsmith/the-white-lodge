@@ -37,6 +37,11 @@ spec:
                 metallb.io/loadBalancerIPs: 192.168.100.202
             spec:
               type: LoadBalancer
+              ports:
+                - name: cnpg-apps
+                  protocol: TCP
+                  port: 5432
+                  targetPort: 5432
         - selectorType: ro
           serviceTemplate:
             metadata:
