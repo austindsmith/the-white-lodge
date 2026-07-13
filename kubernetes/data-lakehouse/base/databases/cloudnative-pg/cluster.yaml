@@ -22,7 +22,7 @@ spec:
             metadata:
               name: "data-cluster-lb"
               annotations:
-                metallb.io/loadBalancerIPs: 192.168.100.210
+                metallb.io/loadBalancerIPs: 10.10.10.4
             spec:
               type: LoadBalancer
   bootstrap:

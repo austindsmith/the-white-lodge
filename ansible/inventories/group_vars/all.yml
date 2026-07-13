@@ -11,6 +11,7 @@ firewall_ports:
   - port: 10250/tcp
   - port: 8472/udp
   - port: 32400/tcp
+  - port: 5432/tcp
 
 firewall_trusted_sources:
   - 10.42.0.0/16
