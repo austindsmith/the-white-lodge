@@ -23,7 +23,7 @@ spec:
     - apps-cluster-ro.cnpg-apps.svc.cluster.local
     - apps-cluster-r.cnpg-apps.svc.cluster.local
   ipAddresses:
-    - 192.168.100.202
+    - 10.10.10.2
   issuerRef:
     name: cnpg-apps-ca-issuer
     kind: ClusterIssuer
