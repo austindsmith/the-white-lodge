@@ -11,6 +11,9 @@ spec:
     serverCASecret: data-cluster-server-cert
     clientCASecret: data-cluster-client-cert
     replicationTLSSecret: data-cluster-client-cert
+  postgresql:
+    pg_hba:
+      - hostssl all all all cert
   managed:
     services:
       additional:

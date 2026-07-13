@@ -2,6 +2,7 @@
 
 ## Notes
 
+Switch this up so that cloudnative-pg creates the secrets and then uses `Push Secrets` to sync to `1 Password`.
 Adding the below to metadata triggers to a reload on changes to the file. Useful for situations where otherwise a resource would need to be deleted and a deployment restarted with `kubectl rollout restart`
 
 ```yaml

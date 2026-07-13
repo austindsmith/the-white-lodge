@@ -15,7 +15,7 @@ spec:
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
     pg_hba:
-      - hostssl all postgres all cert
+      - hostssl all all all cert # modified from `hostssl all postgres all cert`
   bootstrap:
     initdb:
       database: app

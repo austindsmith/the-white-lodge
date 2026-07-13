@@ -1,5 +1,9 @@
 # Authentik
 
+## Notes
+
+Switch this up so that authentik creates the secrets and then uses `Push Secrets` to sync to `1 Password`.
+
 ## Commands
 
 ### Rerunning init when adding a new secret in blueprints
