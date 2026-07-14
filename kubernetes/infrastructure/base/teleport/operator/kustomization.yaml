@@ -10,4 +10,4 @@ resources:
   - secret.yaml
   - ingress-route.yaml
   - pvc-config.yaml
-  - certificate.yaml
+  - certificates.yaml
