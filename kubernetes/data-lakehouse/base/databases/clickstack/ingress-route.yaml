@@ -7,7 +7,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`clickstack.theblacklodge.dev`)
+      match: Host(`clickstack.${cluster_domain}`)
       services:
         - kind: Service
           name: clickstack-hyperdx
