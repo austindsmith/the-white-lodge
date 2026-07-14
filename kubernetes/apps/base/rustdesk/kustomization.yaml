@@ -3,9 +3,9 @@ kind: Kustomization
 namespace: rustdesk
 
 resources:
-  - ./namespace.yaml
-  - ./deployment.yaml
-  - ./service.yaml
-  - ./ingressroute.yaml
-  - ./pvc.yaml
-  - ./secret.yaml
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress0route.yaml
+  - pvc-config.yaml
+  - secret.yaml
