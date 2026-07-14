@@ -81,14 +81,28 @@ spec:
         uri: apps-cluster-rw.cnpg-apps.svc.cluster.local:5432
         tls:
           mode: verify-ca
-          ca_cert_file: "/etc/teleport-tls-db/db-ca/ca.crt"
+          ca_cert_file: "/etc/teleport-tls-db/apps-cluster/ca.crt"
+        static_labels:
+          env: homelab
+      - name: data-cluster-rw
+        protocol: postgres
+        uri: data-cluster-rw.data.svc.cluster.local:5432
+        tls:
+          mode: verify-ca
+          ca_cert_file: "/etc/teleport-tls-db/data-cluster/ca.crt"
         static_labels:
           env: homelab
     extraVolumes:
-      - name: db-ca
+      - name: app-db-ca
         secret:
-          secretName: apps-cluster-server-ca
+          secretName: apps-cluster-application-cert
+      - name: data-db-ca
+        secret:
+          secretName: data-cluster-application-cert
     extraVolumeMounts:
-      - name: db-ca
-        mountPath: /etc/teleport-tls-db/db-ca
+      - name: app-db-ca
+        mountPath: /etc/teleport-tls-db/apps-cluster
+        readOnly: true
+      - name: data-db-ca
+        mountPath: /etc/teleport-tls-db/data-cluster
         readOnly: true
