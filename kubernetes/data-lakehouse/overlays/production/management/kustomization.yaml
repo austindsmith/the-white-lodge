@@ -5,5 +5,5 @@ resources:
   - bytebase
   - dbgate
   - pgadmin4
-  - jupyterhub
+  #- jupyterhub
   - coder
