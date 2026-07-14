@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - cloudnative-pg
   - elasticsearch
-  #- clickstack
+  - clickstack
