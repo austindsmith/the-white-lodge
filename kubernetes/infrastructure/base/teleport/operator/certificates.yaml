@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apps-cluster-application-cert
+  namespace: teleport
+spec:
+  secretName: apps-cluster-application-cert
+  duration: 2160h
+  renewBefore: 360h
+  commonName: postgres
+  usages:
+    - client auth
+  issuerRef:
+    name: cnpg-apps-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: data-cluster-application-cert
+  namespace: teleport
+spec:
+  secretName: data-cluster-application-cert
+  duration: 2160h
+  renewBefore: 360h
+  commonName: postgres
+  usages:
+    - client auth
+  issuerRef:
+    name: data-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
