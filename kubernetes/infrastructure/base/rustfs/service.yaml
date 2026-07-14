@@ -12,4 +12,4 @@ spec:
     - name: s3
       port: 9000
       targetPort: 9000
-  loadBalancerIP: 10.10.10.6
+  loadBalancerIP: 10.10.10.5
