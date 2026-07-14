@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: clickstack
-  namespace: flux-system
-spec:
-  interval: 1h
-  url: https://clickhouse.github.io/ClickStack-helm-charts

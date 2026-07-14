@@ -6,6 +6,8 @@ metadata:
 spec:
   interval: 1h
   releaseName: clickstack
+  dependsOn:
+    - name: clickstack-operators
   chart:
     spec:
       chart: clickstack
@@ -28,6 +30,23 @@ spec:
         type: ClusterIP
     mongodb:
       spec:
+        members: 1
+        type: ReplicaSet
+        version: "5.0.32"
+        security:
+          authentication:
+            modes: ["SCRAM"]
+        users:
+          - name: hyperdx
+            db: hyperdx
+            passwordSecretRef:
+              name: '{{ include "clickstack.mongodb.fullname" . }}-password'
+            roles:
+              - name: dbOwner
+                db: hyperdx
+              - name: clusterMonitor
+                db: admin
+            scramCredentialsSecretName: '{{ include "clickstack.mongodb.fullname" . }}-scram'
         statefulSet:
           spec:
             template:

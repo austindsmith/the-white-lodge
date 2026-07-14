@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: data
 
 resources:
+  - clickstack-operators-helm-release.yaml
   - helm-release.yaml
   - secret.yaml
   - ingress-route.yaml
