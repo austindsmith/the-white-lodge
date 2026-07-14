@@ -23,7 +23,7 @@ spec:
     - data-cluster-ro.data.svc.cluster.local
     - data-cluster-r.data.svc.cluster.local
   ipAddresses:
-    - 192.168.100.210
+    - 10.10.10.4
   issuerRef:
     name: data-ca-issuer
     kind: ClusterIssuer
@@ -46,5 +46,23 @@ spec:
   commonName: streaming_replica
   issuerRef:
     name: data-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apps-cluster-user-cert
+  namespace: cnpg-apps
+spec:
+  secretName: apps-cluster-user-cert
+  duration: 2160h
+  renewBefore: 360h
+  commonName: postgres
+  usages:
+    - client auth
+  issuerRef:
+    name: cnpg-apps-ca-issuer
     kind: ClusterIssuer
     group: cert-manager.io
