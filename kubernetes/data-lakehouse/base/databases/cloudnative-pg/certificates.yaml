@@ -49,20 +49,19 @@ spec:
     kind: ClusterIssuer
     group: cert-manager.io
 ---
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: apps-cluster-user-cert
-  namespace: cnpg-apps
+  name: data-cluster-user-cert
+  namespace: data
 spec:
-  secretName: apps-cluster-user-cert
+  secretName: data-cluster-user-cert
   duration: 2160h
   renewBefore: 360h
   commonName: postgres
   usages:
     - client auth
   issuerRef:
-    name: cnpg-apps-ca-issuer
+    name: data-ca-issuer
     kind: ClusterIssuer
     group: cert-manager.io
