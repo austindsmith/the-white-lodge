@@ -14,7 +14,15 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: dagster
-  #values:
-  #  dagster-user-deployments:
-  #    enabled: false
-  #    deployments: []
+  values:
+    dagster-user-deployments:
+      deployments:
+        - name: "k8s-example-user-code-1"
+          image:
+            repository: "docker.io/dagster/user-code-example"
+            tag: "1.13.9"
+            pullPolicy: Always
+          dagsterApiGrpcArgs:
+            - "--python-file"
+            - "/deploy_k8s/definitions.py"
+          port: 3030
