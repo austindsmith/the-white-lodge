@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: clickstack
+  namespace: data
 spec:
   interval: 1h
   releaseName: clickstack
