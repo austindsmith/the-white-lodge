@@ -6,6 +6,6 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  - ingress0route.yaml
+  - ingress-route.yaml
   - pvc-config.yaml
   - secret.yaml
