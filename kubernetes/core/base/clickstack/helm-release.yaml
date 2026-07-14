@@ -7,7 +7,7 @@ spec:
   interval: 1h
   releaseName: clickstack-operators
   install:
-    crds: CreateReplace
+    crds: Create
   upgrade:
     crds: CreateReplace
   chart:
