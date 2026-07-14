@@ -10,5 +10,10 @@ spec:
     - match: Host(`airbyte.${cluster_domain}`)
       kind: Rule
       services:
-        - name: airbyte
-          port: 8001
+        - name: airbyte-airbyte-webapp-svc
+          port: 80
+    - match: Host(`airbyte.${cluster_domain}`) && PathPrefix(`/api/v1/connector_builder/`)
+      kind: Rule
+      services:
+        - name: airbyte-connector-builder-server-svc
+          port: 80

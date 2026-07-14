@@ -10,4 +10,5 @@ resources:
   - kasm-firefox
   - ntfy
   - mealie
-  #- zammad
+  - rustdesk
+  - zammad

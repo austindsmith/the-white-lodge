@@ -9,3 +9,5 @@ resources:
   - metallb
   - synology-csi
   - kube-prometheus-stack
+  - clickstack
+  - atlas

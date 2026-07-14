@@ -2,16 +2,16 @@ apiVersion: db.atlasgo.io/v1alpha1
 kind: AtlasSchema
 metadata:
   name: atlas-schema
-  namespace: atlas
+  namespace: atlas-system
 spec:
   credentials:
     scheme: postgres
-    host: app-cluster-rw.cloudnative-pg.svc.cluster.local
-    user: test
+    host: data-cluster-rw.cloudnative-pg.svc.cluster.local
+    user: test # or use usernameFrom if supported
     passwordFrom:
       secretKeyRef:
+        name: data-db-secret
         key: password
-        name: test-credentials
     database: test
     port: 5432
     parameters:

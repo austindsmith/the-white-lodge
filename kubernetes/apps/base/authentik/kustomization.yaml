@@ -3,12 +3,12 @@ kind: Kustomization
 namespace: authentik
 
 resources:
-  - ./namespace.yaml
-  - ./helmrelease.yaml
-  - ./helmrepository.yaml
-  - ./ingressroute.yaml
-  - ./secret.yaml
-  - ./blueprints/secret.yaml
+  - namespace.yaml
+  - helm-release.yaml
+  - helm-repository.yaml
+  - ingress-route.yaml
+  - secret.yaml
+  - blueprints/secret.yaml
 
 configMapGenerator:
   - name: authentik-custom-blueprints

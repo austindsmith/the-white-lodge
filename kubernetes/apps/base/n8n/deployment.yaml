@@ -27,9 +27,6 @@ spec:
               value: "1037"
             - name: TZ
               value: America/Denver
-          #envFrom:
-          #  - secretRef:
-          #      name: n8n-oidc
           ports:
             - containerPort: 5000
               protocol: TCP

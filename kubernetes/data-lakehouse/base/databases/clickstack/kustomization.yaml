@@ -3,9 +3,6 @@ kind: Kustomization
 namespace: clickstack
 
 resources:
-  - namespace.yaml
-  - helmrepository.yaml
-  - helmrelease-operators.yaml
-  - helmrelease.yaml
+  - helm-release.yaml
   - secret.yaml
-  - ingressroute.yaml
+  - ingress-route.yaml

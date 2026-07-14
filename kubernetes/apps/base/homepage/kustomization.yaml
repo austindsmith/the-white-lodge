@@ -4,9 +4,9 @@ namespace: homepage
 
 resources:
   - namespace.yaml
-  - ocirepository.yaml
-  - helmrelease.yaml
-  - ingressroute.yaml
+  - oci-repository.yaml
+  - helm-release.yaml
+  - ingress-route.yaml
   - secret.yaml
 
 configMapGenerator:
