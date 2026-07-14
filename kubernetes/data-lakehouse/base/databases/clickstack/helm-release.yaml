@@ -6,8 +6,6 @@ metadata:
 spec:
   interval: 1h
   releaseName: clickstack
-  dependsOn:
-    - name: clickstack-operators
   chart:
     spec:
       chart: clickstack
