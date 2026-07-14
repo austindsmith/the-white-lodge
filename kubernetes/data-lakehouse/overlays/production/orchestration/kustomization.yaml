@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - airbyte
-  - dagster
+  #- dagster
