@@ -12,6 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ariga
-        namespace: flux-system
+        namespace: atlas-system
   values:
     prewarmDevDB: false
