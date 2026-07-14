@@ -11,4 +11,4 @@ resources:
   - ntfy
   - mealie
   - rustdesk
-  - zammad
+  #- zammad
