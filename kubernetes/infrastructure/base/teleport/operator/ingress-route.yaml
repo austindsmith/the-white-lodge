@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: teleport.${cluster_domain}
+    - match: teleport.thewhitelodge.org
       kind: Rule
       services:
         - name: teleport
