@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - cloudflare-ddns
+  - test-endpoint
   - cloudflare-tunnel
   - traefik
   - longhorn

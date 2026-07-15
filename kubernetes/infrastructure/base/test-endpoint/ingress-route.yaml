@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: test-ingress-route
+  namespace: test-endpoint
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`test.${cluster_domain}`)
+      kind: Rule
+      services:
+        - name: nginx-service
+          port: 30081

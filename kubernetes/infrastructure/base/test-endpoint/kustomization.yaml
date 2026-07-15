@@ -4,6 +4,7 @@ namespace: traefik
 
 resources:
   - namespace.yaml
-  - helm-repository.yaml
-  - helm-release.yaml
-  - ingress.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress-route.yaml
