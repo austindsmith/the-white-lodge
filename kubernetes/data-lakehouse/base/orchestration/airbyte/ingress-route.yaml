@@ -11,4 +11,4 @@ spec:
       kind: Rule
       services:
         - name: airbyte-airbyte-server-svc
-          port: 80
+          port: 8001
