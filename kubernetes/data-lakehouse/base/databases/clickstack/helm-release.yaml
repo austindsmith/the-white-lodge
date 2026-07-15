@@ -29,6 +29,7 @@ spec:
       service:
         type: ClusterIP
     mongodb:
+      enabled: true
       spec:
         members: 1
         type: ReplicaSet
