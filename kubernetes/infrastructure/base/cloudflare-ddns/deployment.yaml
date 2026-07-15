@@ -19,9 +19,11 @@ spec:
         - name: cloudflare-ddns
           image: favonia/cloudflare-ddns:edge-alpine
           envFrom:
-            - secretRef: cloudflare-ddns
+            - secretRef:
+                name: cloudflare-ddns
           env:
-            PROXIED: "true"
+            - name: PROXIED
+              value: "true"
           resources:
             requests:
               memory: 64Mi
