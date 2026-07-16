@@ -9,5 +9,4 @@ resources:
   - ingress.yaml
   - certificates.yaml
   - tls-store.yaml
-  - external-secret.yaml
   - cluster-issuer.yaml
