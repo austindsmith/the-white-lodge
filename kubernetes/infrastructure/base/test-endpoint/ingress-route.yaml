@@ -11,5 +11,5 @@ spec:
       kind: Rule
       services:
         - name: nginx-service
-          port: 30081
+          port: 80
   tls: {}
