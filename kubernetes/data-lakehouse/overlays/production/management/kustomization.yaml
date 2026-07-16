@@ -6,4 +6,4 @@ resources:
   - dbgate
   - pgadmin4
   #- jupyterhub
-  - coder
+  #- coder

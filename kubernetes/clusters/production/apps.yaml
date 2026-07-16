@@ -19,5 +19,7 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-vars
+      - kind: Secret
+        name: cluster-vars-secret
   prune: true
   wait: true

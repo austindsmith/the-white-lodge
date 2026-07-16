@@ -7,84 +7,99 @@
         app: traefik
 
 - Media:
-    - Plex: &media_defaults
+    - Plex:
         target: _blank
         namespace: media
         icon: plex
         href: https://plex.thewhitelodge.org
         app: plex
     - Sonarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: sonarr
         href: https://sonarr.thewhitelodge.org
         app: sonarr
     - Radarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: radarr
         href: https://radarr.thewhitelodge.org
         app: radarr
     - Overseerr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: overseerr
         href: https://overseerr.thewhitelodge.org
         app: overseerr
     - Bazarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: bazarr
         href: https://bazarr.thewhitelodge.org
         app: bazarr
     - Cleanuparr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: cleanuperr
         href: https://cleanuparr.thewhitelodge.org
         app: cleanuparr
     - Huntarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: huntarr
         href: https://huntarr.thewhitelodge.org
         app: huntarr
     - Lidarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: lidarr
         href: https://lidarr.thewhitelodge.org
         app: lidarr
     - Maintainerr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: maintainerr
         href: https://maintainerr.thewhitelodge.org
         app: maintainerr
     - Prowlarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: prowlarr
         href: https://prowlarr.thewhitelodge.org
         app: prowlarr
     - qBittorrent:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: qbittorrent
         href: https://torrent.thewhitelodge.org
         app: qbittorrent
     - Tdarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: tdarr
         href: https://tdarr.thewhitelodge.org
         app: tdarr
     - Wizarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: wizarr
         href: https://wizarr.thewhitelodge.org
         app: wizarr
     - Audiobookshelf:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: audiobookshelf
         href: https://audiobookshelf.thewhitelodge.org
         app: audiobookshelf
     - Autobrr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: autobrr
         href: https://autobrr.thewhitelodge.org
         app: autobrr
     - Readarr:
-        !!merge <<: *media_defaults
+        target: _blank
+        namespace: media
         icon: readarr
         href: https://readarr.thewhitelodge.org
         app: readarr
@@ -125,26 +140,29 @@
         app: zammad-railserver
 
 - Data Lakehouse:
-    - Airbyte: &lakehouse_defaults
+    - Airbyte:
         target: _blank
         namespace: data
         icon: airbyte
         href: https://airbyte.thewhitelodge.org
         app: airbyte
     - Jupyterlab:
-        !!merge <<: *lakehouse_defaults
+        target: _blank
+        namespace: data
         icon: jupyter
-        href: https://jupyter.thewhitelodge.org
+        href: https://jupyter.data.thewhitelodge.org
         app: jupyterlab
     - pgAdmin4:
-        !!merge <<: *lakehouse_defaults
+        target: _blank
+        namespace: data
         icon: pgadmin
-        href: https://pgadmin4.thewhitelodge.org
+        href: https://pgadmin.data.thewhitelodge.org
         app: pgadmin4
     - RustFS:
-        !!merge <<: *lakehouse_defaults
+        target: _blank
+        namespace: data
         icon: rustfs
-        href: https://rustfs.thewhitelodge.org
+        href: https://rustfs.data.thewhitelodge.org
         app: rustfs-server
 
 - My Calendar Group:
@@ -168,22 +186,22 @@
                 showName: true
 
 - Services:
-    - Mealie: &services_defaults
+    - Mealie:
         target: _blank
         namespace: mealie
         icon: mealie
         href: https://mealie.thewhitelodge.org
         app: mealie
     - Immich:
-        !!merge <<: *services_defaults
-        icon: immich
+        target: _blank
         namespace: immich
+        icon: immich
         href: https://immich.thewhitelodge.org
         app: immich_server
     - Nextcloud:
-        !!merge <<: *services_defaults
-        icon: nextcloud
+        target: _blank
         namespace: nextcloud
+        icon: nextcloud
         href: https://nextcloud.thewhitelodge.org
         app: nextcloud
     - HomeAssistant:
@@ -197,6 +215,12 @@
         href: https://pihole.thewhitelodge.org/admin
         proxmoxNode: proxmox
         proxmoxVMID: 103
+        proxmoxType: lxc
+    - Infisical:
+        icon: infisical.png
+        href: https://infisical.thewhitelodge.org/
+        proxmoxNode: proxmox
+        proxmoxVMID: 104
         proxmoxType: lxc
     - Semaphore:
         icon: semaphore.png
@@ -226,15 +250,20 @@
         href: https://ipa.thewhitelodge.org/
         proxmoxNode: proxmox
         proxmoxVMID: 109
+    - OPNsense:
+        icon: opnsense.png
+        href: https://opnsense.thewhitelodge.org/
+        proxmoxNode: proxmox
+        proxmoxVMID: 112
     - Jupyterlab:
-        !!merge <<: *services_defaults
-        icon: jupyter
+        target: _blank
         namespace: default
+        icon: jupyter
         href: https://jupyterlab.thewhitelodge.org
         app: jupyterlab
     - pgAdmin4:
-        !!merge <<: *services_defaults
-        icon: pgadmin
+        target: _blank
         namespace: default
-        href: https://pgadmin4.thewhitelodge.org
+        icon: pgadmin
+        href: https://pgadmin.thewhitelodge.org
         app: pgadmin4

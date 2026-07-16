@@ -1,5 +1,6 @@
 resources:
   - cluster-vars.yaml
+  - cluster-vars-external-secrets.yaml
   - external-secrets.yaml
   - core.yaml
   - monitoring.yaml

@@ -5,10 +5,11 @@ metadata:
   namespace: test-endpoint
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`test.cloud.${cluster_domain}`)
       kind: Rule
       services:
         - name: nginx-service
           port: 30081
+  tls: {}
