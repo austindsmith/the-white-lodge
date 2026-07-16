@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: media
+  namespace: freshrss
   name: freshrss-common
 spec:
   accessModes:
@@ -14,7 +14,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: media
+  namespace: freshrss
   name: freshrss-data
 spec:
   accessModes:
@@ -27,7 +27,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: media
+  namespace: freshrss
   name: freshrss-logs
 spec:
   accessModes:

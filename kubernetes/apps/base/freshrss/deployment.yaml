@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: media
+  namespace: freshrss
   name: freshrss
 spec:
   replicas: 1
@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
         - name: freshrss
-          image: revenz/freshrss
+          image: freshrss/freshrss
           env:
             - name: BROWSER_START_DIR
-              value: /apps/media
+              value: /apps/freshrss
             - name: PGID
               value: "100"
             - name: PUID
@@ -53,8 +53,8 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 10
           volumeMounts:
-            - mountPath: /media
-              name: freshrss-media
+            - mountPath: /freshrss
+              name: freshrss-freshrss
             - mountPath: /temp
               name: freshrss-temp
             - mountPath: /app/Data
@@ -65,9 +65,9 @@ spec:
               name: freshrss-common
       restartPolicy: Always
       volumes:
-        - name: freshrss-media
+        - name: freshrss-freshrss
           persistentVolumeClaim:
-            claimName: media
+            claimName: freshrss
         - name: freshrss-common
           persistentVolumeClaim:
             claimName: freshrss-common

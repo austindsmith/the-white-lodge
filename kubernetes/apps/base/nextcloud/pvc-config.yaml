@@ -1,38 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: media
-  name: nextcloud-common
+  namespace: romm
+  name: nextcloud-config
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn # longhorn-backup
+  storageClassName: longhorn-backup
   resources:
     requests:
       storage: 2Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: media
-  name: nextcloud-data
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  namespace: media
-  name: nextcloud-logs
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
