@@ -2,3 +2,7 @@ title: The White Lodge
 background: https://raw.githubusercontent.com/austindsmith/the-white-lodge/refs/heads/main/kubernetes/apps/base/homepage/wallpaper.jpg
 cardBlur: md
 theme: dark
+layout:
+  Media:
+    style: row
+    columns: 3
