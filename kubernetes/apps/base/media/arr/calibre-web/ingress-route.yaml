@@ -4,15 +4,13 @@ metadata:
   name: calibre-web
   namespace: media
   annotations:
-    gethomepage.dev/href: "https://emby.example.com"
+    gethomepage.dev/href: "https://calibre-web.${cluster_domain}"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Media Server
+    gethomepage.dev/description: Ebook library and reader
     gethomepage.dev/group: Media
-    gethomepage.dev/icon: emby.png
-    gethomepage.dev/name: Emby
-    gethomepage.dev/widget.type: "emby"
-    gethomepage.dev/widget.url: "https://emby.example.com"
-    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/icon: calibre-web.png
+    gethomepage.dev/name: Calibre-Web
+    gethomepage.dev/app: calibre-web
 spec:
   entryPoints:
     - web
