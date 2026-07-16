@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt-cloudflare
 spec:
   acme:
-    email: austindsmith_accounts@proton.me
+    email: austin@yourdomain.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-cloudflare-account
@@ -12,5 +12,5 @@ spec:
       - dns01:
           cloudflare:
             apiTokenSecretRef:
-              name: cloudflare-tunnel
-              key: cloudflare-api-token
+              name: cloudflare-dns-token
+              key: api-token
