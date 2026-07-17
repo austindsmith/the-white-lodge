@@ -26,8 +26,6 @@ spec:
           - web
         matchRule: Host(`traefik.${cluster_domain}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
     service:
-      annotations:
-        metallb.io/loadBalancerIPs: 10.10.10.1
       ports:
         web:
           forwardedHeaders:
