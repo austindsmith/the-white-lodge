@@ -3,7 +3,7 @@ resources:
   - cluster-vars-external-secrets.yaml
   - external-secrets.yaml
   - core.yaml
-  - monitoring.yaml
+  #- monitoring.yaml
   - infrastructure.yaml
   - apps.yaml
   - data-lakehouse.yaml
