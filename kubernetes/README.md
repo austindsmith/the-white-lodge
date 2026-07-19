@@ -28,6 +28,12 @@ Checking possible chart metadata
 helm show all metallb/metallb --version 0.15.2
 ```
 
+See spec options for a chart
+
+```bash
+kubectl explain externalsecret.spec
+```
+
 Template out a chart
 
 ```bash

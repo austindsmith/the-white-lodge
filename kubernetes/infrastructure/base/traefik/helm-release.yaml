@@ -31,6 +31,9 @@ spec:
         matchRule: Host(`traefik.${cluster_domain}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
     service:
       type: ClusterIP
+      metrics:
+        prometheus:
+          enabled: false
       ports:
         web:
           forwardedHeaders:
