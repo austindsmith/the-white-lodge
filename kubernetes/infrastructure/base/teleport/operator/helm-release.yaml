@@ -17,7 +17,7 @@ spec:
     operator:
       enabled: true
     chartMode: standalone
-    clusterName: teleport.thewhitelodge.org
+    clusterName: teleport.${personal_domain}
     proxyListenerMode: "multiplex"
     authentication:
       type: 'github'
@@ -32,24 +32,21 @@ spec:
         auth_service:
           enabled: true
           listen_addr: 0.0.0.0:3025
-          public_addr: teleport.thewhitelodge.org:3025
+          public_addr: teleport.${personal_domain}:3025
           web_idle_timeout: 1h
           authentication:
             locking_mode: best_effort
-
     proxy:
       teleportConfig:
         teleport:
           log:
             output: stderr
             severity: DEBUG
-
         proxy_service:
           enabled: true
           web_listen_addr: 0.0.0.0:3080
-          public_addr: teleport.thewhitelodge.org:443
+          public_addr: teleport.${personal_domain}:443
           https_keypairs_reload_interval: 12h
-
     podSecurityPolicy:
       enabled: false
 ---
@@ -70,7 +67,7 @@ spec:
     persistence:
       enabled: true
       existingClaim: teleport-auth-data
-    proxyAddr: teleport.thewhitelodge.org:443
+    proxyAddr: teleport.${personal_domain}:443
     joinParams:
       method: kubernetes
       tokenName: db-agent-token
