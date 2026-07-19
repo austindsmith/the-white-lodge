@@ -16,3 +16,23 @@ spec:
                 name: traefik
                 port:
                   number: 80
+    - host: "*.${hidden_domain}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik
+                port:
+                  number: 80
+    - host: "*.${personal_domain}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik
+                port:
+                  number: 80

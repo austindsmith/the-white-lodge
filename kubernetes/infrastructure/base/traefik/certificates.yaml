@@ -13,3 +13,5 @@ spec:
     - "*.${cluster_domain}"
     - "${hidden_domain}"
     - "*.${hidden_domain}"
+    - "${personal_domain}"
+    - "*.${personal_domain}"
