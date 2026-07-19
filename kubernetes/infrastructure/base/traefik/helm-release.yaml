@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: traefik
+  namespace: traefik
 spec:
   interval: 1h
   install:
@@ -35,6 +36,8 @@ spec:
         prometheus:
           enabled: false
       ports:
+        metrics:
+          port: 9101
         web:
           forwardedHeaders:
             trustedIPs:
