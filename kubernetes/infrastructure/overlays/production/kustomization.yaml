@@ -10,4 +10,4 @@ resources:
   - longhorn
   - cloudnative-pg
   - rustfs
-  - teleport
+  #- teleport
