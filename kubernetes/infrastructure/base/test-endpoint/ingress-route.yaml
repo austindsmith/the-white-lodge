@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`test.cloud.${cluster_domain}`)
+    - match: Host(`test.${cluster_domain}`)
       kind: Rule
       services:
         - name: nginx-service

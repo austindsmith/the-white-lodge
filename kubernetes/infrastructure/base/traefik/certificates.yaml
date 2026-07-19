@@ -9,7 +9,7 @@ spec:
     name: letsencrypt-cloudflare
     kind: ClusterIssuer
   dnsNames:
-    - "cloud.${cluster_domain}"
-    - "*.cloud.${cluster_domain}"
-    - "cloud.${hidden_domain}"
-    - "*.cloud.${hidden_domain}"
+    - "${cluster_domain}"
+    - "*.${cluster_domain}"
+    - "${hidden_domain}"
+    - "*.${hidden_domain}"
