@@ -30,6 +30,8 @@ spec:
       metrics:
         port: 9101
     securityContext:
+      runAsNonRoot: false
+      runAsUser: 0
       capabilities:
         drop: ["ALL"]
         add: ["NET_BIND_SERVICE"]
