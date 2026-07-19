@@ -8,6 +8,5 @@ resources:
   - traefik
   - longhorn
   - cloudnative-pg
-  - metallb
   - rustfs
   #- teleport
