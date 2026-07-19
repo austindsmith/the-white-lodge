@@ -17,6 +17,7 @@ spec:
         kind: HelmRepository
         name: traefik
   values:
+    hostNetwork: true
     api:
       dashboard: true
     ingressRoute:
