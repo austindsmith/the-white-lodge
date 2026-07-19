@@ -7,6 +7,12 @@ spec:
   interval: 1m
   path: ./kubernetes/infrastructure/base/teleport/operator
   prune: true
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+      - kind: Secret
+        name: cluster-vars-secret
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -27,6 +33,12 @@ spec:
     - name: teleport-operator
   path: ./kubernetes/infrastructure/base/teleport/config
   prune: true
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+      - kind: Secret
+        name: cluster-vars-secret
   sourceRef:
     kind: GitRepository
     name: flux-system
