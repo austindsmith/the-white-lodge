@@ -18,6 +18,9 @@ spec:
         name: traefik
   values:
     hostNetwork: true
+    deployment:
+      strategy:
+        type: Recreate
     api:
       dashboard: true
     ingressRoute:
