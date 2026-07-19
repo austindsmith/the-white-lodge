@@ -19,5 +19,5 @@ all:
         oidc_client_id: "{{ lookup('community.general.onepassword', 'headlamp', field='client_id', vault='the-white-lodge') }}"
         domain: "{{ lookup('community.general.onepassword', 'netcup', field='domain', vault='the-white-lodge') }}"
         extra_server_args: >-
-          --node-ip="{{ node_ip }}" --node-external-ip="{{ ansible_host }}" --flannel-iface=wg0 --disable=traefik --kube-apiserver-arg=oidc-issuer-url="https://authentik.{{ domain }}/application/o/headlamp/" --kube-apiserver-arg=oidc-client-id="{{ oidc_client_id }}" --kube-apiserver-arg=oidc-username-claim="email" --kube-apiserver-arg=oidc-groups-claim="groups" --kube-apiserver-arg=oidc-username-prefix="oidc:" --kube-apiserver-arg=oidc-groups-prefix="oidc:"
+          --node-ip="{{ node_ip }}" --flannel-iface=wg0 --disable=servicelb --disable=traefik --kube-apiserver-arg=oidc-issuer-url="https://authentik.{{ domain }}/application/o/headlamp/" --kube-apiserver-arg=oidc-client-id="{{ oidc_client_id }}" --kube-apiserver-arg=oidc-username-claim="email" --kube-apiserver-arg=oidc-groups-claim="groups" --kube-apiserver-arg=oidc-username-prefix="oidc:" --kube-apiserver-arg=oidc-groups-prefix="oidc:"
         cluster_context: the-white-lodge

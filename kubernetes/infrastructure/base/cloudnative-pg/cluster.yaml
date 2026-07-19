@@ -15,7 +15,7 @@ spec:
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
     pg_hba:
-      - hostssl all all all cert
+      - hostssl all all all cert # modified from `hostssl all postgres all cert`
   bootstrap:
     initdb:
       database: app
@@ -33,8 +33,10 @@ spec:
           serviceTemplate:
             metadata:
               name: "cnpg-apps-lb"
+              annotations:
+                metallb.io/loadBalancerIPs: 10.10.10.2
             spec:
-              type: ClusterIP
+              type: LoadBalancer
               ports:
                 - name: cnpg-apps
                   protocol: TCP
@@ -44,8 +46,10 @@ spec:
           serviceTemplate:
             metadata:
               name: "cnpg-apps-ro-lb"
+              annotations:
+                metallb.io/loadBalancerIPs: 10.10.10.3
             spec:
-              type: ClusterIP
+              type: LoadBalancer
     roles:
       - name: authentik
         login: true
