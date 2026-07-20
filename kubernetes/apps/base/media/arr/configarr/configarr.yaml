@@ -1,4 +1,3 @@
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -63,8 +62,29 @@ data:
           # WEB-2160p
           - template: sonarr-v4-quality-profile-web-2160p
           - template: sonarr-v4-custom-formats-web-2160p
+          # Anime
 
-        custom_formats: []
+          - template: sonarr-quality-definition-anime
+          - template: sonarr-v4-quality-profile-anime
+          - template: sonarr-v4-custom-formats-anime
+        custom_formats:
+          - trash_ids:
+               - 026d5aadd1a6b4e550b134cb6c72b3ca # Uncensored
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired
+
+          - trash_ids:
+              - b2550eb333d27b75833e25b8c2557b38 # 10bit
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired
+
+          - trash_ids:
+              - 418f50b10f1907201b6cfdf881f467b7 # Anime Dual Audio
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired
     radarr:
       movies:
         base_url: !env RADARR_HOST
@@ -77,4 +97,26 @@ data:
           - template: radarr-custom-formats-hd-bluray-web
           - template: radarr-quality-profile-uhd-bluray-web
           - template: radarr-custom-formats-uhd-bluray-web
-        custom_formats: []
+
+        # Anime
+          - template: radarr-quality-definition-anime
+          - template: radarr-quality-profile-anime
+          - template: radarr-custom-formats-anime
+        custom_formats:
+          - trash_ids:
+              - 064af5f084a0a24458cc8ecd3220f93f # Uncensored
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired
+
+          - trash_ids:
+              - a5d148168c4506b55cf53984107c396e # 10bit
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired
+
+          - trash_ids:
+              - 4a3b087eea2ce012fcc1ce319259a3be # Anime Dual Audio
+            assign_scores_to:
+              - name: Remux-1080p - Anime
+                score: 0 # Adjust scoring as desired

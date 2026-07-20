@@ -19,7 +19,7 @@ spec:
             command:
               - sh
               - -c
-              - '[ -f /config/config.yaml ] || cp /seed/config.yaml /config/config.yaml'
+              - '[ -f /config/config/config.yaml ] || cp /seed/config.yaml /config/config/config.yaml'
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
