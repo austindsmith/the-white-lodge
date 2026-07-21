@@ -55,28 +55,8 @@ spec:
           volumeMounts:
             - mountPath: /freshrss
               name: freshrss-freshrss
-            - mountPath: /temp
-              name: freshrss-temp
-            - mountPath: /app/Data
-              name: freshrss-data
-            - mountPath: /app/Logs
-              name: freshrss-logs
-            - mountPath: /app/common
-              name: freshrss-common
       restartPolicy: Always
       volumes:
         - name: freshrss-freshrss
           persistentVolumeClaim:
             claimName: freshrss
-        - name: freshrss-common
-          persistentVolumeClaim:
-            claimName: freshrss-common
-        - name: freshrss-data
-          persistentVolumeClaim:
-            claimName: freshrss-data
-        - name: freshrss-logs
-          persistentVolumeClaim:
-            claimName: freshrss-logs
-        - name: freshrss-temp
-          emptyDir:
-            sizeLimit: 100Gi
