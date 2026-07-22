@@ -7,22 +7,9 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`teleport.${personal_domain}`)
-      kind: Rule
+    - match: HostSNI(`teleport.austinsmith.org`)
       services:
         - name: teleport
           port: 443
-  tls: {}
----
-apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: teleport-insecure
-  namespace: teleport
-spec:
-  insecureSkipVerify: true
-  disableHTTP2: true
-  forwardingTimeouts:
-    dialTimeout: 30s
-    responseHeaderTimeout: 0s
-    readIdleTimeout: 0s
+  tls:
+    passthrough: true
