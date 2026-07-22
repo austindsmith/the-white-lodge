@@ -1,5 +1,5 @@
 apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
+kind: IngressRouteTCP
 metadata:
   name: teleport
   namespace: teleport
@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostSNI(`teleport.austinsmith.org`)
+    - match: HostSNI(`teleport.${personal_domain}`)
       services:
         - name: teleport
           port: 443
