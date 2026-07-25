@@ -23,13 +23,13 @@ spec:
     global:
       edition: community
       airbyteUrl: "https://airbyte.${cluster_domain}"
-      secretName: "airbyte-secret"
-      auth:
-        enabled: true
-        instanceAdmin:
-          emailSecretKey: "email"
-          passwordSecretKey: "password"
-          clientIdSecretKey: "client-id"
-          clientSecretSecretKey: "client-secret"
-        security:
-          jwtSignatureSecretKey: "jwt-signature-secret"
+#      secretName: "airbyte-secret"
+#      auth:
+#        enabled: true
+#        instanceAdmin:
+#          emailSecretKey: "email"
+#          passwordSecretKey: "password"
+#          clientIdSecretKey: "client-id"
+#          clientSecretSecretKey: "client-secret"
+#        security:
+#          jwtSignatureSecretKey: "jwt-signature-secret"
