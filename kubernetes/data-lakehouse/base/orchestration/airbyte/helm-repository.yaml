@@ -5,4 +5,4 @@ metadata:
   namespace: data
 spec:
   interval: 24h
-  url: https://airbytehq.github.io/helm-charts
+  url: https://airbytehq.github.io/charts
