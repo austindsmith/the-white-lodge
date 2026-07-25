@@ -31,3 +31,5 @@ spec:
           passwordSecretKey: "password"
           clientIdSecretKey: "client-id"
           clientSecretSecretKey: "client-secret"
+        security:
+          jwtSignatureSecretKey: "jwt-signature-secret"
