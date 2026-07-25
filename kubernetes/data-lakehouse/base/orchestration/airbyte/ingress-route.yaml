@@ -12,8 +12,8 @@ spec:
       services:
         - name: airbyte-airbyte-server-svc
           port: 8001
-#    - match: Host(`airbyte.${cluster_domain}`) && PathPrefix(`/api/v1/connector_builder/`)
-#      kind: Rule
-#      services:
-#        - name: airbyte-connector-builder-server-svc
-#          port: 80
+    - match: Host(`airbyte.${cluster_domain}`) && PathPrefix(`/api/v1/connector_builder/`)
+      kind: Rule
+      services:
+        - name: airbyte-airbyte-connector-builder-server-svc
+          port: 80
