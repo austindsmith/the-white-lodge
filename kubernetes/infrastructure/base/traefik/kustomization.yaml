@@ -10,4 +10,4 @@ resources:
   - certificates.yaml
   - tls-store.yaml
   - cluster-issuer.yaml
-  - external-apps
+  #- external-apps
