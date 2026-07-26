@@ -10,8 +10,8 @@ spec:
   enableSuperuserAccess: true
   certificates:
     serverTLSSecret: apps-cluster-server-cert
-    serverCASecret: apps-cluster-server-cert
-    clientCASecret: apps-cluster-client-cert
+    serverCASecret: cnpg-apps-ca
+    clientCASecret: cnpg-apps-ca
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
     pg_hba:
