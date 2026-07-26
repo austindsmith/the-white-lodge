@@ -20,6 +20,16 @@ spec:
         kind: HelmRepository
         name: airbyte
   values:
+    postgresql:
+      enabled: false
     global:
       edition: community
       airbyteUrl: "https://airbyte.${cluster_domain}"
+      database:
+        type: external
+        secretName: airbyte-db
+        host: apps-cluster-rw.cnpg-apps.svc.cluster.local
+        port: 5432
+        name: airbyte
+        userSecretKey: username
+        passwordSecretKey: password

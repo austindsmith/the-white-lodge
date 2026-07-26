@@ -297,3 +297,39 @@ spec:
   cluster:
     name: apps-cluster
   databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: airbyte
+  namespace: cnpg-apps
+spec:
+  name: airbyte
+  owner: airbyte
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: temporal
+  namespace: cnpg-apps
+spec:
+  name: temporal
+  owner: airbyte
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: temporal-visibility
+  namespace: cnpg-apps
+spec:
+  name: temporal_visibility
+  owner: airbyte
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain

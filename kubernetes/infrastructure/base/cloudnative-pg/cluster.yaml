@@ -15,7 +15,10 @@ spec:
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
     pg_hba:
-      - hostssl all all all cert # modified from `hostssl all postgres all cert`
+      - hostssl airbyte airbyte all scram-sha-256
+      - hostssl temporal airbyte all scram-sha-256
+      - hostssl temporal_visibility airbyte all scram-sha-256
+      - hostssl all all all cert
   bootstrap:
     initdb:
       database: app
@@ -147,3 +150,7 @@ spec:
         login: true
         passwordSecret:
           name: test-db-secret
+      - name: airbyte
+        login: true
+        passwordSecret:
+          name: airbyte-db-secret
