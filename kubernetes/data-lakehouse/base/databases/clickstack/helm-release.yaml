@@ -22,9 +22,9 @@ spec:
       valuesKey: values.yaml
   values:
     hyperdx:
+      frontendUrl: https://clickstack.${cluster_domain}
       config:
         USAGE_STATS_ENABLED: "false"
-        FRONTEND_URL: clickstack.${cluster_domain}
       ingress:
         enabled: false
       service:
