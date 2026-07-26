@@ -6,6 +6,6 @@ resources:
   - cluster.yaml
   - databases.yaml
   - namespace.yaml
-  - pooler.yaml
+  #- pooler.yaml
   - secret.yaml
   - push-secret.yaml
