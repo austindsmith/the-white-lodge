@@ -33,3 +33,4 @@ spec:
         name: airbyte
         userSecretKey: username
         passwordSecretKey: password
+        replica: {}
