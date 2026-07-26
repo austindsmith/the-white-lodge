@@ -16,7 +16,7 @@ metadata:
   namespace: cockpit
 subsets:
   - addresses:
-      - ip: 192.168.2.5
+      - ip: 152.53.52.163
     ports:
       - port: 9090
 ---
