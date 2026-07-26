@@ -11,5 +11,5 @@ spec:
       match: Host(`clickstack.${cluster_domain}`)
       services:
         - kind: Service
-          name: clickstack-hyperdx
+          name: clickstack-app
           port: 3000
