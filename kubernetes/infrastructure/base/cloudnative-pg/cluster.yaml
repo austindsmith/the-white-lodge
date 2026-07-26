@@ -150,5 +150,6 @@ spec:
           name: test-db-secret
       - name: airbyte
         login: true
+        createdb: true
         passwordSecret:
           name: airbyte-db-secret
