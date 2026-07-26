@@ -15,9 +15,7 @@ spec:
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
     pg_hba:
-      - hostssl airbyte airbyte all scram-sha-256
-      - hostssl temporal airbyte all scram-sha-256
-      - hostssl temporal_visibility airbyte all scram-sha-256
+      - hostssl all airbyte all scram-sha-256
       - hostssl all all all cert
   bootstrap:
     initdb:
