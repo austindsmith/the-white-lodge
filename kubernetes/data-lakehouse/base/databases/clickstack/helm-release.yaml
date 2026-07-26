@@ -24,6 +24,7 @@ spec:
     hyperdx:
       config:
         USAGE_STATS_ENABLED: "false"
+        FRONTEND_URL: clickstack.${cluster_domain}
       ingress:
         enabled: false
       service:
