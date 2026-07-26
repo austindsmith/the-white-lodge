@@ -8,4 +8,5 @@ resources:
   - namespace.yaml
   - pooler.yaml
   - secret.yaml
+  - external-secret.yaml
   - push-secret.yaml
