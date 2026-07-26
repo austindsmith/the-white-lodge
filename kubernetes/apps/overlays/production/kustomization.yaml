@@ -11,4 +11,5 @@ resources:
   - ntfy
   - mealie
   - rustdesk
+  - home-assistant
   #- zammad
