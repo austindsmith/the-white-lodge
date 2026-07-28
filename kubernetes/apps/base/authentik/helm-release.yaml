@@ -44,6 +44,9 @@ spec:
       targetPath: authentik.postgresql.password
   values:
     authentik:
+      env:
+        - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
+          value: "10.42.0.0/16,10.43.0.0/16"
       postgresql:
         host: apps-cluster-rw.cnpg-apps.svc.cluster.local
         name: "authentik"

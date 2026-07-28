@@ -1,0 +1,22 @@
+# helm-release.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-k8s-stack
+  namespace: monitoring
+spec:
+  interval: 1h
+  install:
+    createNamespace: true
+  chart:
+    spec:
+      chart: victoria-metrics-k8s-stack
+      sourceRef:
+        kind: HelmRepository
+        name: victoria-metrics
+  values:
+    vmsingle:
+      spec:
+        retentionPeriod: "14d"
+    grafana:
+      enabled: false

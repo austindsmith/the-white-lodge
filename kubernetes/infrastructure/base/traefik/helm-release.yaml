@@ -49,7 +49,7 @@ spec:
       type: ClusterIP
       metrics:
         prometheus:
-          enabled: false
+          enabled: true
       ports:
         web:
           forwardedHeaders:
