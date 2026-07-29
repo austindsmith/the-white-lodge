@@ -8,6 +8,8 @@ spec:
   routes:
     - match: Host(`authentik.${cluster_domain}`)
       kind: Rule
+      middlewares:
+        - name: force-https-proto
       services:
         - name: authentik-server
           port: 80

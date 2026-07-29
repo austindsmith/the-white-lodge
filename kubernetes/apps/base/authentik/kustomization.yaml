@@ -6,6 +6,7 @@ resources:
   - namespace.yaml
   - helm-release.yaml
   - helm-repository.yaml
+  - middleware.yaml
   - ingress-route.yaml
   - secret.yaml
   - blueprints/secret.yaml
