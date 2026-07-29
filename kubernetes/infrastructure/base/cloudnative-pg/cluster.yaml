@@ -14,6 +14,10 @@ spec:
     clientCASecret: cnpg-apps-ca
     replicationTLSSecret: apps-cluster-client-cert
   postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: "512MB"
+      work_mem: "8MB"
     pg_hba:
       - hostssl all airbyte all scram-sha-256
       - hostssl all all all cert
