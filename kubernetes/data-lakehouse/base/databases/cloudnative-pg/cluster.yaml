@@ -13,7 +13,10 @@ spec:
     replicationTLSSecret: data-cluster-client-cert
   postgresql:
     pg_hba:
-      - hostssl all all all cert
+      - hostssl all all 192.168.1.0/24 trust
+      - hostssl all all 192.168.2.5/32 trust
+      - hostssl all all 10.42.0.0/16 trust
+      - hostssl all all all scram-sha-256
   managed:
     services:
       additional:
