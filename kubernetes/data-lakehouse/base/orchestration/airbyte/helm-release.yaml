@@ -5,9 +5,6 @@ metadata:
   namespace: data
 spec:
   interval: 1h
-  dependsOn:
-    - name: cloudnative-pg
-      namespace: cnpg-apps
   install:
     remediation:
       retries: 3
