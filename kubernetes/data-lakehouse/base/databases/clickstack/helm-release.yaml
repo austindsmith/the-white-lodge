@@ -86,6 +86,15 @@ spec:
                 memory: 256Mi
           dataVolumeClaimSpec:
             storageClassName: longhorn-single-replica
+          settings:
+            extraUsersConfig:
+              users:
+                austin:
+                  password_sha256_hex: 455274b2314cbcd0706ae5bb6013264ef1e9308746b02ee1fc6ac9483a467a42
+                  profile: default
+                  grants:
+                    - query: GRANT SELECT ON *.*
+                    - query: GRANT ALL ON sandbox.*
       cluster:
         spec:
           containerTemplate:
