@@ -4,6 +4,7 @@ namespace: data
 
 resources:
   - clickstack-operators-helm-release.yaml
+  - middleware.yaml
   - helm-repository.yaml
   - helm-release.yaml
   - secret.yaml

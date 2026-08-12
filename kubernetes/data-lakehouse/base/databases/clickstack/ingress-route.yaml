@@ -5,11 +5,15 @@ metadata:
   namespace: data
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`clickstack.${cluster_domain}`)
+      middlewares:
+        - name: clickstack-https-proto
       services:
         - kind: Service
           name: clickstack-app
           port: 3000
+  tls:
+    secretName: clickstack-tls
