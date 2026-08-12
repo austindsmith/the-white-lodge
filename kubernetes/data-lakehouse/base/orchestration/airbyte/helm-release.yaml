@@ -65,13 +65,3 @@ spec:
           value: temporal
         - name: VISIBILITY_DBNAME
           value: temporal_visibility
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: airbyte-db
-              key: username
-        - name: POSTGRES_PWD
-          valueFrom:
-            secretKeyRef:
-              name: airbyte-db
-              key: password
