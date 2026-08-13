@@ -8,8 +8,8 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app.kubernetes.io/instance: clickstack
-    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/instance: clickstack-clickhouse-clickhouse
+    app.kubernetes.io/name: clickhouse-server
   ports:
     - name: http
       port: 8123
