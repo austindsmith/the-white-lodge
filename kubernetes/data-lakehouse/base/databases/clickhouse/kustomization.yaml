@@ -5,6 +5,6 @@ namespace: data
 resources:
   - helm-repository.yaml
   - clickstack-operators-helm-release.yaml
-  - keeper.yaml
-  - clickhouse.yaml
+  - keeper-cluster.yaml
+  - clickhouse-cluster.yaml
   - service.yaml
