@@ -1,0 +1,33 @@
+apiVersion: clickhouse.com/v1alpha1
+kind: ClickHouseCluster
+metadata:
+  name: warehouse
+  namespace: data
+spec:
+  replicas: 1
+  shards: 1
+  keeperClusterRef:
+    name: warehouse-keeper
+  containerTemplate:
+    image:
+      repository: clickhouse/clickhouse-server
+      tag: 25.7-alpine
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+  dataVolumeClaimSpec:
+    accessModes: ["ReadWriteOnce"]
+    storageClassName: longhorn-single-replica
+    resources:
+      requests:
+        storage: 10Gi
+  settings:
+    extraUsersConfig:
+      users:
+        austin:
+          password_sha256_hex: 455274b2314cbcd0706ae5bb6013264ef1e9308746b02ee1fc6ac9483a467a42
+          profile: default
+          access_management: 1
+          grants:
+            - query: GRANT ALL ON *.* WITH GRANT OPTION
