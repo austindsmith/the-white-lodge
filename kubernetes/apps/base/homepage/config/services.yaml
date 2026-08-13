@@ -146,23 +146,35 @@
         icon: airbyte
         href: https://airbyte.thewhitelodge.org
         app: airbyte
-    - Jupyterlab:
+    - Clickhouse:
+        target: _blank
+        namespace: data
+        icon: clickhouse
+        href: http://10.10.10.10:8123/play
+        app: warehouse-clickhouse-0-0-0
+    - Dagster:
+        target: _blank
+        namespace: data
+        icon: dagster
+        href: https://dagster.thewhitelodge.org
+        app: dagster
+    - JupyterLab:
         target: _blank
         namespace: data
         icon: jupyter
-        href: https://jupyter.data.thewhitelodge.org
+        href: https://jupyter.thewhitelodge.org
         app: jupyterlab
     - pgAdmin4:
         target: _blank
         namespace: data
         icon: pgadmin
-        href: https://pgadmin.data.thewhitelodge.org
+        href: https://pgadmin4.thewhitelodge.org
         app: pgadmin4
     - RustFS:
         target: _blank
         namespace: data
         icon: rustfs
-        href: https://rustfs.data.thewhitelodge.org
+        href: https://rustfs.thewhitelodge.org
         app: rustfs-server
 
 - My Calendar Group:
@@ -255,7 +267,7 @@
         href: https://opnsense.thewhitelodge.org/
         proxmoxNode: proxmox
         proxmoxVMID: 112
-    - Jupyterlab:
+    - JupyterLab:
         target: _blank
         namespace: default
         icon: jupyter

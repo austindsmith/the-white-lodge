@@ -14,6 +14,12 @@ spec:
         kind: HelmRepository
         name: teleport
   values:
+    persistence:
+      existingClaimName: teleport-auth-data
+    tls:
+      existingSecretName: teleport-tls
+    service:
+      type: ClusterIP
     operator:
       enabled: true
     chartMode: standalone
@@ -65,8 +71,7 @@ spec:
         name: teleport
   values:
     persistence:
-      enabled: true
-      existingClaim: teleport-auth-data
+      enabled: false
     proxyAddr: teleport.${personal_domain}:443
     joinParams:
       method: kubernetes

@@ -6,7 +6,6 @@ resources:
   - namespace.yaml
   - helm-release.yaml
   - helm-repository.yaml
-  - service.yaml
   - secret.yaml
   - ingress-route.yaml
   - pvc-config.yaml
