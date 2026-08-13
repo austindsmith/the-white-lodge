@@ -43,5 +43,5 @@ spec:
     - teleport.${personal_domain}
     - "*.teleport.${personal_domain}"
   issuerRef:
-    name: letsencrypt
+    name: letsencrypt-cloudflare
     kind: ClusterIssuer
