@@ -15,5 +15,5 @@ spec:
       port: 8123
       targetPort: 8123
     - name: native
-      port: 9000
-      targetPort: 9000
+      port: 9001
+      targetPort: 9001
