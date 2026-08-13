@@ -28,6 +28,5 @@ spec:
         austin:
           password_sha256_hex: 455274b2314cbcd0706ae5bb6013264ef1e9308746b02ee1fc6ac9483a467a42
           profile: default
-          access_management: 1
           grants:
-            - query: GRANT ALL ON *.*
+            - query: GRANT ALL ON *.* WITH GRANT OPTION
