@@ -23,7 +23,7 @@ spec:
                   name: metabase-secret
             env:
               MB_DB_TYPE: postgres
-              MB_DB_HOST: ${apps_db_host}
+              MB_DB_HOST: apps-cluster-rw.cnpg-apps.svc.cluster.local
               MB_DB_PORT: "5432"
               MB_DB_DBNAME: metabase
               MB_JETTY_PORT: &port 3000
