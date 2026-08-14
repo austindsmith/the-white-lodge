@@ -164,6 +164,12 @@
         icon: jupyter
         href: https://jupyter.thewhitelodge.org
         app: jupyterlab
+    - Metabase:
+        target: _blank
+        namespace: data
+        icon: metabase
+        href: https://metabase.thewhitelodge.org
+        app: metabase
     - pgAdmin4:
         target: _blank
         namespace: data
