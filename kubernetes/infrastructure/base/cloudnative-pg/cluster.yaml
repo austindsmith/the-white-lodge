@@ -159,3 +159,8 @@ spec:
         createdb: true
         passwordSecret:
           name: airbyte-db-secret
+      - name: metabase
+        login: true
+        createdb: true
+        passwordSecret:
+          name: metabase-db-secret

@@ -333,3 +333,16 @@ spec:
   cluster:
     name: apps-cluster
   databaseReclaimPolicy: retain
+---
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: metabase
+  namespace: cnpg-apps
+spec:
+  name: metabase
+  owner: metabase
+  cluster:
+    name: apps-cluster
+  databaseReclaimPolicy: retain

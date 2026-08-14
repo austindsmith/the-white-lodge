@@ -17,12 +17,10 @@ spec:
   values:
     dagster-user-deployments:
       deployments:
-        - name: "k8s-example-user-code-1"
+        - name: dagster-project
           image:
-            repository: "docker.io/dagster/user-code-example"
-            tag: "1.13.9"
+            repository: ghcr.io/austindsmith/dagster
+            tag: latest
             pullPolicy: Always
-          dagsterApiGrpcArgs:
-            - "--python-file"
-            - "/deploy_k8s/definitions.py"
-          port: 3030
+          imagePullSecrets:
+            - name: ghcr-pull-secret
