@@ -13,3 +13,69 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: home-assistant
+  values:
+    env:
+      - name: TZ
+        value: America/Denver
+    controller:
+      type: Deployment
+      deploymentStrategy: Recreate
+      deploymentAnnotations:
+        reloader.stakater.com/auto: "true"
+    persistence:
+      enabled: true
+      existingClaim: home-assistant-config
+    additionalVolumes:
+      - name: themes
+        configMap:
+          name: home-assistant-themes
+      - name: dashboards
+        configMap:
+          name: home-assistant-dashboards
+    additionalMounts:
+      - name: themes
+        mountPath: /config/themes
+      - name: dashboards
+        mountPath: /config/dashboards
+      - name: dashboards
+        mountPath: /config/ui-lovelace.yaml
+        subPath: ui-lovelace.yaml
+    ingress:
+      external: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+    configuration:
+      enabled: true
+      forceInit: true
+      trusted_proxies:
+        - 10.42.0.0/16
+      templateConfig: |-
+        default_config:
+
+        http:
+          use_x_forwarded_for: true
+          trusted_proxies:
+          {{- range .Values.configuration.trusted_proxies }}
+            - {{ . }}
+          {{- end }}
+
+        frontend:
+          themes: !include_dir_merge_named themes
+
+        lovelace:
+          mode: yaml
+          dashboards:
+            dash-media:
+              mode: yaml
+              title: Media
+              icon: mdi:play-box-multiple
+              show_in_sidebar: true
+              filename: dashboards/media.yaml
+
+        automation: !include automations.yaml
+        script: !include scripts.yaml
+        scene: !include scenes.yaml

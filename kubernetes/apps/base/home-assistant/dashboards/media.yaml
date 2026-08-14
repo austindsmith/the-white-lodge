@@ -1,0 +1,14 @@
+title: Media
+views:
+  - title: Now Playing
+    path: now-playing
+    icon: mdi:play
+    cards:
+      - type: media-control
+        entity: media_player.plex
+      - type: entities
+        title: Downloads
+        entities:
+          - sensor.sonarr_queue
+          - sensor.radarr_queue
+          - sensor.sabnzbd_queue

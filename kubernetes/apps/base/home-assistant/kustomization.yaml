@@ -7,5 +7,16 @@ resources:
   - helm-repository.yaml
   - namespace.yaml
   - pvc-config.yaml
-  - service.yaml
   - ingress-route.yaml
+
+configMapGenerator:
+  - name: home-assistant-themes
+    files:
+      - themes/black-lodge.yaml
+  - name: home-assistant-dashboards
+    files:
+      - dashboards/ui-lovelace.yaml
+      - dashboards/media.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

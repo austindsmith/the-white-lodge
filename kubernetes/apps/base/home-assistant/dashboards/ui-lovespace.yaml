@@ -1,0 +1,49 @@
+title: The Black Lodge
+views:
+  - title: Home
+    path: home
+    icon: mdi:home
+    cards:
+      - type: weather-forecast
+        entity: weather.home
+        show_current: true
+        show_forecast: true
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.living_room
+          - light.bedroom
+          - light.office
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: button
+            entity: light.living_room
+            name: Living Room
+            tap_action:
+              action: toggle
+          - type: button
+            entity: light.office
+            name: Office
+            tap_action:
+              action: toggle
+      - type: history-graph
+        title: Temperature
+        hours_to_show: 24
+        entities:
+          - sensor.living_room_temperature
+  - title: System
+    path: system
+    icon: mdi:server
+    cards:
+      - type: entities
+        title: Host
+        entities:
+          - sensor.processor_use
+          - sensor.memory_use_percent
+          - sensor.disk_use_percent
+      - type: markdown
+        content: >-
+          Managed by Flux. Edit dashboards in git, refresh the browser to see changes.
