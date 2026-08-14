@@ -12,7 +12,7 @@ resources:
 configMapGenerator:
   - name: home-assistant-themes
     files:
-      - themes/black-lodge.yaml
+      - themes/the-black-lodge.yaml
   - name: home-assistant-dashboards
     files:
       - dashboards/ui-lovelace.yaml
