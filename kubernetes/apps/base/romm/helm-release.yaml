@@ -2,15 +2,77 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: romm
+  namespace: romm
 spec:
-  install:
-    createNamespace: true
   interval: 1h
   chart:
     spec:
-      chart: romm
-      version: 0.2.20
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: romm
-  #values:
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      romm:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/rommapp/romm
+              tag: latest
+            env:
+              DB_HOST: apps-cluster-rw.cnpg-apps.svc.cluster.local
+              DB_PORT: "5432"
+              DB_NAME: romm
+              DB_USER: romm
+            envFrom:
+              - secretRef:
+                  name: romm-secret
+    service:
+      app:
+        controller: romm
+        ports:
+          http:
+            port: 8080
+    ingress:
+      app:
+        className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: web
+        hosts:
+          - host: "romm.${cluster_domain}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        existingClaim: romm-config
+        globalMounts:
+          - path: /romm/config
+      resources:
+        type: persistentVolumeClaim
+        storageClass: longhorn-backup
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        globalMounts:
+          - path: /romm/resources
+      redis-data:
+        type: emptyDir
+        globalMounts:
+          - path: /redis-data
+      library:
+        type: nfs
+        server: 192.168.1.131
+        path: /volume1/media/roms
+        globalMounts:
+          - path: /romm/library
+      assets:
+        type: nfs
+        server: 192.168.1.131
+        path: /volume1/media/roms/assets
+        globalMounts:
+          - path: /romm/assets

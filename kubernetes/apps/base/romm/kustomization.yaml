@@ -3,8 +3,7 @@ kind: Kustomization
 namespace: romm
 
 resources:
-  - helm-release.yaml
-  - helm-repository.yaml
+  - namespace.yaml
+  - external-secret.yaml
   - pvc-config.yaml
-  - service.yaml
-  - ingress-route.yaml
+  - helm-release.yaml

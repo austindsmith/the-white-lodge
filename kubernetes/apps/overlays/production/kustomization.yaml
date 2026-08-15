@@ -12,4 +12,5 @@ resources:
   - mealie
   - rustdesk
   - home-assistant
+  - romm
   #- zammad
