@@ -6,3 +6,4 @@ metadata:
 spec:
   basicAuth:
     secret: gh-proxy-auth
+    removeHeader: true
