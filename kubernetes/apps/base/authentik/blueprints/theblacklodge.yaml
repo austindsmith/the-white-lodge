@@ -508,3 +508,56 @@ entries:
     attrs:
       enabled: true
       name: akadmin
+
+  - model: authentik_providers_proxy.proxyprovider
+    state: present
+    identifiers:
+      name: Provider for Firefox
+    attrs:
+      name: Provider for Firefox
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://docs.${hidden_domain}
+      mode: forward_single
+      access_token_validity: hours=24
+
+  - model: authentik_providers_proxy.proxyprovider
+    state: present
+    identifiers:
+      name: Provider for Firefox Files
+    attrs:
+      name: Provider for Firefox Files
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      external_host: https://catalog.${hidden_domain}
+      mode: forward_single
+      access_token_validity: hours=24
+
+  - model: authentik_core.application
+    state: present
+    identifiers:
+      slug: firefox
+    attrs:
+      name: Firefox
+      slug: firefox
+      provider: !Find [authentik_providers_proxy.proxyprovider, [name, Provider for Firefox]]
+      policy_engine_mode: any
+
+  - model: authentik_core.application
+    state: present
+    identifiers:
+      slug: firefox-files
+    attrs:
+      name: Firefox Files
+      slug: firefox-files
+      provider: !Find [authentik_providers_proxy.proxyprovider, [name, Provider for Firefox Files]]
+      policy_engine_mode: any
+
+  - model: authentik_outposts.outpost
+    state: present
+    identifiers:
+      managed: goauthentik.io/outposts/embedded
+    attrs:
+      providers:
+        - !Find [authentik_providers_proxy.proxyprovider, [name, Provider for Firefox]]
+        - !Find [authentik_providers_proxy.proxyprovider, [name, Provider for Firefox Files]]

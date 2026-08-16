@@ -1,0 +1,31 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+    name: gh-proxy
+    namespace: gh-proxy
+spec:
+    entryPoints:
+        - ENC[AES256_GCM,data:+q6j,iv:R8cPBixaXYDZem3uZpEN6zrtS4JjwUkm2bca95EQrTc=,tag:9ZEn6K+gqIeR55AYPWdrtQ==,type:str]
+    routes:
+        - match: ENC[AES256_GCM,data:Xp/c0jQvfUyCESj6HKDdIObiQMpSu1+WJ2AFDm4/8LuMVpM7vbrnCFwEk+Y=,iv:GfXrK/bVUo2MQx+IPUeePn2KmaHKuf2fQLKDJgl+0QY=,tag:s5GOgox8yEKwhLkToDgF9g==,type:str]
+          kind: ENC[AES256_GCM,data:AIX/dg==,iv:uEuGhw00cAozVwKIToUGjSFfJUrxu5Fpf9V/klxIQe4=,tag:Ph3stEB5bGl1gOWGZYJB3Q==,type:str]
+          middlewares:
+            - name: ENC[AES256_GCM,data:43o9IHdu+jCZLWgWwg==,iv:I1W7fmn5GRZ5EZs3ncnLpuBTGnx751SxEK/ol5kI6p8=,tag:ioe+HPG7LIsMhiosJWNUcg==,type:str]
+          services:
+            - name: ENC[AES256_GCM,data:5VzdI0pDNpT8+EOu,iv:diSGn0gNVYhEuKqGD5/JK8ENyvxsCQBLzcW/WAMoV0g=,tag:8QPE51y7NTaYOKNXCyT2Mw==,type:str]
+              port: ENC[AES256_GCM,data:JsQ=,iv:UXh7RFwBN/uHZZv7qHDBY2TsrjgKTIHRleLlpdKxVAA=,tag:aIghVPGNLivZEUMqE3N8Ug==,type:int]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZR3dzS080MzVVV1RKSEhH
+            UFhTQ1dNV0c1WGNVY0pCdlZRTzBpK3Ywb0ZJCjVjQWN2STFGZk5XMnEzaWluSDhD
+            dWJTa0tlL2F2c3AxeHpoa3NWeldZM0EKLS0tIHQvRStXYTlvNXpnZWVNdWF4by8w
+            SUVaeUdmeWhHdDBaSlliTEthVU1YcjAKnp06A/qu85pPE4ReRae07uXMDBtdvSjO
+            Ztd16F4Dq5R0+dKVoVBqu0VVY0ijONwzgE11Pb2J1NmiPGS0jZbf+g==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n
+    encrypted_regex: ^(data|stringData|spec)$
+    lastmodified: "2026-08-15T23:40:15Z"
+    mac: ENC[AES256_GCM,data:McDzyHOhJGkRmAr4bzf8KZ+Q+5QG74/w0slNhMidl+ssx6uXOj5BDJrG6QaqU5S2Ms5napGJ6cTsfvBxRPtDsHfeziwR5MK3wHHA5LmGWDqQP8IcfEVxFGLY+altTCV6M3dkD6wBk4lQ5b4p42Qmj1HV1KfS3XTzesmskY3TO5o=,iv:pFRHhXJezbGfIgcuF26JZTRULuKP8AgFIq0suLcElxA=,tag:O8ocrBLho09JFegFy3sZvA==,type:str]
+    version: 3.13.3

@@ -14,6 +14,8 @@ spec:
       labels:
         app: firefox
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: firefox
           image: lscr.io/linuxserver/firefox:latest
@@ -27,21 +29,15 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Denver
-            - name: CUSTOM_USER
-              valueFrom:
-                secretKeyRef:
-                  name: firefox
-                  key: username
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: firefox
-                  key: password
+            - name: TITLE
+              value: Special Education Data
           volumeMounts:
             - name: config
               mountPath: /config
             - name: dshm
               mountPath: /dev/shm
+            - name: custom-init
+              mountPath: /custom-cont-init.d
           resources:
             requests:
               cpu: 500m
@@ -54,6 +50,39 @@ spec:
               port: 3000
             initialDelaySeconds: 15
             periodSeconds: 10
+        - name: filebrowser
+          image: filebrowser/filebrowser:latest
+          args:
+            - --noauth
+            - --address=0.0.0.0
+            - --port=8080
+            - --root=/srv
+            - --database=/db/filebrowser.db
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /srv
+              subPath: Downloads
+            - name: config
+              mountPath: /db
+              subPath: filebrowser
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -66,10 +95,3 @@ spec:
           configMap:
             name: firefox-custom-init
             defaultMode: 0755
-      volumeMounts:
-        - name: config
-          mountPath: /config
-        - name: dshm
-          mountPath: /dev/shm
-        - name: custom-init
-          mountPath: /custom-cont-init.d

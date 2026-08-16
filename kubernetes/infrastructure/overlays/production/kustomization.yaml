@@ -11,3 +11,4 @@ resources:
   - cloudnative-pg
   - rustfs
   - teleport
+  - gh-proxy

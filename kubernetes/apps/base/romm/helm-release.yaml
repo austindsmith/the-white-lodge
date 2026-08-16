@@ -63,12 +63,12 @@ spec:
       library:
         type: nfs
         server: 192.168.1.131
-        path: /volume1/media/roms
+        path: /volume1/media/complete/roms
         globalMounts:
           - path: /romm/library
       assets:
         type: nfs
         server: 192.168.1.131
-        path: /volume1/media/roms/assets
+        path: /volume1/media/complete/roms/assets
         globalMounts:
           - path: /romm/assets
