@@ -11,4 +11,4 @@ spec:
       kind: Rule
       services:
         - name: romm
-          port: 19200
+          port: 8080
