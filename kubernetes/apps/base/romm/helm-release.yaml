@@ -72,3 +72,43 @@ spec:
         path: /volume1/media/complete/roms/assets
         globalMounts:
           - path: /romm/assets
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mariadb
+  namespace: romm
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: bjw-s-labs
+    namespace: flux-system
+  values:
+    controllers:
+      mariadb:
+        containers:
+          app:
+            image:
+              repository: mariadb
+              tag: "11.4"
+            env:
+              MARIADB_DATABASE: romm
+              MARIADB_USER: romm
+            envFrom:
+              - secretRef:
+                  name: romm-mariadb-secret
+    service:
+      app:
+        controller: mariadb
+        ports:
+          db:
+            port: 3306
+    persistence:
+      data:
+        type: persistentVolumeClaim
+        storageClass: longhorn-backup
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        globalMounts:
+          - path: /var/lib/mysql

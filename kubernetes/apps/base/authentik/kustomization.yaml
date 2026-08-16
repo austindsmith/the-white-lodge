@@ -9,6 +9,7 @@ resources:
   - middleware.yaml
   - ingress-route.yaml
   - secret.yaml
+  - outpost-paths.yaml
   - blueprints/secret.yaml
 
 configMapGenerator:

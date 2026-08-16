@@ -72,7 +72,7 @@ spec:
   values:
     persistence:
       enabled: false
-    proxyAddr: teleport.${personal_domain}:443
+    proxyAddr: teleport-auth.teleport.svc.cluster.local:3025
     joinParams:
       method: kubernetes
       tokenName: db-agent-token

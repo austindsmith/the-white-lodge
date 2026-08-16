@@ -6,12 +6,6 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`docs.${hidden_domain}`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      services:
-        - name: authentik-server
-          namespace: authentik
-          port: 80
     - match: Host(`docs.${hidden_domain}`)
       kind: Rule
       middlewares:
@@ -28,12 +22,6 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`catalog.${hidden_domain}`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      services:
-        - name: authentik-server
-          namespace: authentik
-          port: 80
     - match: Host(`catalog.${hidden_domain}`)
       kind: Rule
       middlewares:
