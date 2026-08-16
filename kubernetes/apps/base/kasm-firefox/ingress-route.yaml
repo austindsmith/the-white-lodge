@@ -9,9 +9,9 @@ spec:
   routes:
     - match: Host(`docs.${hidden_domain}`)
       kind: Rule
-      middlewares:
-        - name: basic-auth
-          namespace: firefox
+      #middlewares:
+      #  - name: basic-auth
+      #    namespace: firefox
       services:
         - name: firefox
           port: 3000
@@ -26,9 +26,9 @@ spec:
   routes:
     - match: Host(`catalog.${hidden_domain}`)
       kind: Rule
-      middlewares:
-        - name: basic-auth
-          namespace: firefox
+      #middlewares:
+      #  - name: basic-auth
+      #    namespace: firefox
       services:
         - name: firefox-files
           port: 8080
