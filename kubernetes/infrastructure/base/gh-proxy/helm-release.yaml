@@ -11,27 +11,33 @@ spec:
   values:
     controllers:
       gh-proxy:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: hunsh/gh-proxy-py
-              tag: latest
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
+              repository: caddy
+              tag: 2.10-alpine
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
-                memory: 64Mi
+                memory: 32Mi
               limits:
-                memory: 256Mi
+                memory: 128Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
     service:
       app:
         ports:
           http:
-            port: 80
+            port: 8080
     ingress:
       app:
         className: traefik
@@ -44,3 +50,18 @@ spec:
                 service:
                   identifier: app
                   port: http
+    persistence:
+      caddyfile:
+        type: configMap
+        name: gh-proxy-caddyfile
+        globalMounts:
+          - path: /etc/caddy/Caddyfile
+            subPath: Caddyfile
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /data
+      config:
+        type: emptyDir
+        globalMounts:
+          - path: /config

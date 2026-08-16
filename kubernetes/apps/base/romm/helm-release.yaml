@@ -97,7 +97,7 @@ spec:
               MARIADB_USER: romm
             envFrom:
               - secretRef:
-                  name: romm-mariadb-secret
+                  name: romm-secret
     service:
       app:
         controller: mariadb

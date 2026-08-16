@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gh-proxy-caddyfile
+  namespace: gh-proxy
+data:
+  Caddyfile: |
+    :8080 {
+    	reverse_proxy https://github.com {
+    		header_up Host github.com
+    		header_down Location https://github.com https://resources.${hidden_domain}
+    	}
+    }
