@@ -23,6 +23,7 @@ spec:
       type: ClusterIP
     operator:
       enabled: true
+      installCRDs: always
     chartMode: standalone
     clusterName: teleport.${personal_domain}
     proxyListenerMode: "multiplex"
