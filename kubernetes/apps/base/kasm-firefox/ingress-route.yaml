@@ -2,12 +2,16 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: firefox
+  namespace: firefox
 spec:
   entryPoints:
     - web
   routes:
     - match: Host(`docs.${hidden_domain}`)
       kind: Rule
+      middlewares:
+        - name: authentik-forwardauth
+          namespace: firefox
       services:
         - name: firefox
           port: 3000
@@ -22,6 +26,9 @@ spec:
   routes:
     - match: Host(`catalog.${hidden_domain}`)
       kind: Rule
+      middlewares:
+        - name: authentik-forwardauth
+          namespace: firefox
       services:
         - name: firefox-files
           port: 8080
