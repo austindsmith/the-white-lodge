@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: teleport
+  namespace: teleport
 spec:
   install:
     createNamespace: true
@@ -60,6 +61,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: teleport-db-agent
+  namespace: teleport
 spec:
   interval: 1h
   chart:
