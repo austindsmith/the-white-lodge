@@ -19,7 +19,6 @@ spec:
         name: traefik
   values:
     hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
     deployment:
       strategy:
         type: Recreate
