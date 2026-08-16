@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: (Host(`firefox.${hidden_domain}`) || Host(`files.${hidden_domain}`)) && PathPrefix(`/outpost.goauthentik.io/`)
+    - match: (Host(`resources.${hidden_domain}`) || Host(`catalog.${hidden_domain}`)) && PathPrefix(`/outpost.goauthentik.io/`)
       kind: Rule
       services:
         - name: authentik-server
