@@ -1,0 +1,7 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: gh-proxy-auth
+spec:
+  basicAuth:
+    secret: gh-proxy-auth

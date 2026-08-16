@@ -6,3 +6,4 @@ resources:
   - namespace.yaml
   - ingress-route.yaml
   - helm-release.yaml
+  - middleware.yaml
