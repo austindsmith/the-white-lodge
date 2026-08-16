@@ -1,13 +1,22 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gh-proxy-caddyfile
-  namespace: gh-proxy
+    name: gh-proxy-caddyfile
+    namespace: gh-proxy
 data:
-  Caddyfile: |
-    :8080 {
-    	reverse_proxy https://github.com {
-    		header_up Host github.com
-    		header_down Location https://github.com https://resources.${hidden_domain}
-    	}
-    }
+    Caddyfile: ENC[AES256_GCM,data:1DrOjByU+HbQ6iHcNLdWs9OU2O+PoQC1ErxBBy2dH5lSj4tCPr2e0d+fvO/HEuRvsCMyUmbPU9Ai62+MMZjfnpRmJo58PCQ+IIFfPfPbFmiReb8SXYkJPVL3XNMDXOPG/ufNJaIWeKHTxhYMOxFoaO6l1BmrGNHgNWuBA6IJNRc789uc8F9Z8Ynsclaw/ybNRqvaYazg+tWqn3Wrjvh7R7Qgtaw=,iv:E3OLADDk5m/9KRoDwRl7MjTVHQftABsaE1pTtUj2bjo=,tag:divWM60E7RrgpcCX10ofpw==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrZnRRemhacm50WWZvTUNv
+            QnZ3RVhhem5NYU9YUVZCQnVxTGJXcUg4MVVBCjdmSWEvQUJDVHB3RjNsanFuLzdV
+            TGZZTjdZMG5pVUZMWFQ4Vng5MGUwQXcKLS0tIGRMMDFUTmZMTzJZaE9XaEVCMHBv
+            NE1RRGVlbUZicFlHa0hONEJGa1ZsdHcKQ4pLvyvLhQs8keZJlIeMD6sRI6msaQ+Y
+            dhHVWs1OegiU/qKLiyjyz5HCGEJwlMXhyIN6dB9sO8BrXOz+3ye/zA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age19azmnl8ee2f4r95jnwvr47uhllf33eq66dfc3vuxezq7k5vwqgfsyrdv8n
+    encrypted_regex: ^(data|stringData|spec)$
+    lastmodified: "2026-08-16T01:00:41Z"
+    mac: ENC[AES256_GCM,data:zP6H6VAU8D8wxiEi97gVXvUXOT6AytdKWCSAlxo/hdF13llPWhUBTgHAkVYCRlyM795PxmhCm77A02s8QnClXwV2RyUUoLGzizsvfjCsjNax/uVdu1hOTrTouxPrCe2RuMORWYLqjkbCzKpS/2hauFS3dfM72DMQUiZvXw38iGM=,iv:UbS4w99Bs4TRNmc7rSAD1oNh4t6mHaQChMhOpnGvTmc=,tag:Y3K/BV2rirbAdCbj8WuKvg==,type:str]
+    version: 3.13.3

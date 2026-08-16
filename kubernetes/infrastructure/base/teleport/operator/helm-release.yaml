@@ -1,64 +1,6 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: teleport
-spec:
-  install:
-    createNamespace: true
-  interval: 1h
-  chart:
-    spec:
-      chart: teleport-cluster
-      version: 18.8.3
-      sourceRef:
-        kind: HelmRepository
-        name: teleport
-  values:
-    persistence:
-      existingClaimName: teleport-auth-data
-    tls:
-      existingSecretName: teleport-tls
-    service:
-      type: ClusterIP
-    operator:
-      enabled: true
-    chartMode: standalone
-    clusterName: teleport.${personal_domain}
-    proxyListenerMode: "multiplex"
-    authentication:
-      type: 'github'
-    extraArgs:
-      - "--insecure"
-    auth:
-      teleportConfig:
-        teleport:
-          log:
-            output: stderr
-            severity: DEBUG
-        auth_service:
-          enabled: true
-          listen_addr: 0.0.0.0:3025
-          public_addr: teleport.${personal_domain}:3025
-          web_idle_timeout: 1h
-          authentication:
-            locking_mode: best_effort
-    proxy:
-      teleportConfig:
-        teleport:
-          log:
-            output: stderr
-            severity: DEBUG
-        proxy_service:
-          enabled: true
-          web_listen_addr: 0.0.0.0:3080
-          public_addr: teleport.${personal_domain}:443
-          https_keypairs_reload_interval: 12h
-    podSecurityPolicy:
-      enabled: false
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
   name: teleport-db-agent
 spec:
   interval: 1h
@@ -72,7 +14,8 @@ spec:
   values:
     persistence:
       enabled: false
-    proxyAddr: teleport-auth.teleport.svc.cluster.local:3025
+    proxyAddr: teleport.${personal_domain}:443
+    insecureSkipProxyTLSVerify: true
     joinParams:
       method: kubernetes
       tokenName: db-agent-token

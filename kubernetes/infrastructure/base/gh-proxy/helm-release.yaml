@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: gh-proxy
+  namespace: gh-proxy
 spec:
   chartRef:
     kind: OCIRepository
