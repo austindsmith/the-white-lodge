@@ -7,5 +7,5 @@ resources:
   - certificates.yaml
   - github.yaml
   - local-user.yaml
-  - provision-tokens.yaml
+  #- provision-tokens.yaml
   - roles.yaml
