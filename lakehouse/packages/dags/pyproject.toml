@@ -1,0 +1,25 @@
+[project]
+name = "dags"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Austin Smith", email = "austindsmith_accounts@proton.me" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "bills",
+    "dagster>=1.13.18",
+    "dagster-dg-cli>=1.13.18",
+    "dagster-webserver>=1.13.18",
+]
+
+[project.scripts]
+dags = "dags:main"
+
+[build-system]
+requires = ["uv_build>=0.10.8,<0.11.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+bills = { workspace = true }
