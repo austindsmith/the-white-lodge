@@ -1,0 +1,14 @@
+# Override CHANGEME-name / CHANGEME-port (and targetPort, which should match
+# the containerPort set in deployment.yaml) via patch.yaml. See ../README.md.
+apiVersion: v1
+kind: Service
+metadata:
+  name: CHANGEME-name
+  namespace: data
+spec:
+  selector:
+    app: CHANGEME-name
+  ports:
+    - protocol: TCP
+      port: CHANGEME-port
+      targetPort: CHANGEME-port

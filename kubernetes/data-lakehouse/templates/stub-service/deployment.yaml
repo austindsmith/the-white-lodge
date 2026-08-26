@@ -1,0 +1,82 @@
+# Template Deployment for a "try this chart out" data-lakehouse stub app.
+#
+# Every consumer MUST override the CHANGEME- placeholders below via a
+# patch.yaml (strategic-merge patch), the same way
+# kubernetes/infrastructure/overlays/staging/traefik/patch.yaml overrides its
+# base. See ../README.md for a full worked example. Fields to override:
+#   - metadata.name / spec.selector.matchLabels.app / spec.template.metadata.labels.app
+#   - spec.template.spec.containers[0].name
+#   - spec.template.spec.containers[0].image
+#   - spec.template.spec.containers[0].ports[0].containerPort
+#   - spec.template.spec.containers[0].livenessProbe/readinessProbe/startupProbe .port
+#   - spec.template.spec.volumes[0].persistentVolumeClaim.claimName (must match
+#     the PVC name set in pvc-config.yaml)
+#
+# Everything else (env vars, resource shape, probe timings, restartPolicy) is
+# the house default carried over from kubernetes/apps/base/media/arr/fileflows/
+# and is fine to leave as-is for a first try, then tune per app.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: data
+  name: CHANGEME-name
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: CHANGEME-name
+  template:
+    metadata:
+      labels:
+        app: CHANGEME-name
+    spec:
+      containers:
+        - name: CHANGEME-name
+          image: CHANGEME-image
+          env:
+            - name: PGID
+              value: "100"
+            - name: PUID
+              value: "1037"
+            - name: TZ
+              value: America/Denver
+          ports:
+            - containerPort: CHANGEME-port
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: CHANGEME-port
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: CHANGEME-port
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: CHANGEME-port
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+          volumeMounts:
+            - mountPath: /config
+              name: CHANGEME-name-config
+      restartPolicy: Always
+      volumes:
+        - name: CHANGEME-name-config
+          persistentVolumeClaim:
+            claimName: CHANGEME-name-config

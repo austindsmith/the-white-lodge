@@ -1,0 +1,14 @@
+# Override CHANGEME-name (must match the claimName used in deployment.yaml's
+# volumes[0]) and CHANGEME-size via patch.yaml. See ../README.md.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: data
+  name: CHANGEME-name-config
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: CHANGEME-size

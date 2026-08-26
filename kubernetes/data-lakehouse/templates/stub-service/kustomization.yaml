@@ -1,0 +1,14 @@
+# Reusable template for a single-container "try this chart out" app under
+# data-lakehouse/. Do not reference this directory directly from an app's
+# kustomization.yaml without a patch.yaml overriding the CHANGEME- fields
+# below (see ../README.md for the full walkthrough).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: data
+
+resources:
+  - deployment.yaml
+  - pvc-config.yaml
+  #- secret.yaml
+  - service.yaml
+  - ingress-route.yaml
