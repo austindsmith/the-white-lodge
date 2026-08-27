@@ -3,3 +3,4 @@
 ## Todo
 
 - [ ] Create seperate Ansible repository for sharing roles
+- [ ] Continue Playwright scripts
