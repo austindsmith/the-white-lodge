@@ -18,6 +18,7 @@ spec:
       watchPlugins: true
       oidc:
         issuerURL: "https://authentik.${cluster_domain}/application/o/headlamp/"
+        callbackURL: "https://headlamp.${cluster_domain}/oidc-callback"
         scopes: "openid email profile groups offline_access"
     pluginsManager:
       enabled: true
