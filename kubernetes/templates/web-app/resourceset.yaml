@@ -1,0 +1,86 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+
+metadata:
+  name: helm-app
+  namespace: flux-system
+
+spec:
+  inputsFrom:
+    - kind: ResourceSetInputProvider
+      selector:
+        matchLabels:
+          app-template: helm-app
+
+  resourcesTemplate: |
+    ---
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: << inputs.namespace >>
+
+    ---
+    apiVersion: helm.toolkit.fluxcd.io/v2
+    kind: HelmRelease
+    metadata:
+      name: << inputs.appName >>
+      namespace: << inputs.namespace >>
+    spec:
+      interval: 30m
+      chart:
+        spec:
+          chart: << inputs.chartName >>
+          version: << inputs.chartVersion | quote >>
+          sourceRef:
+            kind: HelmRepository
+            name: bjw-s
+            namespace: flux-system
+
+    {{ if inputs.enableService }}
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: << inputs.appName >>
+      namespace: << inputs.namespace >>
+    spec:
+      selector:
+        app.kubernetes.io/name: << inputs.appName >>
+      ports:
+        - name: http
+          port: << inputs.servicePort >>
+          targetPort: http
+    {{ end }}
+
+    {{ if inputs.enableIngress }}
+    ---
+    apiVersion: traefik.io/v1alpha1
+    kind: IngressRoute
+    metadata:
+      name: << inputs.appName >>
+      namespace: << inputs.namespace >>
+    spec:
+      entryPoints:
+        - websecure
+      routes:
+        - match: Host(`<< inputs.subdomain >>`)
+          kind: Rule
+          services:
+            - name: << inputs.appName >>
+              port: << inputs.servicePort >>
+    {{ end }}
+
+    {{ if inputs.enablePvc }}
+    ---
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: << inputs.appName >>
+      namespace: << inputs.namespace >>
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: << inputs.storageSize >>
+    {{ end }}

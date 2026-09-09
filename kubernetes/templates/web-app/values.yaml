@@ -1,0 +1,15 @@
+appName: ""
+namespace: ""
+
+chartName: ""
+chartVersion: ""
+
+subdomain: ""
+
+servicePort: 80
+
+enableService: true
+enableIngress: true
+enablePvc: false
+
+storageSize: 10Gi

@@ -1,0 +1,27 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSetInputProvider
+
+metadata:
+  name: sonarr
+  namespace: flux-system
+  labels:
+    app-template: helm-app
+
+spec:
+  type: Static
+
+  defaultValues:
+    appName: sonarr
+    namespace: sonarr
+
+    chartName: sonarr
+    chartVersion: "10.3.0"
+
+    subdomain: sonarr.example.com
+    servicePort: 8989
+
+    enableService: true
+    enableIngress: true
+    enablePvc: true
+
+    storageSize: 10Gi
