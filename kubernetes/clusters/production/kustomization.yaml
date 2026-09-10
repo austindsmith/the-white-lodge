@@ -3,6 +3,7 @@ resources:
   - cluster-vars-external-secrets.yaml
   - external-secrets.yaml
   - core.yaml
+  - flux-operator.yaml
   #- monitoring.yaml
   - infrastructure.yaml
   - apps.yaml

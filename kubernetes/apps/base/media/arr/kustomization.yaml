@@ -1,4 +1,5 @@
 resources:
+  - resourceset.yaml
   - agregarr
   - autobrr
   - bazarr
@@ -17,4 +18,4 @@ resources:
   - wizarr
   - lidarr
   - calibre
-  - calibre-web
+  #- calibre-web

@@ -4,6 +4,28 @@
 
 - Make instructions for end users
 
+## Commands
+
+### Rendering a `resourceset`
+
+```bash
+flux-operator build rset -f resourceset.yaml
+```
+
+### Applying a `resourceset` outside of git
+
+```bash
+kubectl apply -f resourceset.yaml
+kubectl get resourceset -n media
+kubectl describe resourceset sonarr-family -n media
+```
+
+### Deleting a `resourceset` outside of > [!IMPORTANT]
+
+```bash
+kubectl delete -f resourceset.yaml
+```
+
 ## Migration
 
 ### Containers

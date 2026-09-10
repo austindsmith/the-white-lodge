@@ -1,0 +1,184 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: arr-apps
+  namespace: media
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "1h"
+spec:
+  inputs:
+    - name: calibre-web
+      image: lscr.io/linuxserver/calibre-web:latest
+      port: 8083
+      readinessPath: /ping
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 2Gi
+
+      env:
+        DOCKER_MODS: linuxserver/mods:universal-calibre
+
+      externalService:
+        enabled: false
+
+  resourcesTemplate: |
+    ---
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: << inputs.name >>-config
+      namespace: media
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: << get inputs "configSize" | default "5Gi" >>
+
+    ---
+    apiVersion: external-secrets.io/v1
+    kind: ExternalSecret
+    metadata:
+      name: << inputs.name >>
+      namespace: media
+    spec:
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: op-secret-store
+      target:
+        name: << inputs.name >>
+        creationPolicy: Owner
+      dataFrom:
+        - extract:
+            key: << inputs.name >>
+      refreshInterval: 6h
+
+    ---
+    apiVersion: helm.toolkit.fluxcd.io/v2
+    kind: HelmRelease
+    metadata:
+      name: << inputs.name >>
+      namespace: media
+    spec:
+      interval: 1h
+
+      chartRef:
+        kind: OCIRepository
+        name: bjw-s-labs
+        namespace: flux-system
+
+      values:
+
+        controllers:
+          << inputs.name >>:
+
+            annotations:
+              reloader.stakater.com/auto: "true"
+
+            containers:
+              app:
+
+                image:
+                  repository: << inputs.image >>
+                  tag: << inputs.tag | quote >>
+
+                envFrom:
+                  - secretRef:
+                      name: << inputs.name >>
+
+                env: << inputs.env | toYaml | nindent 16 >>
+
+                probes:
+
+                  liveness:
+                    enabled: true
+                    spec:
+                      periodSeconds: 30
+                      timeoutSeconds: 5
+                      failureThreshold: 5
+
+                  readiness:
+                    enabled: true
+                    custom: true
+                    spec:
+                      httpGet:
+                        path: << inputs.readinessPath >>
+                        port: << inputs.port | int >>
+                      periodSeconds: 10
+                      timeoutSeconds: 5
+                      failureThreshold: 5
+
+                  startup:
+                    enabled: true
+                    spec:
+                      failureThreshold: 30
+                      periodSeconds: 10
+
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: true
+                  capabilities:
+                    drop:
+                      - ALL
+
+                resources: << inputs.resources | toYaml | nindent 16 >>
+
+        defaultPodOptions:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1037
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: OnRootMismatch
+
+        service:
+
+          app:
+            controller: << inputs.name >>
+            ports:
+              http:
+                port: << inputs.port | int >>
+
+          <<- if inputs.externalService.enabled >>
+
+          external:
+            controller: << inputs.name >>
+            type: ClusterIP
+            externalIPs:
+              - << inputs.externalService.externalIP >>
+            ports:
+              << inputs.name >>:
+                port: << inputs.externalService.port | int >>
+
+          <<- end >>
+
+        ingress:
+
+          app:
+            className: traefik
+            hosts:
+              - host: << inputs.name >>.thewhitelodge.org
+                paths:
+                  - path: /
+                    service:
+                      identifier: app
+                      port: http
+
+        persistence:
+
+          config:
+            existingClaim: << inputs.name >>-config
+            globalMounts:
+              - path: /config
+
+          media:
+            existingClaim: media
+            globalMounts:
+              - path: /media
+
+          tmp:
+            type: emptyDir
