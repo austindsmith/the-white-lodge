@@ -9,6 +9,7 @@ spec:
   inputs:
     - name: calibre-web
       image: lscr.io/linuxserver/calibre-web
+      tag: ""
       port: 8083
       readinessPath: /ping
       resources:
