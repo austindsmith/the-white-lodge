@@ -8,7 +8,7 @@ metadata:
 spec:
   inputs:
     - name: calibre-web
-      image: lscr.io/linuxserver/calibre-web:latest
+      image: lscr.io/linuxserver/calibre-web
       port: 8083
       readinessPath: /ping
       resources:
@@ -84,7 +84,7 @@ spec:
 
                 image:
                   repository: << inputs.image >>
-                  tag: << inputs.tag | quote >>
+                  tag: << inputs.tag | default "latest" | quote >>
 
                 envFrom:
                   - secretRef:
