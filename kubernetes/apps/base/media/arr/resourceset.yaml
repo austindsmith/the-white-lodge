@@ -128,14 +128,6 @@ spec:
 
                 resources: << inputs.resources | toYaml | nindent 16 >>
 
-        defaultPodOptions:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1037
-            runAsGroup: 100
-            fsGroup: 100
-            fsGroupChangePolicy: OnRootMismatch
-
         service:
 
           app:
