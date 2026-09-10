@@ -26,6 +26,15 @@ kubectl describe resourceset sonarr-family -n media
 kubectl delete -f resourceset.yaml
 ```
 
+### Force re-applying `resourceset`
+
+```bash
+kubectl annotate resourceset arr-apps \
+  -n media \
+  reconcile.fluxcd.io/requestedAt="$(date +%s)" \
+  --overwrite
+```
+
 ## Migration
 
 ### Containers
