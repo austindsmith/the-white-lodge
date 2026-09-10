@@ -121,9 +121,6 @@ spec:
 
                 securityContext:
                   allowPrivilegeEscalation: false
-                  capabilities:
-                    drop:
-                      - ALL
 
                 resources: << inputs.resources | toYaml | nindent 16 >>
 
