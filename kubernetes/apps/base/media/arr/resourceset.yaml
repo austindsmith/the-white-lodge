@@ -67,6 +67,9 @@ spec:
     spec:
       interval: 1h
 
+      driftDetection:
+        mode: enabled
+
       chartRef:
         kind: OCIRepository
         name: bjw-s-labs
