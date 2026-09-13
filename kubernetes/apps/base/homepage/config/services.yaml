@@ -71,7 +71,7 @@
         target: _blank
         namespace: media
         icon: qbittorrent
-        href: https://torrent.thewhitelodge.org
+        href: https://qbittorrent.thewhitelodge.org
         app: qbittorrent
     - Tdarr:
         target: _blank

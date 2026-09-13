@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: traefik
 
 resources:
-  - cockpit.yaml
+  - netbox.yaml
